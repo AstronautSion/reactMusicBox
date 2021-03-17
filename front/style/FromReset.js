@@ -42,7 +42,7 @@ const FormReset = () => {
 		/* Text Inputs
 		-----------------------------------------------*/
 		input[type=date],input[type=datetime],input[type=datetime-local],input[type=email],input[type=month],input[type=number],input[type=password],input[type=range],input[type=search],input[type=tel],input[type=text],input[type=time],input[type=url],input[type=week]{
-			display:block; width:100%; height:2.5rem; padding:0 .75rem; border:1px solid #ddd;
+			display:block; width:100%; height:2.5rem; padding:0 .75rem;
 		}
 		
 		/* Textarea

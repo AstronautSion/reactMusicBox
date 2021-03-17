@@ -2,16 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StPopupWrapper } from '../style/components/PopupLayout';
 
-const PopupLayout = ({prop}) => {
+const PopupLayout = ({ children }) => {
+    
+
     return(
         <StPopupWrapper>
-            {prop}
+            <button type="button">X</button>
+            {children}
         </StPopupWrapper>
     );
 }
 
 PopupLayout.propTypes = {
-    prop: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
 }
 
 export default PopupLayout;

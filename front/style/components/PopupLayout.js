@@ -6,8 +6,16 @@ export const StPopupWrapper = styled.div`
     left:0;
     width:100%;
     height:100%;
-    display:fixed;
+    display:flex;
     justify-contents:center;
-    align-item: center;
-    background-color:rgba(0,0,0,0.2);
+    align-items: center;
+    background-color:rgba(0,0,0,.75);
+
+    > button {
+        position:absolute;
+        top:1em;
+        right:1em;
+        font-size:1rem;
+        color:#fff;
+    }
 `;

@@ -10,7 +10,7 @@ const AppLayout = ({ children }) => {
     const onclickLoginForm = () => {
         setBtnShowLoginForm(!btnShowLoginForm);
     };
-
+    
     return (
         <>
             <StHeader>
@@ -19,21 +19,18 @@ const AppLayout = ({ children }) => {
                         <Link href="/"><a>Home</a></Link>
                         <Link href="/music"><a>Music</a></Link>
                     </div>
-
                     <div className="header__right">
                         <StBtnSignin onClick={onclickLoginForm}>Sign in</StBtnSignin>
-                        <StBtnSignin onClick={onclickLoginForm}>Sign up</StBtnSignin>
+                        <StBtnSignin onClick={onclickLoginForm}>Create account</StBtnSignin>
                         {/* <Link href="/profile"><a>Profile</a></Link> */}
                     </div>
                 </StWrapper>    
             </StHeader>
-            
             { btnShowLoginForm && 
                 <PopupLayout > 
                     <LoginForm /> 
                 </PopupLayout>
             }
-
             {children}
         </>
     );

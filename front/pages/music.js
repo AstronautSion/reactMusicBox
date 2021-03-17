@@ -1,14 +1,15 @@
 import React from 'react';
-import AppLayout from "../components/AppLayout";
+import AppLayout from '../components/AppLayout';
 import { StWrapper } from '../style/components/AppLayout';
 
-const Home = () => {
-    return (
+const Music = () => {
+    return(
         <AppLayout>
             <StWrapper>
-                <div>Hello, Next</div>
+                <div>Music pages</div>
             </StWrapper>
         </AppLayout>
-    )
+
+    );
 }
-export default Home;
+export default Music;

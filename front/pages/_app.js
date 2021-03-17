@@ -1,20 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-
-const App = ({ Component }) => {
+import Reset from '../style/Reset';
+import FormReset from '../style/FromReset';
+const MusicBox = ({ Component }) => {
     return(
         <>
             <Head>
                 <title>MusicBox</title>
+                <meta charSet="utf-8" />
             </Head>
+            <Reset />
+            <FormReset />
             <Component />
         </>
     );
 }
 
-App.propTypes = {
+MusicBox.propTypes = {
     Component : PropTypes.elementType.isRequired,
 }
 
-export default App;
+export default MusicBox;

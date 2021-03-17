@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emotion/styled": "^11.1.5",
     "next": "^10.0.9",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",

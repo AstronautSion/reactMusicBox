@@ -6,7 +6,7 @@ const Home = () => {
     return (
         <AppLayout>
             <StWrapper>
-                <div>Hello, Next</div>
+                <div>Hello, MusixBox</div>
             </StWrapper>
         </AppLayout>
     )

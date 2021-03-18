@@ -1,35 +1,26 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Link from 'next/link';
-import { StHeader, StWrapper, StBtnSignin } from '../style/components/AppLayout';
 import LoginForm from './LoginForm';
-import PopupLayout from './PopupLayout';
+import Header from './Header';
+import PropTypes from 'prop-types';
 
 const AppLayout = ({ children }) => {
-    const [btnShowLoginForm, setBtnShowLoginForm ] = useState(false);
-    const onclickLoginForm = () => {
-        setBtnShowLoginForm(!btnShowLoginForm);
-    };
-    
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [showPopup, setShowPopup ] = useState(false);
+   
     return (
         <>
-            <StHeader>
-                <StWrapper>
-                    <div className="menu">
-                        <Link href="/"><a>Home</a></Link>
-                        <Link href="/music"><a>Music</a></Link>
-                    </div>
-                    <div className="header__right">
-                        <StBtnSignin onClick={onclickLoginForm}>Sign in</StBtnSignin>
-                        <StBtnSignin onClick={onclickLoginForm}>Create account</StBtnSignin>
-                        {/* <Link href="/profile"><a>Profile</a></Link> */}
-                    </div>
-                </StWrapper>    
-            </StHeader>
-            { btnShowLoginForm && 
-                <PopupLayout > 
-                    <LoginForm /> 
-                </PopupLayout>
+            <Header 
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                showPopup={showPopup}
+                setShowPopup={setShowPopup} 
+            />
+
+            { showPopup &&  
+                <LoginForm 
+                    setShowPopup={setShowPopup} 
+                    setIsLoggedIn={setIsLoggedIn} 
+                /> 
             }
             {children}
         </>

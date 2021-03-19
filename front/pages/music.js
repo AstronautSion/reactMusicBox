@@ -1,13 +1,10 @@
 import React from 'react';
-import AppLayout from '../components/AppLayout';
-import { StWrapper } from '../style/components/AppLayout';
+import AppLayout from '../components/Layout/AppLayout';
 
 const Music = () => {
     return(
         <AppLayout>
-            <StWrapper>
-                <div>Music pages</div>
-            </StWrapper>
+            <div>Music pages</div>
         </AppLayout>
 
     );

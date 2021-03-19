@@ -1,10 +1,13 @@
 import styled from "@emotion/styled";
 
-
 export const StWrapper = styled.div`
     max-width:1200px;
     width: 95%;
     margin:0 auto;
+`;
+export const StSection = styled.div`
+    position:relative;
+    padding:2em 0;
 `;
 
 export const StPopupWrapper = styled.div`
@@ -26,7 +29,6 @@ export const StPopupWrapper = styled.div`
         color:#fff;
     }
 `;
-
  
 export const StP = styled.p`
 display:block;

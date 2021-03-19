@@ -1,8 +1,8 @@
 import React, { useCallback, useRef, useState } from 'react';
 import Link from 'next/link';
-import { StWrapper } from "../style/components/AppLayout";
-import { StAccountMenu, StBtnSignin, StButtonSm, StHeader, StMenuUl } from '../style/components/Header';
+import { StAccountMenu, StBtnSignin, StButtonSm, StHeader, StMenuUl } from '../../style/components/Header';
 import PropTypes from 'prop-types';
+import { StWrapper } from '../../style/components/AppLayout';
 
 const Header = ({isLoggedIn, setIsLoggedIn, showPopup, setShowPopup}) => {
 

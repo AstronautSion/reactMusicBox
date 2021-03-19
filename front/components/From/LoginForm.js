@@ -1,25 +1,25 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { StP, StPopupWrapper } from '../style/components/AppLayout';
-import { StBtnLoginForm, StLoginForm, StLoginFormTitle } from '../style/components/LoginForm';
-import { StCheckbox, StInput, StLable, StSelect } from '../style/Form';
+import { StP, StPopupWrapper } from '../../style/components/AppLayout';
+import { StBtnLoginForm, StLoginForm, StLoginFormTitle } from '../../style/components/LoginForm';
+import { StCheckbox, StInput, StLable, StSelect } from '../../style/Form';
 import PropTypes from 'prop-types';
+import useInput from '../../hooks/useInput';
 
 
 const LoginForm = ({ setShowPopup, setIsLoggedIn }) => {
     const [order, setOrder] = useState(0);
-    const [signin, setSignin] = useState('');
+    const [signin, onChangeSignin] = useInput('');
+    const [account, onChangeAccount] = useInput('');
+    const [password, onChangePassword] = useInput('');
+    const [nickname, onChangeNickname] = useInput('');
+    const [age, onChangeAge] = useInput(0);
     
-    const [account, setAccount] = useState('');
-    const [password, setPassword] = useState('');
     const [agree, setAgree] = useState(false);
-
-    const [nickname, setNickname] = useState('');
-    const [age, setAge] = useState(0);
-    const gender = useRef('');
-
-    const onChangeSignin = (e) => {
-        setSignin(e.target.value);
+    const onCheckAgree = (e) => {
+        e.preventDefault();
+        setAgree(!agree); 
     }
+    const gender = useRef('');
     const onClickNext = () =>{
         if(order === 3){
             setOrder(0);
@@ -27,22 +27,6 @@ const LoginForm = ({ setShowPopup, setIsLoggedIn }) => {
         }else{
             setOrder(order + 1);
         }        
-    }
-    const onChangeNickname = (e) =>{
-        setNickname(e.target.value);
-    }
-    const onChangeAge = (e) => {
-        setAge(e.target.value)
-    }
-    const onChangeAccount = (e) => {
-        setAccount(e.target.value);
-    }
-    const onChangePassword = (e) => {
-        setPassword(e.target.value);
-    }
-    const onCheckAgree = (e) => {
-        e.preventDefault();
-        setAgree(!agree); 
     }
     const onClickBackContents = () =>{
         setOrder(0);
@@ -53,11 +37,9 @@ const LoginForm = ({ setShowPopup, setIsLoggedIn }) => {
             onClickNext();
         }
     }
-
     const onClickClosePopup = () => {
         setShowPopup(false);
     }
-
     const onClickLoginFacebook = useCallback(() => {
         setIsLoggedIn(true);
         setShowPopup(false);

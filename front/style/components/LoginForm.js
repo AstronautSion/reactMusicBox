@@ -48,7 +48,6 @@ export const StBtnLoginForm = styled.button`
     }};
 `;
 
-
 export const StLoginFormTitle = styled.h3`
     display:block;
     text-align:center;
@@ -57,4 +56,3 @@ export const StLoginFormTitle = styled.h3`
     font-weight:normal;
     line-height:1.5;
 `;
-

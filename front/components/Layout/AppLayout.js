@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import LoginForm from './LoginForm';
 import Header from './Header';
 import PropTypes from 'prop-types';
+import LoginForm from '../From/LoginForm';
+import { StWrapper } from '../../style/components/AppLayout';
 
 const AppLayout = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,12 +18,15 @@ const AppLayout = ({ children }) => {
             />
 
             { showPopup &&  
-                <LoginForm 
+                <LoginForm
                     setShowPopup={setShowPopup} 
                     setIsLoggedIn={setIsLoggedIn} 
                 /> 
             }
-            {children}
+            <StWrapper>
+                {children}
+            </StWrapper>
+            
         </>
     );
 };

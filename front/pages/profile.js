@@ -1,10 +1,17 @@
 import React from 'react';
-import AppLayout from "../components/AppLayout";
+import NicknameEditForm from '../components/From/NicknameEditForm';
+import AppLayout from '../components/Layout/AppLayout';
+import { StSection } from '../style/components/AppLayout';
 
 const Profile = () => {
+
     return (
         <AppLayout>
-            <div>Profile Page</div>
+            <NicknameEditForm nickname="Astronaut.sion" />
+            <StSection>
+                {/* <PlayList />
+                <Aside /> */}
+            </StSection>
         </AppLayout>
     );
 }

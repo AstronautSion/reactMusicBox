@@ -1,13 +1,10 @@
 import React from 'react';
-import AppLayout from "../components/AppLayout";
-import { StWrapper } from '../style/components/AppLayout';
+import AppLayout from "../components/Layout/AppLayout";
 
 const Home = () => {
     return (
         <AppLayout>
-            <StWrapper>
-                <div>Hello, MusixBox</div>
-            </StWrapper>
+            <div>Hello, MusixBox</div>
         </AppLayout>
     )
 }

@@ -1,5 +1,6 @@
 import React from 'react';
-import AppLayout from '../components/AppLayout';
+import AppLayout from '../components/Layout/AppLayout';
+
 const Follower = () => {
     return (
         <AppLayout>

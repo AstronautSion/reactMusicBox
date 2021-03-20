@@ -11,6 +11,7 @@ export const StSection = styled.div`
 `;
 
 export const StPopupWrapper = styled.div`
+    z-index:10000;
     position:fixed;
     top:0;
     left:0;

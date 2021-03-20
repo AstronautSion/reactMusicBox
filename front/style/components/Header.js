@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 
 export const StHeader = styled.div`
+    z-index:9999;
+    position:relative;
     width:100%;
     background-color:#111;
 
@@ -16,7 +18,7 @@ export const StHeader = styled.div`
             color:#fff;
             padding:1em;
             display:block;
-            text-align:center;
+            text-align:center;이거 
             text-decoration:none;
             font-weight:bold;
         }

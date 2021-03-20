@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Reset from '../style/Reset';
 import FormReset from '../style/FromReset';
+import wrapper from '../store/configureStore';
+
 const MusicBox = ({ Component }) => {
     return(
         <>
@@ -21,4 +23,4 @@ MusicBox.propTypes = {
     Component : PropTypes.elementType.isRequired,
 }
 
-export default MusicBox;
+export default wrapper.withRedux(MusicBox);

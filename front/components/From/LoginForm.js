@@ -1,12 +1,16 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { StP, StPopupWrapper } from '../../style/components/AppLayout';
+import { StP } from '../../style/components/AppLayout';
 import { StBtnLoginForm, StLoginForm, StLoginFormTitle } from '../../style/components/LoginForm';
 import { StCheckbox, StInput, StLable, StSelect } from '../../style/Form';
 import PropTypes from 'prop-types';
 import useInput from '../../hooks/useInput';
+import { useDispatch } from 'react-redux';
+import { loginAction } from '../../reducers/user';
 
 
-const LoginForm = ({ setShowPopup, setIsLoggedIn }) => {
+const LoginForm = ({ setShowPopup }) => {
+    const dispatch = useDispatch();
+
     const [order, setOrder] = useState(0);
     const [signin, onChangeSignin] = useInput('');
     const [account, onChangeAccount] = useInput('');
@@ -41,19 +45,25 @@ const LoginForm = ({ setShowPopup, setIsLoggedIn }) => {
         setShowPopup(false);
     }
     const onClickLoginFacebook = useCallback(() => {
-        setIsLoggedIn(true);
+        dispatch(loginAction({
+            id: account,
+            password
+        }));
         setShowPopup(false);
         setOrder(0);
     }, []);
 
     const onClickLoginGoogle = useCallback(() => {
-        setIsLoggedIn(true);
+        dispatch(loginAction({
+            id: account,
+            password
+        }));
         setShowPopup(false);
         setOrder(0);
     }, []);
 
-    return(   
-        <StPopupWrapper>
+    return(
+        <>
             <button onClick={onClickClosePopup}>X</button>
             <StLoginForm>
                 {order === 0 && 
@@ -127,13 +137,13 @@ const LoginForm = ({ setShowPopup, setIsLoggedIn }) => {
                     </form>
                 }
             </StLoginForm>
-        </StPopupWrapper>    
+        </>  
+
     );
 }
 
 LoginForm.propTypes = {
     setShowPopup : PropTypes.func.isRequired,
-    setIsLoggedIn: PropTypes.func.isRequired,
 }
  
 export default LoginForm;

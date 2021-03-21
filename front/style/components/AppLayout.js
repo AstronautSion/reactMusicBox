@@ -21,14 +21,27 @@ export const StPopupWrapper = styled.div`
     justify-contents:center;
     align-items: center;
     background-color:rgba(0,0,0,.75);
+`;
 
-    > button {
-        position:absolute;
-        top:1em;
-        right:1em;
-        font-size:1rem;
-        color:#fff;
+export const StLoginLayout = styled.div`
+    padding:10rem 0;
+    box-sizing:border-box;
+    @media screen and (max-width: 768px){
+        padding:5rem 0;
     }
+`;
+
+export const StPopupBtnClose = styled.button`
+    position:absolute;
+    top:1em;
+    right:1em;
+    font-size:1rem;
+    color:#fff;
+`;
+
+export const StContainer = styled.div`
+    padding:1em 1em 3em 1em;
+    background-color:#fff;
 `;
  
 export const StP = styled.p`
@@ -45,3 +58,42 @@ color: ${props => {
 }};
 `;
 
+
+export const StLocalNav = styled.ul`
+  border-bottom:1px solid #efefef;
+  box-sizing:border-box;
+  display:flex;
+
+  li{
+    padding:0 .875em;
+    a{
+      position:relative;
+      top:1px;
+      display:block;
+      padding:.875em 0;
+      font-size:1rem;
+      font-weight:bold;
+      text-decoration:none;
+      box-sizing:border-box;
+      border-bottom:1px solid transparent;
+      &:hover{
+        border-bottom:1px solid #111;
+      }
+    }
+    &:first-child{
+      padding-left:0;
+    }
+    &.active a{
+      color:#f50;
+      border-color:#f50;
+    }
+  }
+`;
+
+export const StSectionTitle = styled.h3`
+  display:block;
+  font-size:1.25rem;
+  font-weight:bold;
+  color:#333;
+  padding-bottom:1em;
+`;

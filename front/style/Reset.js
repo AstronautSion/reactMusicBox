@@ -8,6 +8,7 @@ const Reset = () =>{
 				margin:0;
 				font-size: 16px;
 				font-family: 'Titillium Web', 'Nanum Gothic', '굴림', sans-serif;
+				background-color:#efefef;
 			}
 	
 			div,

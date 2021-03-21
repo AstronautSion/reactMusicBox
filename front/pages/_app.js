@@ -11,6 +11,7 @@ const MusicBox = ({ Component }) => {
             <Head>
                 <title>MusicBox</title>
                 <meta charSet="utf-8" />
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
             </Head>
             <Reset />
             <FormReset />

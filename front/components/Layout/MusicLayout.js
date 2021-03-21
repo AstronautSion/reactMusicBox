@@ -1,24 +1,26 @@
 import React from 'react';
 import Header from './Header';
 import PropTypes from 'prop-types';
-import { StWrapper } from '../../style/components/AppLayout';
-import MusicPlayer from './MusicPlayer';
+import LoginForm from '../From/LoginForm';
 import { useSelector } from 'react-redux';
 import PopupLogin from '../PopupLogin';
+import { StLoginLayout } from '../../style/components/AppLayout';
 
 const AppLayout = ({ children }) => {
-
-	const isLoginPopup = useSelector( state => state.user.isLoginPopup);
+  const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+	const isLoginPopup = useSelector(state => state.user.isLoginPopup);
+    
 	return (
 		<>
 			<Header />
 			{ isLoginPopup &&  
 				<PopupLogin />
 			}
-			<StWrapper>
-				{children}
-			</StWrapper>
-			<MusicPlayer />
+      {isLoggedIn 
+        ? children 
+        : <StLoginLayout><LoginForm/></StLoginLayout>
+      }
+      
 		</>
 	);
 };

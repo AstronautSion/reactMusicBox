@@ -4,7 +4,7 @@ import { StBtnLoginForm, StLoginForm, StLoginFormTitle } from '../../style/compo
 import { StCheckbox, StInput, StLable, StSelect } from '../../style/Form';
 import useInput from '../../hooks/useInput';
 import { useDispatch } from 'react-redux';
-import { loginAction, popupLoginClose } from '../../reducers/user';
+import { loginAction, popupClose } from '../../reducers/user';
 
 
 const LoginForm = () => {
@@ -37,7 +37,7 @@ const LoginForm = () => {
 			id: account,
 			password
 		}));
-		dispatch(popupLoginClose);
+		dispatch(popupClose);
 		setOrder(0);
 	}, []);
 
@@ -46,7 +46,7 @@ const LoginForm = () => {
 			id: account,
 			password
 		}));
-		dispatch(popupLoginClose);
+		dispatch(popupClose);
 		setOrder(0);
 	}, []);
 

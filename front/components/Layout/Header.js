@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { StAccountMenu, StBtnSignin, StButtonSm, StHeader, StMenuUl } from '../../style/components/Header';
 import { StWrapper } from '../../style/components/AppLayout';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutAction, popupLoginOpen } from '../../reducers/user';
+import { logoutAction, popupOpen } from '../../reducers/user';
 
 const Header = () => {
 	const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const Header = () => {
 	}
 	
 	const onclickLoginForm = useCallback(() => {
-		dispatch(popupLoginOpen);
+		dispatch(popupOpen('isLoginPopup'));
 	},[]);
 
 	const onClickLogout = useCallback(() => {

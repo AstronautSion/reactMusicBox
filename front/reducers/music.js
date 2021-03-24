@@ -1,11 +1,11 @@
 const dummyMusic = {
   
   playList : [
-    {id:0, title: 'Easily', author:'Bruno Major', writter: '우주인', musicUrl: 'dsE2HTeFC-E', type: 0},
-		{id:1,title: 'Weekend', author:'PERC%NT', writter: '우주인', musicUrl: 'jwTpp7ODeiw', type: 0},
-		{id:2,title: 'Fool For You', author:'Snoh Aalegra', writter: '우주인', musicUrl: 'jwTpp7ODeiw', type: 0},
-		{id:3,title: 'See You Again', author:'Tyler, The Creator', writter: '우주인', musicUrl: 'jwTpp7ODeiw', type: 0},
-		{id:4,title: '운전만해', author:'브레이브걸스', writter: '우주인', musicUrl: 'jwTpp7ODeiw', type: 0},
+    {id:0, title: 'Easily', author:'Bruno Major', writter: '우주인', link: 'dsE2HTeFC-E', type: 0},
+		{id:1,title: 'Weekend', author:'PERC%NT', writter: '우주인', link: 'jwTpp7ODeiw', type: 0},
+		{id:2,title: 'Fool For You', author:'Snoh Aalegra', writter: '우주인', link: 'jwTpp7ODeiw', type: 0},
+		{id:3,title: 'See You Again', author:'Tyler, The Creator', writter: '우주인', link: 'jwTpp7ODeiw', type: 0},
+		{id:4,title: '운전만해', author:'브레이브걸스', writter: '우주인', link: 'jwTpp7ODeiw', type: 0},
   ]
 };
   
@@ -21,8 +21,8 @@ export const MUSIC_PLAY = 'MUSIC_PLAY';
 export const LOAD_MUSIC_LIST = 'LOAD_MUSIC_LIST';
 export const CHANGE_MUSIC_ID = 'CHANGE_MUSIC_ID';
 export const MUSIC_PLAYER = 'MUSIC_PLAYER';
-
 export const MUSIC_DELETE = 'MUSIC_DELETE';
+export const MUSIC_MODIFY = 'MUSIC_MODIFY';
 
 export const changeMusicIdAction = (data) => {  
   return{
@@ -30,16 +30,21 @@ export const changeMusicIdAction = (data) => {
     data,
   }
 }
-export const musicPlayerAction = (data) =>{
+export const musicPlayerAction = (data) => {
   return{
     type: MUSIC_PLAYER,
     data,
   }  
 }
-
-export const musicDeleteAction = (data) =>{
+export const musicDeleteAction = (data) => {
   return{
     type: MUSIC_DELETE,
+    data,
+  }
+}
+export const musicModifyAction = (data) => {
+  return{
+    type: MUSIC_MODIFY,
     data,
   }
 }
@@ -78,13 +83,17 @@ export default (state = initialState, action) => {
         musicPlayer: action.data,
       }
     }
-    // case MUSIC_MODIFY: {
-    //   const playLists = [...state.playList];
-    //   return {
-    //     ...state,
-    //     playList: playLists
-    //   }
-    // }
+    case MUSIC_MODIFY: {
+      console.log(action.data)
+      const playLists = [...state.playList];
+      playLists[action.data.id].title = action.data.title;
+      playLists[action.data.id].author = action.data.author;
+      console.log('??',playLists);
+      return {
+        ...state,
+        playList: playLists
+      }
+    }
     case MUSIC_DELETE: {
       const playLists = [...state.playList];
       return {

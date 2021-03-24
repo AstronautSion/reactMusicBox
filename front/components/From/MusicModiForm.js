@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
 import { StInput, StLable } from '../../style/Form';
-import { StFieldset } from '../../style/components/AppLayout';
+import { StButton, StFieldset } from '../../style/components/AppLayout';
 import { useDispatch, useSelector } from 'react-redux';
+import { musicModifyAction } from '../../reducers/music';
+import { popupClose } from '../../reducers/user';
 
 const StMusicModiForm = styled.div`
   
@@ -19,7 +20,7 @@ const MusicModiForm = () => {
     console.log(data)
     setTitle(data.title);
     setAuthor(data.author);
-    setLink(data.musicUrl);
+    setLink(data.link);
   },[data]);
   const onChangeMusicTitle = (e) => {
     setTitle(e.target.value);
@@ -29,8 +30,15 @@ const MusicModiForm = () => {
   }
   const onSubmitModiMusicList = (e) =>{
     e.preventDefault();
-
-    dispatch()
+    dispatch(musicModifyAction({
+      id: data.id,
+      link: data.link,
+      type: data.type,
+      writter: data.writter,
+      author,
+      title,
+    }))
+    dispatch(popupClose);
   }
   return(
     <StMusicModiForm>
@@ -47,14 +55,10 @@ const MusicModiForm = () => {
         <StLable>Author</StLable>
         <StInput value={author} onChange={onChangeMusicAuthor} minLength="1" maxLength="30" required/>
       </StFieldset>
-      <button type="submit">수정</button>
+      <StButton main type="submit">수정</StButton>
     </form>
     </StMusicModiForm>
   );
-}
-
-MusicModiForm.propTypes = {
-  data: PropTypes.object.isRequired,
 }
 
 export default MusicModiForm;

@@ -35,6 +35,9 @@ export const StPopupWrapper = styled.div`
 export const StLoginLayout = styled.div`
     padding:10rem 0;
     box-sizing:border-box;
+    max-width:500px;
+    width:100%;
+    margin:0 auto;
     @media screen and (max-width: 768px){
         padding:5rem 0;
     }
@@ -55,6 +58,7 @@ export const StContainer = styled.div`
  
 export const StP = styled.p`
 display:block;
+font-weight:normal;
 line-height:1.4;
 font-size: ${props => {
     if(props.sm){ return '.785rem';}
@@ -65,9 +69,16 @@ color: ${props => {
     if(props.light){return '#666'}
     else{return '#111'}
 }};
+margin: ${props => props.StMargin || '0'};
 `;
 
-
+export const StTitleCenter = styled.strong`
+  display:block;
+  text-align:center;
+  font-size:2rem;
+  font-weight:400;
+  margin-bottom:3em;
+`;
 export const StLocalNav = styled.ul`
   border-bottom:1px solid #efefef;
   box-sizing:border-box;
@@ -156,4 +167,16 @@ export const StTitle = styled.strong`
 
 export const StFieldset = styled.div`
   margin:1em 0;
+`;
+
+export const StButton = styled.button`
+  position:relative;
+  width:100%;
+  height:40px;
+  color:#fff;
+  background-color:${props => props.main ? '#f50' : '#eee'};
+  border:${props => props.main ? '1px solid #f50': '1px solid #eee'};
+  line-height:40px;
+  border-radius:.2em;
+  font-size:.875rem;
 `;

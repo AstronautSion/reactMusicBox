@@ -20,6 +20,9 @@ const StMusicList = styled.ul`
 
       .music-list__info{
         padding-left:1em;
+        box-sizing: border-box;
+        width: calc(100% - 70px);
+        word-break: break-all;
 
         .music-list__title{
           font-size:1rem;
@@ -53,7 +56,7 @@ const StMusicList = styled.ul`
 
       .music-list__control{
         position:absolute;
-        top:0;
+        bottom:0;
         right:0;
 
         > button{

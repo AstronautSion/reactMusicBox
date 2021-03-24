@@ -135,7 +135,7 @@ const StPlayerIcon = styled.div`
 const MusicImgItem = ({data}) => {
   
   const onClickPlay = () => {
-    console.log(data.type, data.musicUrl);
+    
   };
 
   return(

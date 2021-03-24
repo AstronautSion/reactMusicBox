@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import PropTypes from 'prop-types';
 import LoginForm from '../From/LoginForm';
-import PopupLogin from '../Popup/PopupLogin';
+import Popup from '../Popup/Popup';
 import { useSelector } from 'react-redux';
 import { StLoginLayout } from '../../style/components/AppLayout';
 import styled from '@emotion/styled';
@@ -21,13 +21,15 @@ export const StMusicLayout = styled.div`
 
 const MusicLayout = ({ children }) => {
   const isLoggedIn = useSelector(state => state.user.isLoggedIn);
-	const isLoginPopup = useSelector(state => state.user.isLoginPopup);
+	const isLoginPopup = useSelector(state => state.user.popup.isLoginPopup);
     
 	return (
 		<>
 			<Header />
 			{ isLoginPopup &&  
-				<PopupLogin />
+				<Popup>
+					<LoginForm />
+				</Popup>
 			}
       {isLoggedIn 
         ? children 

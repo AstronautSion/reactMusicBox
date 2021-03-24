@@ -26,8 +26,10 @@ export const initialState = {
 	isLoggedIn: false,
 	user: null,
 	popup: {
+		data: null,
 		isLoginPopup: false,
 		isAddMusic: false,
+		isModiMusic: false,
 	}
 };
 
@@ -103,9 +105,9 @@ export default (state = initialState, action) => {
 			};
 		}
 		case POPUP_OPEN: {
-			console.log(action.type, action.data)
 			const popupState = {...state.popup}
-			popupState[action.data] = true;
+			popupState[action.data.key] = true;
+			popupState.data = action.data.value;
 			return {
 				...state,
 				popup : popupState,

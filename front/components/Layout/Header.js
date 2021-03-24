@@ -25,7 +25,10 @@ const Header = () => {
 	}
 	
 	const onclickLoginForm = useCallback(() => {
-		dispatch(popupOpen('isLoginPopup'));
+		dispatch(popupOpen({
+			key:'isLoginPopup',
+			value: null,
+		}));
 	},[]);
 
 	const onClickLogout = useCallback(() => {

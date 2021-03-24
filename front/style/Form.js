@@ -82,10 +82,14 @@ export const StInput = styled.input`
     border-radius:.25em;
     border-color: ${ props => props.stColor || '#ddd'};
     margin: ${props => props.stMargin || '0'};
+
+    &[readonly]{
+        background-color:#eee;
+    }
 `;
 
 export const StLable = styled.label`
-    font-size:1rem;
+    font-size:${props => props.sm ? '.875rem' : props.lg ? '1.2rem' : '1rem'};
     margin-bottom:.5em;
     display:block;
 `;

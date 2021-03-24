@@ -21,6 +21,15 @@ export const StPopupWrapper = styled.div`
     justify-contents:center;
     align-items: center;
     background-color:rgba(0,0,0,.75);
+    > div{
+      position:relative;
+      background-color:#fff;
+      max-width:500px;
+      width:95%;
+      margin:0 auto;
+      padding:2em;
+      box-sizing:border-box;
+    }
 `;
 
 export const StLoginLayout = styled.div`
@@ -96,4 +105,55 @@ export const StSectionTitle = styled.h3`
   font-weight:bold;
   color:#333;
   padding-bottom:1em;
+`;
+
+export const StFixedButton = styled.div`
+  position:fixed;
+  bottom:10%;
+  right:1rem;
+  width:50px;
+  height:50px;
+  background-color:#f50;
+  border-radius:50%;
+  cursor:pointer;
+  &:after{
+    content:'';
+    display:block;
+    width:1px;
+    height:20px;
+    position:absolute; 
+    top:50%;
+    left:50%;
+    margin-top:-10px;
+    margin-left:-.5px;
+    background-color:#fff;
+  }
+  &:before{
+    content:'';
+    display:block;
+    width:20px;
+    height:1px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-.5px;
+    margin-left:-10px;
+    background-color:#fff;
+  }
+  &:hover{
+    background-color:#ff7734;
+  }
+`;
+
+
+export const StTitle = styled.strong`
+  display:block;
+  font-size:1.25rem;
+  font-weight:bold;
+  color:#333;
+  padding-bottom:1em;
+`;
+
+export const StFieldset = styled.div`
+  margin:1em 0;
 `;

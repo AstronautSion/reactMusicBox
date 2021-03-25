@@ -115,28 +115,31 @@ export default (state = initialState, action) => {
 			};
 		}
 		case USER_MODIFY: {
-			const userState = {...state.user};
-			userState.nickname = action.data.nickname;
-			userState.userId = action.data.userId;
 			return {
 				...state,
-				user: userState,
+				user: {
+					...state.user,
+					nickname: action.data.nickname,
+					userId: action.data.userId,
+				},
 			}
 		}
 		case POPUP_OPEN: {
-			const popupState = {...state.popup}
-			popupState[action.data.key] = true;
-			popupState.data = action.data.value;
 			return {
 				...state,
-				popup : popupState,
+				popup : {
+					...state.popup,
+					[action.data.key]: true,
+					data: action.data.value,
+				},
 			}
 		}
 		case POPUP_CLOSE: {
-			const popupState = {...initialState.popup};
 			return {
 				...state,
-				popup : popupState,
+				popup : {
+					...initialState.popup
+				},
 			}
 		}
 		default: {

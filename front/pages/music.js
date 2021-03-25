@@ -33,7 +33,7 @@ const Music = () => {
 							</StTitle>
 							
 							{ isAddMusic && <Popup><MusicAddForm /></Popup>}
-							{ playList && playList.map(v => ( <MusicList data={v} key={v.title} />))}
+							{ playList && playList.map(v => ( <MusicList data={v} key={v.id} />))}
 							{ isModiMusic && <Popup> <MusicModiForm /> </Popup>}
 							<StFixedButton onClick={onClickAddMusicButton} />
 							</>

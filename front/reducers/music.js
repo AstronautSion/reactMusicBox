@@ -1,5 +1,4 @@
 const dummyMusic = {
-  
   playList : [
     {id:0, title: 'Easily', author:'Bruno Major', writter: '우주인', link: 'dsE2HTeFC-E', type: 0},
 		{id:1,title: 'Weekend', author:'PERC%NT', writter: '우주인', link: 'jwTpp7ODeiw', type: 0},
@@ -14,7 +13,8 @@ export const initialState = {
   volume: 0,
   musicId: null,
   musicType: null,
-  musicPlayer : null,  
+  musicPlayer : null,
+  playList: [],
 };
 
 export const MUSIC_PLAY = 'MUSIC_PLAY';
@@ -84,11 +84,13 @@ export default (state = initialState, action) => {
       }
     }
     case MUSIC_MODIFY: {
-      console.log(action.data)
-      const playLists = [...state.playList];
-      playLists[action.data.id].title = action.data.title;
-      playLists[action.data.id].author = action.data.author;
-      console.log('??',playLists);
+      const playLists = [...state.playList]
+      playLists.map(v => {
+        if(v.id === action.data.id){
+          v.title = action.data.title;
+          v.author = action.data.author;
+        }
+      });
       return {
         ...state,
         playList: playLists

@@ -17,7 +17,6 @@ const StMusicAsideList = styled.ul`
 const MusicAsideMenu = () => {
 
   const playList = useSelector(state => state.user.playList);
-  console.log(playList);
   return (
     <StMusicAsideMenu>
       <div className="music-menu__option">

@@ -17,7 +17,6 @@ const MusicModiForm = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   useEffect(() => {
-    console.log(data)
     setTitle(data.title);
     setAuthor(data.author);
     setLink(data.link);

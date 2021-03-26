@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import LoginForm from '../From/LoginForm';
 import Popup from '../Popup/Popup';
 import { useSelector } from 'react-redux';
-import { StLoginLayout } from '../../style/components/AppLayout';
+import { StSmLayout } from '../../style/components/AppLayout';
 import styled from '@emotion/styled';
 
 
@@ -14,7 +14,7 @@ export const StMusicLayout = styled.div`
 	left:0;
 	width:100%;
 	height:100%;
-	background-color:#f50;
+	background-color:#5f56e0;
 	padding-top:50px;
 	box-sizing:border-box;
 `;
@@ -33,9 +33,9 @@ const MusicLayout = ({ children }) => {
 			}
       {isLoggedIn 
         ? children 
-        : <StLoginLayout>
+        : <StSmLayout>
 						<LoginForm/>
-					</StLoginLayout>
+					</StSmLayout>
       }
       
 		</>

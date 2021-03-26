@@ -40,7 +40,7 @@ export const StBtnLoginForm = styled.button`
         }else if(props.stGoogle){
             return '#fff';
         }else{
-            return '#f50';
+            return '#5f56e0';
         }
     }};
 `;
@@ -52,6 +52,7 @@ export const StLoginFormTitle = styled.h3`
     font-size:1.65rem;
     font-weight:normal;
     line-height:1.5;
+		color:#fff;
 `;
 
 

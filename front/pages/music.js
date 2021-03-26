@@ -1,6 +1,6 @@
 import React from 'react';
 import MusicList from '../components/MusicList';
-import { StContainer, StFixedButton, StLoginLayout, StP, StTitle, StTitleCenter, StWrapper } from '../style/components/AppLayout';
+import { StContainer, StFixedButton, StSmLayout, StP, StTitle, StTitleCenter, StWrapper } from '../style/components/AppLayout';
 import AppLayout from '../components/Layout/AppLayout';
 import MusicAddForm from '../components/From/MusicAddForm';
 import Popup from '../components/Popup/Popup';
@@ -33,15 +33,17 @@ const Music = () => {
 							</StTitle>
 							
 							{ isAddMusic && <Popup><MusicAddForm /></Popup>}
-							{ playList && playList.map(v => ( <MusicList data={v} key={v.id} />))}
+							{ playList && 
+								playList.map(v => ( <MusicList data={v} key={v.id} />))
+							}
 							{ isModiMusic && <Popup> <MusicModiForm /> </Popup>}
 							<StFixedButton onClick={onClickAddMusicButton} />
 							</>
 						:
-							<StLoginLayout>
+							<StSmLayout>
 								<StTitleCenter>Please Login</StTitleCenter>
 								<LoginForm />
-							</StLoginLayout>
+							</StSmLayout>
 						}
 
 					</StContainer>

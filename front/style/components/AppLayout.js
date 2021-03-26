@@ -32,7 +32,7 @@ export const StPopupWrapper = styled.div`
     }
 `;
 
-export const StLoginLayout = styled.div`
+export const StSmLayout = styled.div`
     padding:10rem 0;
     box-sizing:border-box;
     max-width:500px;
@@ -53,7 +53,6 @@ export const StPopupBtnClose = styled.button`
 
 export const StContainer = styled.div`
     padding:1em 1em 3em 1em;
-    background-color:#fff;
 `;
  
 export const StP = styled.p`
@@ -78,6 +77,7 @@ export const StTitleCenter = styled.strong`
   font-size:2rem;
   font-weight:400;
   margin-bottom:3em;
+  color:#fff;
 `;
 export const StLocalNav = styled.ul`
   border-bottom:1px solid #efefef;
@@ -104,19 +104,12 @@ export const StLocalNav = styled.ul`
       padding-left:0;
     }
     &.active a{
-      color:#f50;
-      border-color:#f50;
+      color:#5f56e0;
+      border-color:#5f56e0;
     }
   }
 `;
 
-export const StSectionTitle = styled.h3`
-  display:block;
-  font-size:1.25rem;
-  font-weight:bold;
-  color:#333;
-  padding-bottom:1em;
-`;
 
 export const StFixedButton = styled.div`
   position:fixed;
@@ -124,7 +117,7 @@ export const StFixedButton = styled.div`
   right:1rem;
   width:50px;
   height:50px;
-  background-color:#f50;
+  background-color:#5f56e0;
   border-radius:50%;
   cursor:pointer;
   &:after{
@@ -161,8 +154,9 @@ export const StTitle = styled.strong`
   display:block;
   font-size:1.25rem;
   font-weight:bold;
-  color:#333;
+  color:#fff;
   padding-bottom:1em;
+  margin-top:2em;
 `;
 
 export const StFieldset = styled.div`
@@ -174,8 +168,8 @@ export const StButton = styled.button`
   width:100%;
   height:40px;
   color:#fff;
-  background-color:${props => props.main ? '#f50' : '#eee'};
-  border:${props => props.main ? '1px solid #f50': '1px solid #eee'};
+  background-color:${props => props.main ? '#5f56e0' : '#eee'};
+  border:${props => props.main ? '1px solid #5f56e0': '1px solid #eee'};
   line-height:40px;
   border-radius:.2em;
   font-size:.875rem;

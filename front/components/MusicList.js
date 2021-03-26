@@ -13,6 +13,8 @@ const StMusicList = styled.ul`
     border:1px solid #eee;
     box-sizing:border-box;
     margin-bottom:.5em;
+    background-color:#fafafb;
+    border-radius:.5em;
 
     .music-list__wrapper{
       position:relative;
@@ -29,9 +31,10 @@ const StMusicList = styled.ul`
           display:block;
           padding-bottom:.25em;
           line-height:1.4;
+          color:#474c71;
 
           .music-list__author{
-            color:#999;
+            color:#9195b5;
             display:inline-block;
             font-size:.75rem;
             line-height:1.2;
@@ -44,14 +47,14 @@ const StMusicList = styled.ul`
           padding-top:1em;
           font-size:.75rem;
           display:block;
-          color:#999;
+          color:#9195b5;
         }
       }
       .music-list__thumb{
         display:block;
         width:70px;
         height:70px;
-        background-color:#eee;
+        background-color:#9195b5;
       }
 
       .music-list__control{
@@ -66,19 +69,18 @@ const StMusicList = styled.ul`
           padding:.25em .7em;
           margin-left:.25em;
           cursor:pointer;
+          color:#9195b5;
         }
 
         .music-list__button--delete{
-          border-color:#888;
-          background-color:#888;
+          border-color:#9195b5;
+          background-color:#9195b5;
           color:#fff;
         }
       }
     }
   }
 `;
-
-
 
 const MusicList = ({data}) => {
   const dispatch = useDispatch();
@@ -94,6 +96,7 @@ const MusicList = ({data}) => {
     }));
   }
   return (
+
     <StMusicList>
       <li>
         <div className="music-list__wrapper">

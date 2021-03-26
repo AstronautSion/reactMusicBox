@@ -7,7 +7,8 @@ import wrapper from '../store/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadMusicList } from '../reducers/music';
 
-const MusicBox = ({ Component }) => {
+const MusicBox = ({ Component }) => {	
+	
 	const dispatch = useDispatch();
 	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
 	
@@ -28,6 +29,8 @@ const MusicBox = ({ Component }) => {
 			<Reset />
 			<FormReset />
 			<Component />
+
+			
 		</>
 	);
 }

@@ -26,11 +26,11 @@ const ProfileForm = () => {
   return(
     <form onSubmit={onSubmitProfileEdit}>
       <StFieldset>
-        <StLable sm>User Id</StLable>
+        <StLable>User Id</StLable>
         <StInput value={changeUserId} onChange={onChangeUserId}></StInput>
       </StFieldset>
       <StFieldset>
-        <StLable sm>Display Name</StLable>
+        <StLable>Display Name</StLable>
         <StInput value={changeNickname} onChange={onChangeNickname}></StInput>
       </StFieldset>
       <StButton main type="submit">수정</StButton>

@@ -13,6 +13,10 @@ export const StCheckbox = styled.label`
     user-select:none; 
     vertical-align:top;
     margin:1em 0;
+    color:#eee;
+    font-size:.875rem;
+    text-indent:5px;
+    border:0;
 
     & > input[type="checkbox"] {
         position: absolute; 
@@ -20,6 +24,7 @@ export const StCheckbox = styled.label`
         cursor: pointer; 
         height: 0; 
         width: 0;
+        
         & ~ span{
             position:absolute; 
             top:0; 
@@ -27,7 +32,7 @@ export const StCheckbox = styled.label`
             height:17px; 
             width:17px; 
             background-color: #fff; 
-            border:1px solid #ddd;
+            border:0;
 
             &:after{
                 content:""; 
@@ -82,16 +87,24 @@ export const StInput = styled.input`
     border-radius:.25em;
     border-color: ${ props => props.stColor || '#ddd'};
     margin: ${props => props.stMargin || '0'};
-
+    background-color:#fff;
     &[readonly]{
         background-color:#eee;
     }
 `;
 
 export const StLable = styled.label`
-    font-size:${props => props.sm ? '.875rem' : props.lg ? '1.2rem' : '1rem'};
+    font-size:.875rem;
     margin-bottom:.5em;
     display:block;
+    font-weight:300;
+    color:${props => {
+        if(props.color){
+            return props.color;
+        }else{
+            return '#9195b5';
+        }
+    }};
 `;
 
 export const StSelect = styled.select`
@@ -105,6 +118,7 @@ export const StSelect = styled.select`
     padding:0 1em;
     box-sizing:border-box;
     border-radius:.25em;
+    background-color:#fff;
     border-color: ${ props => props.stColor || '#ddd'};
     margin: ${props => props.stMargin || '0'};
 `;

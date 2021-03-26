@@ -8,7 +8,7 @@ const StButtonLonger = styled.button`
   height:40px;
   line-height:40px;
   margin-top:1em;
-  background-color:#f50;
+  background-color:#5f56e0;
   font-size:.875rem;
   color:#fff;
   text-align:center;
@@ -68,11 +68,11 @@ const MusicAddForm = () => {
           <button onClick={onclickBack}>←</button>
           <StInput value={resultLink} readOnly />
           <StFieldset>
-            <StLable sm>Title</StLable>
+            <StLable>Title</StLable>
             <StInput />
           </StFieldset>
           <StFieldset>
-            <StLable sm>author</StLable>
+            <StLable>author</StLable>
             <StInput />
           </StFieldset>
         </form>

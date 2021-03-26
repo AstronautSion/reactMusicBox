@@ -2,13 +2,15 @@
 import React from 'react';
 import ProfileForm from '../components/From/ProfileForm';
 import AppLayout from "../components/Layout/AppLayout";
-import { StContainer } from "../style/components/AppLayout";
+import { StContainer, StSmLayout } from "../style/components/AppLayout";
 
 const Profile = () => {
   return (
     <AppLayout>
       <StContainer>
-        <ProfileForm />
+        <StSmLayout>
+          <ProfileForm />
+        </StSmLayout>
       </StContainer>
     </AppLayout>
 

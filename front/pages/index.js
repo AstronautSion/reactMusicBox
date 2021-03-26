@@ -1,13 +1,11 @@
 import React from 'react';
 import AppLayout from "../components/Layout/AppLayout";
-
-
-
+import MusicBoxCard from '../components/MusicBoxCard';
 
 const Home = () => {
 	return (
 		<AppLayout>
-			<div>Hello, MusixBox</div>
+			<MusicBoxCard />
 		</AppLayout>
 	)
 }

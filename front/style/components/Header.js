@@ -4,14 +4,11 @@ export const StHeader = styled.div`
     z-index:9999;
     position:relative;
     width:100%;
-    background-color:#111;
-
     /* .wrapper */
     > div{
         display:flex;
         justify-content: space-between;    
     }
-
     .menu{
         display:flex;
         a {
@@ -76,8 +73,8 @@ export const StBtnSignin = styled.button`
     text-decoration:none;
     color:#fff;
     font-size:.875rem;
-    border:${props => props.stOrange ? '1px solid #f50' :  '1px solid #ddd' };
-    background-color:${props => props.stOrange ? '#f50' :  'transparent' };
+    border:${props => props.stOrange ? '1px solid #5f56e0' :  '1px solid #383838' };
+    background-color:${props => props.stOrange ? '#5f56e0' :  'transparent' };
     border-radius:.25rem;
     cursor:pointer;
     margin-left:1em;
@@ -92,8 +89,8 @@ export const StButtonSm = styled.button`
     text-decoration:none;
     color:#fff;
     font-size:.7rem;
-    border:${props => props.stOrange ? '1px solid #f50' :  '1px solid #ddd' };
-    background-color:${props => props.stOrange ? '#f50' :  'transparent' };
+    border:${props => props.stOrange ? '1px solid #5f56e0' :  '1px solid #383838' };
+    background-color:${props => props.stOrange ? '#5f56e0' :  'transparent' };
     border-radius:.25rem;
     cursor:pointer;
     margin-left:1em;

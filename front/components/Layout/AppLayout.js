@@ -1,14 +1,14 @@
 import React from 'react';
 import Header from './Header';
 import PropTypes from 'prop-types';
-import { StWrapper } from '../../style/components/AppLayout';
+import { StSmLayout, StTitleCenter, StWrapper } from '../../style/components/AppLayout';
 import { useSelector } from 'react-redux';
 import Popup from '../Popup/Popup';
 import LoginForm from '../From/LoginForm';
 
 
 const AppLayout = ({ children }) => {
-
+	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
 	const isLoginPopup = useSelector( state => state.user.popup.isLoginPopup);
 	return (
 		<>
@@ -19,7 +19,12 @@ const AppLayout = ({ children }) => {
 				</Popup>
 			}
 			<StWrapper>
-				{children}
+				{ isLoggedIn ? children :
+					<StSmLayout>
+						<StTitleCenter>Please Login</StTitleCenter>
+						<LoginForm />
+					</StSmLayout>
+				}
 			</StWrapper>
 		</>
 	);

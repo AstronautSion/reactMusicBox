@@ -2,25 +2,6 @@ const dummyUser = {
 	id: 1,
 	userId: 'Astronaut.sion',
 	nickname: '사자',
-	myMusic: [{
-		title: 'default',
-		data: [
-			{title: '브레이브걸스1', writter: '오리1', link: 'dsE2HTeFC-E', type: 0},
-			{title: '브레이브걸스2', writter: '오리2', link: 'jwTpp7ODeiw', type: 0},
-			{title: '브레이브걸스3', writter: '오리3', link: 'jwTpp7ODeiw', type: 0},
-			{title: '브레이브걸스4', writter: '오리4', link: 'jwTpp7ODeiw', type: 0},
-			{title: '브레이브걸스5', writter: '오리5', link: 'jwTpp7ODeiw', type: 0},
-		]
-	},{
-		title: 'myFavorite',
-		data: [
-			{title: '브레이브걸스1', writter: '오리1', link: 'dsE2HTeFC-E', type: 0},
-			{title: '브레이브걸스2', writter: '오리2', link: 'jwTpp7ODeiw', type: 0},
-			{title: '브레이브걸스3', writter: '오리3', link: 'jwTpp7ODeiw', type: 0},
-			{title: '브레이브걸스4', writter: '오리4', link: 'jwTpp7ODeiw', type: 0},
-			{title: '브레이브걸스5', writter: '오리5', link: 'jwTpp7ODeiw', type: 0},
-		]	
-	}]
 };
   
 export const initialState = {

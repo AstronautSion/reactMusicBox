@@ -3,19 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import YouTube from 'react-youtube';
 
 export let TYAPI = null;
+let oneBool = true;
 
 const YoutubeAPI = () => {
   const musicId = useSelector(state => state.music.nowPlayList.link);
+  const isPlay = useSelector(state => state.music.isPlay);
   let volumeInit = 0;
-  let oneBool = true;
+  
   const onStateChanges = useCallback((e) => {
-   
+    
     if(oneBool && e.target.getDuration()){
       e.target.pauseVideo();
       e.target.setVolume(volumeInit);
       e.target.seekTo(0)
       oneBool = false;
     }
+    
   },[volumeInit]);
   
   const onReadyYouTube = useCallback((e) => {

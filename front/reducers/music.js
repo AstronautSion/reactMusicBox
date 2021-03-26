@@ -1,10 +1,10 @@
 const dummyMusic = {
   playList : [
-    {id:0, title: 'Easily', author:'Bruno Major', writter: '우주인', link: 'dsE2HTeFC-E', type: 0},
-		{id:1,title: 'Weekend', author:'PERC%NT', writter: '우주인', link: 'jwTpp7ODeiw', type: 0},
-		{id:2,title: 'Fool For You', author:'Snoh Aalegra', writter: '우주인', link: 'jwTpp7ODeiw', type: 0},
-		{id:3,title: 'See You Again', author:'Tyler, The Creator', writter: '우주인', link: 'jwTpp7ODeiw', type: 0},
-		{id:4,title: '운전만해', author:'브레이브걸스', writter: '우주인', link: 'jwTpp7ODeiw', type: 0},
+    {id:0, title: 'Photograph ', author:'offonoff', writter: '우주인', link: '2b1E-zu-QEM', type: 0},
+		{id:1,title: 'Weekend', author:'PERC%NT', writter: '우주인', link: 'WRtbq1W1GFY', type: 0},
+		{id:2,title: 'Slow dancing in the dark', author:'Joji', writter: '우주인', link: 'K3Qzzggn--s', type: 0},
+		{id:3,title: 'Sanctuary', author:'Joji', writter: '우주인', link: '5-uWlFq380M', type: 0},
+		{id:4,title: 'Liar', author:'Taek ', writter: '우주인', link: 'XP0lIqnvFCY', type: 0},
   ],
 };
   
@@ -18,6 +18,14 @@ export const MUSIC_PLAY = 'MUSIC_PLAY';
 export const LOAD_MUSIC_LIST = 'LOAD_MUSIC_LIST';
 export const MUSIC_DELETE = 'MUSIC_DELETE';
 export const MUSIC_MODIFY = 'MUSIC_MODIFY';
+export const SET_NOW_MUSIC_LIST = 'SET_NOW_MUSIC_LIST';
+
+export const setNowMusicListAction = (data) => {
+  return{
+    type: SET_NOW_MUSIC_LIST,
+    data,
+  }
+}
 
 export const musicDeleteAction = (data) => {
   return{
@@ -79,6 +87,13 @@ export default (state = initialState, action) => {
       return {
         ...state, 
         playList: playLists.filter(v => v.id !== action.data) 
+      }
+    }
+
+    case SET_NOW_MUSIC_LIST: {
+      return {
+        ...state,
+        nowPlayList: action.data,
       }
     }
     

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { musicPlayAction } from '../reducers/music';
+import { musicPlayAction, setNowMusicListAction } from '../reducers/music';
 import { TYAPI } from './YoutubeAPI';
 
 
@@ -142,15 +142,17 @@ const MusicBoxTime = styled.div`
 `;
 
 const MusicBoxCard = () => {
+
   const dispatch = useDispatch();
   const [play, setPlay] = useState(true);
   const isPlay = useSelector(state => state.music.isPlay);
-  const {link, title, author, writter, id, type} = useSelector(state => state.music.nowPlayList);
+  const {link, title, author, writter, id, type} = useSelector(state => state.music?.nowPlayList);
+  const playList = useSelector(state => state.music.playList);
   const [duration, setDuration] = useState('00:00');
   // const [volume, setVolume] = useState(TYAPI.getVolume());
   // const [currentTime, setCurrentTime] = useState()
   const [musicImg, setMusicImg] = useState();
-
+  
   const timeFormat = (time) => {
     let timestamp = time;
     let hours = Math.floor(timestamp / 60 / 60);
@@ -179,6 +181,28 @@ const MusicBoxCard = () => {
     play ? TYAPI.playVideo() : TYAPI.pauseVideo();
   },[play, isPlay]);
 
+  const onClickPrev = useCallback(() => {
+    playList.map((v, i) => {
+      if(v.id === id){
+        if(i !== 0){
+          dispatch(setNowMusicListAction(playList[i - 1]))
+        }
+        console.log(v, i)
+      }
+    });
+  },[playList, id]);
+
+  const conClickNext = useCallback(() => {
+    playList.map((v, i) => {
+      if(v.id === id){
+        if(i !== (playList.length - 1) ){
+          dispatch(setNowMusicListAction(playList[i + 1]));
+        }
+        console.log(v, i)
+      }
+    });
+  },[playList, id]);
+
   return (
     <StMusicboxCard>
       <StMusicBoxImg StImgUrl={musicImg}/>
@@ -187,8 +211,8 @@ const MusicBoxCard = () => {
         <StMusicBoxButton onClick={onClickPlay}><i className={isPlay ? 'fa fa-play' : 'fa fa-pause'}></i>
         {/* fa-pause */}
         </StMusicBoxButton>
-        <StMusicBoxButtonSm><i className="fa fa-backward"></i></StMusicBoxButtonSm>
-        <StMusicBoxButtonSm><i className="fa fa-forward"></i></StMusicBoxButtonSm>
+        <StMusicBoxButtonSm onClick={onClickPrev}><i className="fa fa-backward"></i></StMusicBoxButtonSm>
+        <StMusicBoxButtonSm onClick={conClickNext}><i className="fa fa-forward"></i></StMusicBoxButtonSm>
       </StMusicBoxControlArea>
       
       <StMusicBoxBottom>

@@ -1,28 +1,29 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import YouTube from 'react-youtube';
-import { setMusicInfoAction } from '../reducers/music';
 
 export let TYAPI = null;
 
 const YoutubeAPI = () => {
-  const dispatch = useDispatch();
   const musicId = useSelector(state => state.music.nowPlayList.link);
+  let volumeInit = 0;
+  let oneBool = true;
   const onStateChanges = useCallback((e) => {
-    console.log(e.target.getDuration())
-    console.log('e.target',e.target);
-  },[]);
-
-  const onReadyYouTube = (e) => {
-    e.target.pauseVideo();
+   
+    if(oneBool && e.target.getDuration()){
+      e.target.pauseVideo();
+      e.target.setVolume(volumeInit);
+      e.target.seekTo(0)
+      oneBool = false;
+    }
+  },[volumeInit]);
+  
+  const onReadyYouTube = useCallback((e) => {
     TYAPI = e.target;
-
-    //set music info
-    dispatch(setMusicInfoAction({
-      volume: e.target.getVolume(),
-      duration: e.target.getDuration(),
-    }));
-  }
+    volumeInit = TYAPI.getVolume();
+    TYAPI.setVolume(0);
+    
+  },[volumeInit]);
 
   const opts = {
     playerVars: {

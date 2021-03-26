@@ -10,8 +10,6 @@ const dummyMusic = {
   
 export const initialState = {
 	isPlay: false,
-  volume: 0,
-  duration: 0,
   nowPlayList: {},
   playList: [],
 };
@@ -20,14 +18,6 @@ export const MUSIC_PLAY = 'MUSIC_PLAY';
 export const LOAD_MUSIC_LIST = 'LOAD_MUSIC_LIST';
 export const MUSIC_DELETE = 'MUSIC_DELETE';
 export const MUSIC_MODIFY = 'MUSIC_MODIFY';
-export const SET_MUSIC_INFO = 'SET_MUSIC_INFO';
-
-export const setMusicInfoAction = (data) => {
-  return {
-    type: SET_MUSIC_INFO,
-    data,
-  }
-}
 
 export const musicDeleteAction = (data) => {
   return{
@@ -63,13 +53,7 @@ export default (state = initialState, action) => {
         nowPlayList: dummyMusic.playList[0]
 			};
 		}
-    case SET_MUSIC_INFO: {
-      return{
-        ...state,
-        volume: action.data.volume,
-        duration: action.data.duration,
-      }
-    }
+  
     case MUSIC_PLAY: {
       return {
         ...state,

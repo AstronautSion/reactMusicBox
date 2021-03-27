@@ -110,7 +110,6 @@ export const StLocalNav = styled.ul`
   }
 `;
 
-
 export const StFixedButton = styled.div`
   position:fixed;
   bottom:10%;
@@ -149,7 +148,6 @@ export const StFixedButton = styled.div`
   }
 `;
 
-
 export const StTitle = styled.strong`
   display:block;
   font-size:1.25rem;
@@ -173,4 +171,45 @@ export const StButton = styled.button`
   line-height:40px;
   border-radius:.2em;
   font-size:.875rem;
+`;
+
+
+export const StBackgroundYouTube = styled.div`
+  transition:all 1s;
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:${props => {
+    if(props.StImg){
+      return 'url('+props.StImg+') no-repeat center;'
+    }else{
+      return '#333';
+    }
+  }};
+  background-size:cover;
+  filter: blur(10px);
+  
+  &:after{
+    position:absolute;
+    content:'';
+    display:block;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.15);
+  }
+  & > div{
+    iframe{
+      position:absolute;
+      top:0;
+      left:0;
+      width:1px;
+      height:1px;
+      opacity:0;
+    }
+  }
 `;

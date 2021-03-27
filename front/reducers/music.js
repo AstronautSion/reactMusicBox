@@ -10,6 +10,8 @@ const dummyMusic = {
   
 export const initialState = {
 	isPlay: false,
+  musicChange: true,
+  duration: 0,
   nowPlayList: {},
   playList: [],
 };
@@ -19,6 +21,22 @@ export const LOAD_MUSIC_LIST = 'LOAD_MUSIC_LIST';
 export const MUSIC_DELETE = 'MUSIC_DELETE';
 export const MUSIC_MODIFY = 'MUSIC_MODIFY';
 export const SET_NOW_MUSIC_LIST = 'SET_NOW_MUSIC_LIST';
+export const SET_DURATION = 'SET_DURATION';
+export const SET_MUSIC_CHANGE = 'SET_MUSIC_CHANGE';
+
+export const setMusicChangeAction = (data) => {
+  return{
+    type: SET_MUSIC_CHANGE,
+    data,
+  }
+}
+
+export const setDurationAction = (data) => {
+  return{
+    type: SET_DURATION,
+    data,
+  }
+}
 
 export const setNowMusicListAction = (data) => {
   return{
@@ -94,6 +112,20 @@ export default (state = initialState, action) => {
       return {
         ...state,
         nowPlayList: action.data,
+      }
+    }
+    
+    case SET_DURATION: {
+      return{
+        ...state,
+        duration: action.data,
+      }
+    }
+    
+    case SET_MUSIC_CHANGE: {
+      return{
+        ...state,
+        musicChange: action.data,
       }
     }
     

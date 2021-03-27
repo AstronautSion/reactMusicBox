@@ -19,6 +19,7 @@ const FormReset = () => {
 			background:none; 
 			line-height:1; 
 			font-size:1rem;
+			font-family: 'Arvo','Noto Sans KR', 'Titillium Web', 'Nanum Gothic', '굴림', sans-serif;
 		}
 		input:focus,
 		textarea:focus{outline:0;}

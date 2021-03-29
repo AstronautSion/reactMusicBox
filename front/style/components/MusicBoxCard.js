@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled, { css } from 'styled-components';
 
 export const StMusicboxCard = styled.div`
   position:fixed;
@@ -65,16 +65,14 @@ export const StMusicBoxImg = styled.div`
   display:block;
   width:20rem;
   height:20rem;
-  background:${props => {
-    if(!props.StImgUrl ){
-      return '#333';
-    }else{
-      return 'url('+props.StImgUrl+') no-repeat center';
-    }
-  }};
+  background:#333;
   background-size:cover;
   border-radius:1em;
   box-shadow:0 0 7px rgba(0,0,0,0.2);
+  
+  ${props => props.StImgUrl && css`
+    background:url(${props.StImgUrl}) no-repeat center;
+  `}
 `;
 export const StMusicBoxControlArea = styled.div`
   padding:1.5rem 0 0 1rem;
@@ -114,7 +112,7 @@ export const StMusicBoxProgressBarItem = styled.div`
   position:absolute;
   top:0;
   left:0;
-  width: ${props => props.width };
+  width: ${props => props.StWidth || '0px' };
   height:5px;
   border-radius:2em;
   background-color:#9195b5;

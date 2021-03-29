@@ -1,21 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { StInput, StLable } from '../../style/Form';
-import styled from '@emotion/styled';
-import { StFieldset, StTitle } from '../../style/components/AppLayout';
+import { StButtonBack, StFieldset, StTitle } from '../../style/components/AppLayout';
+import { StButtonLonger } from '../../style/LoginForm';
 
-const StButtonLonger = styled.button`
-  width:100%;
-  height:40px;
-  line-height:40px;
-  margin-top:1em;
-  background-color:#5f56e0;
-  font-size:.875rem;
-  color:#fff;
-  text-align:center;
-  box-sizing:border-box;
-  border-radius:.25em;
-`;
- 
+
 
 const MusicAddForm = () => {
   const [link, setLink] = useState('');
@@ -47,6 +35,7 @@ const MusicAddForm = () => {
   },[link]);
 
   const onclickBack = () => {
+    console.log('hi')
     setReadySubmit(false);
   }
   return(
@@ -65,7 +54,7 @@ const MusicAddForm = () => {
         </form>
       :
         <form>
-          <button onClick={onclickBack}>←</button>
+          <StButtonBack onClick={onclickBack}>&larr;</StButtonBack>
           <StInput value={resultLink} readOnly />
           <StFieldset>
             <StLable>Title</StLable>

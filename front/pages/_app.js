@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadMusicList } from '../reducers/music';
 import YoutubeAPI from '../components/YoutubeAPI';
 import { StBackgroundYouTube } from '../style/components/AppLayout';
+import withReduxSaga  from 'next-redux-saga';
 
 const MusicBox = ({ Component }) => {	
 	
@@ -37,7 +38,6 @@ const MusicBox = ({ Component }) => {
 			}
 			<FormReset />
 			<Component />
-			
 		</>
 	);
 }
@@ -46,4 +46,4 @@ MusicBox.propTypes = {
 	Component : PropTypes.elementType.isRequired,
 }
 
-export default wrapper.withRedux(MusicBox);
+export default wrapper.withRedux(withReduxSaga(MusicBox));

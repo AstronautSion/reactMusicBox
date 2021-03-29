@@ -29,7 +29,31 @@ SSR과 Code Splitting이 꼭 NEXT를 사용해야만 하는것은 아니지만 N
 ### NEXT를 사용안해도 되는 경우
 대표적으로 어드민 사이트 같은경우는 검색엔진에 노출될 필요가 없으며 관리자들은 조금 불편하겠지만 사용자들이 이용하지 않기 때문에 굳이 NEXT를 사용하지 않아도 된다.
 
+<br><br><br>
+# styled-components
+
+```
+npm i --save styled-components
+npm i babel-plugin-styled-components
+```
 
 
+루스에 `.babelrc` 파일을 추가
 
+```js
+{
+  "presets": ["next/babel"],
+  "plugins": [
+    [
+      "babel-plugin-styled-components",
+      { "fileName": true, "displayName": true, "pure": true }
+    ]
+  ]
+}
+```
+바벨 플러그인 설정은 배열로 담아 [0]인덱스에는 플러그인명, [1]인덱스에는 옵션을 위치시킨다.
+
+- `fileName`: 코드가 포함된 파일명을 알려줌
+- `displayName` : 클래스명에 해당 스타일 정보 추가
+- `pure` : 사용하지 않은 속성 제거
 

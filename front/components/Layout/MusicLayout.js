@@ -5,7 +5,7 @@ import LoginForm from '../From/LoginForm';
 import Popup from '../Popup/Popup';
 import { useSelector } from 'react-redux';
 import { StSmLayout } from '../../style/components/AppLayout';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 
 
 export const StMusicLayout = styled.div`

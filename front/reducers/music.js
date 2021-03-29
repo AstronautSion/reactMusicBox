@@ -3,8 +3,10 @@ const dummyMusic = {
     {id:0, title: 'Photograph ', author:'offonoff', writter: '우주인', link: '2b1E-zu-QEM', type: 0},
 		{id:1,title: 'Weekend', author:'PERC%NT', writter: '우주인', link: 'WRtbq1W1GFY', type: 0},
 		{id:2,title: 'Slow dancing in the dark', author:'Joji', writter: '우주인', link: 'K3Qzzggn--s', type: 0},
-		{id:3,title: 'Sanctuary', author:'Joji', writter: '우주인', link: '5-uWlFq380M', type: 0},
-		{id:4,title: 'Liar', author:'Taek ', writter: '우주인', link: 'XP0lIqnvFCY', type: 0},
+    {id:3,title: '5초 샘플입니다.', author:'5초', writter: '우주인', link: 'Jv8YaypLNBc', type: 0},
+    
+		{id:4,title: 'Sanctuary', author:'Joji', writter: '우주인', link: '5-uWlFq380M', type: 0},
+		{id:5,title: 'Liar', author:'Taek ', writter: '우주인', link: 'XP0lIqnvFCY', type: 0},
   ],
 };
   

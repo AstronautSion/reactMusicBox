@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 export const StCheckbox = styled.label`
     display:inline-block; 
@@ -13,11 +13,11 @@ export const StCheckbox = styled.label`
     user-select:none; 
     vertical-align:top;
     margin:1em 0;
-    color:#eee;
+    color:#9195b5;
     font-size:.875rem;
     text-indent:5px;
-    border:0;
-
+    line-height:1;
+    
     & > input[type="checkbox"] {
         position: absolute; 
         opacity: 0; 
@@ -27,12 +27,12 @@ export const StCheckbox = styled.label`
         
         & ~ span{
             position:absolute; 
-            top:0; 
+            top:-2px; 
             left:0; 
             height:17px; 
             width:17px; 
             background-color: #fff; 
-            border:0;
+            border:1px solid #ddd;
 
             &:after{
                 content:""; 
@@ -51,7 +51,7 @@ export const StCheckbox = styled.label`
         }
 
         &:checked ~ span{
-            background-color:#e54737;
+            background-color:#5f56e0;
             &:after{
                 display:block;
             }

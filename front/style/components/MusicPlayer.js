@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 export const StMusicPlayer = styled.div`
     z-index:9999;
     position:fixed;

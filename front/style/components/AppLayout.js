@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled, { css } from "styled-components";
 
 export const StWrapper = styled.div`
     max-width:1200px;
@@ -33,14 +33,15 @@ export const StPopupWrapper = styled.div`
 `;
 
 export const StSmLayout = styled.div`
-    padding:10rem 0;
-    box-sizing:border-box;
-    max-width:500px;
-    width:100%;
-    margin:0 auto;
-    @media screen and (max-width: 768px){
-        padding:5rem 0;
-    }
+  position: relative;
+  padding:10rem 0;
+  box-sizing:border-box;
+  max-width:500px;
+  width:100%;
+  margin:0 auto;
+  @media screen and (max-width: 768px){
+    padding:5rem 0;
+  }
 `;
 
 export const StPopupBtnClose = styled.button`
@@ -109,8 +110,16 @@ export const StLocalNav = styled.ul`
     }
   }
 `;
+export const StButtonBack = styled.button`
+  color:#9195b5;
+  padding:1em;
+  box-sizing:border-box;
+  display:block;
+  cursor:pointer;
+`;
 
 export const StFixedButton = styled.div`
+  z-index:1;
   position:fixed;
   bottom:10%;
   right:1rem;
@@ -144,7 +153,7 @@ export const StFixedButton = styled.div`
     background-color:#fff;
   }
   &:hover{
-    background-color:#ff7734;
+    background-color:#5f56e0;
   }
 `;
 
@@ -166,11 +175,16 @@ export const StButton = styled.button`
   width:100%;
   height:40px;
   color:#fff;
-  background-color:${props => props.main ? '#5f56e0' : '#eee'};
-  border:${props => props.main ? '1px solid #5f56e0': '1px solid #eee'};
+  background-color:#eee;
+  border:1px solid #eee;
   line-height:40px;
   border-radius:.2em;
   font-size:.875rem;
+
+  ${props => props.main && css`
+    background-color:#5f56e0;
+    border:1px solid #5f56e0;
+  `}
 `;
 
 
@@ -182,13 +196,10 @@ export const StBackgroundYouTube = styled.div`
   width:100%;
   height:100%;
   overflow:hidden;
-  background:${props => {
-    if(props.StImg){
-      return 'url('+props.StImg+') no-repeat center;'
-    }else{
-      return '#333';
-    }
-  }};
+  background:#333;
+  ${props => props.StImg && css`
+    background:url(${props.StImg}) no-repeat center;
+  `}
   background-size:cover;
   filter: blur(10px);
   
@@ -213,3 +224,4 @@ export const StBackgroundYouTube = styled.div`
     }
   }
 `;
+

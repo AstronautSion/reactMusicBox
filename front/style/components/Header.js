@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled, { css } from "styled-components";
 
 export const StHeader = styled.div`
     z-index:9999;
@@ -73,12 +73,18 @@ export const StBtnSignin = styled.button`
     text-decoration:none;
     color:#fff;
     font-size:.875rem;
-    border:${props => props.stOrange ? '1px solid #5f56e0' :  '1px solid #383838' };
-    background-color:${props => props.stOrange ? '#5f56e0' :  'transparent' };
+    border:1px solid 
+    border:1px solid #383838;
+    background-color:transparent;
     border-radius:.25rem;
     cursor:pointer;
     margin-left:1em;
     line-height:1;
+
+    ${props => props.stOrange && css`
+        border:1px solid #5f56e0;
+        background-color:#5f56e0;
+    `}
 `;
  
 
@@ -89,11 +95,16 @@ export const StButtonSm = styled.button`
     text-decoration:none;
     color:#fff;
     font-size:.7rem;
-    border:${props => props.stOrange ? '1px solid #5f56e0' :  '1px solid #383838' };
-    background-color:${props => props.stOrange ? '#5f56e0' :  'transparent' };
+    border:1px solid #383838;
+    background-color:transparent;
     border-radius:.25rem;
     cursor:pointer;
     margin-left:1em;
     line-height:1;
+
+    ${props => props.stOrange && css`
+        border:1px solid #5f56e0;
+        background-color:#5f56e0;
+    `}
 
 `

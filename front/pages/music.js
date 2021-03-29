@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { popupOpen } from '../reducers/user';
 import MusicModiForm from '../components/From/MusicModiForm';
 import LoginForm from '../components/From/LoginForm';
+import { StMusicList } from '../style/components/MusicList';
 
 const Music = () => {
 	const dispatch = useDispatch();
@@ -33,7 +34,9 @@ const Music = () => {
 							</StTitle>
 							
 							{ isAddMusic && <Popup><MusicAddForm /></Popup>}
-							{ playList && playList.map(v => ( <MusicList data={v} key={v.id} />))}
+							<StMusicList>
+								{ playList && playList.map(v => (<MusicList data={v} key={v.id} />))}
+							</StMusicList>
 							{ isModiMusic && <Popup> <MusicModiForm /> </Popup>}
 							<StFixedButton onClick={onClickAddMusicButton} />
 							</>

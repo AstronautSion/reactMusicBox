@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import { StInput, StLable } from '../../style/Form';
 import { StButton, StFieldset } from '../../style/components/AppLayout';
 import { useDispatch, useSelector } from 'react-redux';

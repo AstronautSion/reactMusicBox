@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { StAccountMenu, StBtnSignin, StButtonSm, StHeader, StMenuUl } from '../../style/components/Header';
 import { StWrapper } from '../../style/components/AppLayout';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutAction, popupOpen } from '../../reducers/user';
+import { logoutRequestAction, popupOpenRequestAction } from '../../reducers/user';
 
 const Header = () => {
 	const dispatch = useDispatch();
-	const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+	const me = useSelector((state) => state.user.me);
 	const [accountMenu, setAccountMenu] = useState(true);
 	const accountMenuRef = useRef();
 
@@ -25,14 +25,14 @@ const Header = () => {
 	}
 	
 	const onclickLoginForm = useCallback(() => {
-		dispatch(popupOpen({
+		dispatch(popupOpenRequestAction({
 			key:'isLoginPopup',
 			value: null,
 		}));
 	},[]);
 
 	const onClickLogout = useCallback(() => {
-		dispatch(logoutAction);
+		dispatch(logoutRequestAction);
 	},[]);
 
 	return (
@@ -43,7 +43,7 @@ const Header = () => {
 						<Link href="/music"><a>Music</a></Link>
 					</div>
 					<div className="header__right">
-							{isLoggedIn ? 
+							{me ? 
 								<>
 									<StAccountMenu>
 										<span onClick={onClickBtnMenu}>Astronaut.sion</span>

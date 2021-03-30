@@ -1,34 +1,28 @@
 import React, { useCallback, useState } from 'react';
-import { StInput } from '../../style/Form';
-import useInput from '../../hooks/useInput';
+
 import { useDispatch } from 'react-redux';
-import { popupClose } from '../../reducers/user';
+import { popupCloseRequestAction } from '../../reducers/user';
 import GoogleLoginButton from '../oauth/googleLogin';
 import { StBtnLoginForm } from '../../style/LoginForm';
-import CreateAccountForm from './Login/createAccountForm';
+import CreateAccountPasswordForm from './Login/CreateAccountPasswordForm';
 import CreateAccountInfoForm from './Login/CreateAccountInfoForm';
 import CreateAccountNicknameForm from './Login/CreateAccountNicknameForm';
+import CreateAccountForm from './Login/createAccountForm';
 
 const LoginForm = () => {
 	const dispatch = useDispatch();
- 
 	const [order, setOrder] = useState(0);
-	const [signin, onChangeSignin] = useInput('');
 	
-	const onSubmitFIndAccount = useCallback((e) => {
-		e.preventDefault();
-		if(signin){ 
-			//아이디 검증 
-			setOrder(1); 
-		}
-	},[signin]);
+
+	const [nickname, setNickname] = useState('');	
+
 
 	const onClickLoginFacebook = useCallback(() => {
 		// dispatch(loginAction({
 		// 	id: account,
 		// 	password
 		// }));
-		dispatch(popupClose);
+		dispatch(popupCloseRequestAction);
 		setOrder(0);
 	}, []);
 
@@ -39,24 +33,35 @@ const LoginForm = () => {
 			{order === 0 && 
 				<>
 					<div>
-						<StBtnLoginForm stFacebook stMargin="0" type="button" onClick={onClickLoginFacebook}>Continue with Facebook</StBtnLoginForm>
-						<GoogleLoginButton setOrder={setOrder} />
+						<StBtnLoginForm 
+							stFacebook 
+							stMargin="0" 
+							onClick={onClickLoginFacebook} 
+							type="button">Continue with Facebook</StBtnLoginForm>
+
+						<GoogleLoginButton
+							setNickname={setNickname}
+							setOrder={setOrder} 
+						/>
 					</div>
 					<hr />
-					<form onSubmit={onSubmitFIndAccount}>
-						<StInput type="text" value={signin} onChange={onChangeSignin} minLength="8" maxLength="20" required />
-						<StBtnLoginForm type="submit" >Continue</StBtnLoginForm>
-					</form>
+					<CreateAccountForm setOrder={setOrder} />
 				</>
 			}
 			{order === 1 && 
-				<CreateAccountForm setOrder={setOrder} />
+				<CreateAccountPasswordForm 
+					setOrder={setOrder} 
+				/>
 			}
 			{order === 2 && 
 				<CreateAccountInfoForm setOrder={setOrder} />
 			}
 			{order === 3 && 
-				<CreateAccountNicknameForm setOrder={setOrder} />
+				<CreateAccountNicknameForm 
+					nickname={nickname}
+					setNickname={setNickname}
+					setOrder={setOrder} 
+				/>
 			}
 		</div>
 		

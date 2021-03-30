@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import YouTube from 'react-youtube';
-import { setDurationAction, setMusicChangeAction } from '../reducers/music';
+import { setDurationRequestAction, setMusicChangeRequestAction } from '../reducers/music';
 import { playProgressAnimation } from './MusicBoxProgressBar';
 
 export let TYAPI = null;
@@ -16,8 +16,8 @@ const YoutubeAPI = () => {
     if(musicChange && e.target.getVideoData().title !== ''){
       e.target.pauseVideo();
       e.target.seekTo(0);
-      dispatch(setDurationAction(e.target.getDuration()));
-      dispatch(setMusicChangeAction(false));
+      dispatch(setDurationRequestAction(e.target.getDuration()));
+      dispatch(setMusicChangeRequestAction(false));
       playProgressAnimation();
       console.log('YOUTUBE ONCHANGE')
     }

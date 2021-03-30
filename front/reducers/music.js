@@ -11,6 +11,18 @@ const dummyMusic = {
 };
   
 export const initialState = {
+  getMusicLoading: false,  //음악가져오기 시도중
+  getMusicDone: false,
+  getMusicError: null,
+
+  modifyMusicLoading: false,  //음악수정 시도중
+  modifyMusicDone: false,
+  modifyMusicError: null,
+
+  deleteMusicLoading: false,  //음악삭제 시도중
+  deleteMusicDone: false,
+  deleteMusicError: null,
+ 
 	isPlay: false,
   musicChange: true,
   duration: 0,
@@ -18,78 +30,117 @@ export const initialState = {
   playList: [],
 };
 
-export const MUSIC_PLAY = 'MUSIC_PLAY';
-export const LOAD_MUSIC_LIST = 'LOAD_MUSIC_LIST';
-export const MUSIC_DELETE = 'MUSIC_DELETE';
-export const MUSIC_MODIFY = 'MUSIC_MODIFY';
-export const SET_NOW_MUSIC_LIST = 'SET_NOW_MUSIC_LIST';
-export const SET_DURATION = 'SET_DURATION';
-export const SET_MUSIC_CHANGE = 'SET_MUSIC_CHANGE';
 
-export const setMusicChangeAction = (data) => {
+export const ADD_MUSIC_REQUEST = 'ADD_MUSIC_REQUEST';
+export const ADD_MUSIC_SUCCESS = 'ADD_MUSIC_SUCCESS';
+export const ADD_MUSIC_FAILURE = 'ADD_MUSIC_FAILURE';
+
+export const GET_MUSIC_REQUEST = 'GET_MUSIC_REQUEST';
+export const GET_MUSIC_SUCCESS = 'GET_MUSIC_SUCCESS';
+export const GET_MUSIC_FAILURE = 'GET_MUSIC_FAILURE';
+
+export const MODIFY_MUSIC_REQUEST = 'MODIFY_MUSIC_REQUEST';
+export const MODIFY_MUSIC_SUCCESS = 'MODIFY_MUSIC_SUCCESS';
+export const MODIFY_MUSIC_FAILURE = 'MODIFY_MUSIC_FAILURE';
+
+export const DELETE_MUSIC_REQUEST = 'DELETE_MUSIC_REQUEST';
+export const DELETE_MUSIC_SUCCESS = 'DELETE_MUSIC_SUCCESS';
+export const DELETE_MUSIC_FAILURE = 'DELETE_MUSIC_FAILURE';
+
+export const SET_NOW_MUSIC_REQUEST = 'SET_NOW_MUSIC_REQUEST';
+export const SET_DURATION = 'SET_DURATION';
+export const MUSIC_PLAY = 'MUSIC_PLAY';
+export const SET_MUSIC_CHANGE = 'SET_MUSIC_CHANGE';
+ 
+
+export const addMusicRequestAction = (data) => {
+  return{
+    type: ADD_MUSIC_REQUEST,
+    data,
+  }
+}
+export const setNowMusicRequestAction = (data) => {
+  return{
+    type: SET_NOW_MUSIC_REQUEST,
+    data,
+  }
+}
+export const deleteMusicRequestAction = (data) => {
+  return{
+    type: DELETE_MUSIC_REQUEST,
+    data,
+  }
+}
+export const modifyMusicRequestAction = (data) => {
+  return{
+    type: MODIFY_MUSIC_REQUEST,
+    data,
+  }
+}
+export const getMusicRequestAction = (data) => {
+  return{
+    type: GET_MUSIC_REQUEST,
+    data,
+  }
+};
+ 
+export const musicPlayRequestAction = (data) => {
+  return {
+    type: MUSIC_PLAY,
+    data,
+  }
+}
+export const setDurationRequestAction = (data) => {
+  return{
+    type: SET_DURATION,
+    data,
+  }
+}
+export const setMusicChangeRequestAction = (data) => {
   return{
     type: SET_MUSIC_CHANGE,
     data,
   }
 }
 
-export const setDurationAction = (data) => {
-  return{
-    type: SET_DURATION,
-    data,
-  }
-}
-
-export const setNowMusicListAction = (data) => {
-  return{
-    type: SET_NOW_MUSIC_LIST,
-    data,
-  }
-}
-
-export const musicDeleteAction = (data) => {
-  return{
-    type: MUSIC_DELETE,
-    data,
-  }
-}
-export const musicModifyAction = (data) => {
-  return{
-    type: MUSIC_MODIFY,
-    data,
-  }
-}
-
-export const musicPlayAction = (data) => {
-  return {
-    type: MUSIC_PLAY,
-    data,
-  }
-}
-
-export const loadMusicList = {
-	type: LOAD_MUSIC_LIST
-};
-   
 export default (state = initialState, action) => {
 	switch (action.type) {
     
-		case LOAD_MUSIC_LIST: {
+		case GET_MUSIC_REQUEST: {
 			return {
 				...state,
+				getMusicLoading: true,
+        getMusicDone: false,
+        getMusicError: null,
+			};
+		}
+    case GET_MUSIC_SUCCESS: {
+			return {
+				...state,
+        getMusicLoading: false,
+        getMusicDone: false,
 				playList: dummyMusic.playList,
         nowPlayList: dummyMusic.playList[0]
 			};
 		}
+    case GET_MUSIC_FAILURE: {
+			return {
+				...state,
+        getMusicLoading: false,
+        getMusicError: action.error,
+			};
+		}
   
-    case MUSIC_PLAY: {
+    
+    case MODIFY_MUSIC_REQUEST: {
       return {
         ...state,
-        isPlay : action.data,
+        modifyMusicLoading: true,
+        modifyMusicDone: false,
+        modifyMusicError: null,
       }
     }
-     
-    case MUSIC_MODIFY: {
+    case MODIFY_MUSIC_SUCCESS: {
       const playLists = [...state.playList]
       playLists.map(v => {
         if(v.id === action.data.id){
@@ -99,24 +150,59 @@ export default (state = initialState, action) => {
       });
       return {
         ...state,
+        modifyMusicLoading: false,
+        modifyMusicDone: true,
         playList: playLists
       }
     }
-    case MUSIC_DELETE: {
-      const playLists = [...state.playList];
+    case MODIFY_MUSIC_FAILURE: {
       return {
-        ...state, 
-        playList: playLists.filter(v => v.id !== action.data) 
+        ...state,
+        modifyMusicError: action.error,
+        modifyMusicLoading: false,
       }
     }
 
-    case SET_NOW_MUSIC_LIST: {
+
+    case DELETE_MUSIC_REQUEST: {
+      return {
+        ...state, 
+        deleteMusicLoading: true,
+        deleteMusicDone: true,
+        deleteMusicError: null,
+      }
+    }
+    case DELETE_MUSIC_SUCCESS: {
+      const playLists = [...state.playList];
+      return {
+        ...state, 
+        deleteMusicLoading: false,
+        deleteMusicDone: true,
+        playList: playLists.filter(v => v.id !== action.data) 
+      }
+    }
+    case DELETE_MUSIC_FAILURE: {
+      return {
+        ...state, 
+        deleteMusicLoading: false,
+        deleteMusicError: action.error,
+      }
+    }
+
+
+    case SET_NOW_MUSIC_REQUEST: {
       return {
         ...state,
         nowPlayList: action.data,
       }
     }
-    
+    case MUSIC_PLAY: {
+      return {
+        ...state,
+        isPlay : action.data,
+      }
+    }
+
     case SET_DURATION: {
       return{
         ...state,

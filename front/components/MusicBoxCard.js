@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { musicPlayAction, setMusicChangeAction, setNowMusicListAction } from '../reducers/music';
+import { musicPlayRequestAction, setMusicChangeRequestAction, setNowMusicRequestAction } from '../reducers/music';
 import { TYAPI } from './YoutubeAPI';
 import { 
   StMusicBoxAuthor,
@@ -32,8 +32,8 @@ const MusicBoxCard = () => {
   const onClickPlay = useCallback(() => {
     if(TYAPI){    
       setPlay((prev) => !prev);
-      dispatch(musicPlayAction(play));
-      dispatch(setMusicChangeAction(true));
+      dispatch(musicPlayRequestAction(play));
+      dispatch(setMusicChangeRequestAction(true));
       if(play){
         TYAPI.playVideo();
         playProgressAnimation();
@@ -46,8 +46,8 @@ const MusicBoxCard = () => {
   const onClickPrev = useCallback(() => {
     playList.map((v, i) => { 
       if(v.id === id){ if(i !== 0){ 
-        dispatch(setNowMusicListAction(playList[i - 1]));
-        dispatch(setMusicChangeAction(true)); 
+        dispatch(setNowMusicRequestAction(playList[i - 1]));
+        dispatch(setMusicChangeRequestAction(true)); 
       }}
     });  
   },[playList, id, TYAPI]);
@@ -55,8 +55,8 @@ const MusicBoxCard = () => {
   onClickNext = useCallback(() => {
     playList.map((v, i) => {
       if(v.id === id){ if(i !== (playList.length - 1) ){
-        dispatch(setNowMusicListAction(playList[i + 1]));
-        dispatch(setMusicChangeAction(true));
+        dispatch(setNowMusicRequestAction(playList[i + 1]));
+        dispatch(setMusicChangeRequestAction(true));
       }}
     });
   },[playList, id, TYAPI]);

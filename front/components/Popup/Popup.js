@@ -1,13 +1,13 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { popupClose } from '../../reducers/user';
+import { popupCloseRequestAction } from '../../reducers/user';
 import { StPopupBtnClose, StPopupWrapper } from '../../style/components/AppLayout';
 import PropTypes from 'prop-types';
 
 const Popup = ({ children }) => {
   const dispatch = useDispatch();
   const onClickClosePopup = useCallback(() => {
-		dispatch(popupClose);
+		dispatch(popupCloseRequestAction);
 	},[]);
 
   return(

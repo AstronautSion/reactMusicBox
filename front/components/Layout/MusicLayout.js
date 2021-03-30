@@ -20,7 +20,7 @@ export const StMusicLayout = styled.div`
 `;
 
 const MusicLayout = ({ children }) => {
-  const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+  const me = useSelector(state => state.user.me);
 	const isLoginPopup = useSelector(state => state.user.popup.isLoginPopup);
     
 	return (
@@ -31,7 +31,7 @@ const MusicLayout = ({ children }) => {
 					<LoginForm />
 				</Popup>
 			}
-      {isLoggedIn 
+      {me 
         ? children 
         : <StSmLayout>
 						<LoginForm/>

@@ -20,12 +20,12 @@ export const StBtnLoginForm = styled.button`
 		color:#222;
 		border:1px solid #ccc;
 		background-color:#fff;
-	`};
+	`}
 
 	${props => props.stFacebook && css`
 		border:1px solid #3578e5;
 		background-color:#3578e5;
-	`};
+	`}
 `;
 
 export const StLoginFormTitle = styled.h3`
@@ -51,3 +51,10 @@ export const StButtonLonger = styled.button`
   border-radius:.25em;
 `;
  
+export const StWarnningText = styled.div`
+	font-size:.75rem;
+	color:#f50;
+	display:block;
+	line-height:1.2;
+	padding-top:1em;
+`;

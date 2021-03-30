@@ -5,19 +5,19 @@ import AppLayout from '../components/Layout/AppLayout';
 import MusicAddForm from '../components/From/MusicAddForm';
 import Popup from '../components/Popup/Popup';
 import { useDispatch, useSelector } from 'react-redux';
-import { popupOpen } from '../reducers/user';
+import { popupOpenRequestAction } from '../reducers/user';
 import MusicModiForm from '../components/From/MusicModiForm';
 import LoginForm from '../components/From/LoginForm';
 import { StMusicList } from '../style/components/MusicList';
 
 const Music = () => {
 	const dispatch = useDispatch();
-	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+	const me = useSelector(state => state.user.me);
 	const isAddMusic = useSelector(state => state.user.popup.isAddMusic);
 	const isModiMusic = useSelector(state => state.user.popup.isModiMusic);
 	const playList = useSelector(state => state.music.playList);
 	const onClickAddMusicButton = () => {
-		dispatch(popupOpen({
+		dispatch(popupOpenRequestAction({
 			key:'isAddMusic',
 			value: null,
 		}));
@@ -26,7 +26,7 @@ const Music = () => {
 		<AppLayout>
 			<StWrapper>
 					<StContainer>
-						{isLoggedIn ?
+						{me ?
 							<>
 							<StTitle>
 								MUSIC LIST

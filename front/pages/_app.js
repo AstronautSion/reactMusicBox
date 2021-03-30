@@ -5,7 +5,7 @@ import Reset from '../style/Reset';
 import FormReset from '../style/FromReset';
 import wrapper from '../store/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadMusicList } from '../reducers/music';
+import { getMusicRequestAction } from '../reducers/music';
 import YoutubeAPI from '../components/YoutubeAPI';
 import { StBackgroundYouTube } from '../style/components/AppLayout';
 import withReduxSaga  from 'next-redux-saga';
@@ -13,13 +13,13 @@ import withReduxSaga  from 'next-redux-saga';
 const MusicBox = ({ Component }) => {	
 	
 	const dispatch = useDispatch();
-	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+	const me = useSelector(state => state.user.me);
 	const link = useSelector(state => state.music.nowPlayList.link);
 	useEffect(() => {
-		if(isLoggedIn){ 
-			dispatch(loadMusicList);
+		if(me){ 
+			dispatch(getMusicRequestAction);
 		}
-	},[isLoggedIn]);
+	},[me]);
 	
 	return(
 		<>
@@ -31,7 +31,7 @@ const MusicBox = ({ Component }) => {
 				<link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
 			</Head>
 			<Reset />
-			{isLoggedIn && 
+			{me && 
 				<StBackgroundYouTube StImg={`https://img.youtube.com/vi/${link}/hqdefault.jpg`}>
 					<YoutubeAPI />
 				</StBackgroundYouTube>

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { musicDeleteAction } from '../reducers/music';
-import { popupOpen } from '../reducers/user';
+import { popupOpenRequestAction } from '../reducers/user';
 
 const MusicList = ({data}) => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const MusicList = ({data}) => {
     }
   }
   const onClickModifyButton = () => {
-    dispatch(popupOpen({
+    dispatch(popupOpenRequestAction({
       key:'isModiMusic',
       value: data,
     }));

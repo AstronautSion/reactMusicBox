@@ -5,99 +5,209 @@ const dummyUser = {
 };
   
 export const initialState = {
-	isLoggedIn: false,
-	user: null,
+	loginLoading: false, // 로그인 시도중
+	loginDone: false,
+	loginError: null,
+	logoutLoading: false, // 로그아웃 시도중
+	logoutDone: false,
+	logoutError: null,
+	AccountCheckLoading: false, // 계정 확인 시도중
+	AccountCheckDone: false,
+	AccountCheckError: null,
+	signupLoading: false, // 회원가입 시도중
+	signupDone: false,
+	signupError: null,
+	userModifyLoading: false, // 회원정보수정 시도중
+	userModifyDone: false,
+	userModifyError: null,
+	me: null,
 	popup: {
 		data: null,
 		isLoginPopup: false,
 		isAddMusic: false,
 		isModiMusic: false,
-	}
+	},
+	loginData: {},
 };
 
-export const SIGN_UP = 'SIGN_UP';
+export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
-export const LOG_IN = 'LOG_IN'; // 액션의 이름
-export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'; // 액션의 이름
-export const LOG_IN_FAILURE = 'LOG_IN_FAILURE'; // 액션의 이름
-export const LOG_OUT = 'LOG_OUT';
+export const SIGN_UP_FAILURE = 'LOG_IN_FAILURE';
 
-export const USER_MODIFY = 'USER_MODIFY';
+export const LOG_IN_REQUEST = 'LOG_IN_REQUEST'; 
+export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'; 
+export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
+
+export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
+export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
+
+export const ACCOUNT_CHECK_REQUEST = 'ACCOUNT_CHECK_REQUEST';
+export const ACCOUNT_CHECK_SUCCESS = 'ACCOUNT_CHECK_SUCCESS';
+export const ACCOUNT_CHECK_FAILURE = 'ACCOUNT_CHECK_FAILURE';
+
+export const USER_MODIFY_REQUEST = 'USER_MODIFY_REQUEST';
+export const USER_MODIFY_SUCCESS = 'USER_MODIFY_SUCCESS';
+export const USER_MODIFY_FAILURE = 'USER_MODIFY_FAILURE';
+
 
 export const POPUP_OPEN = 'POPUP_OPEN';
 export const POPUP_CLOSE = 'POPUP_CLOSE';
+ 
 
-export const signUpAction = (data) => {
-	return {
-		type: SIGN_UP,
-		data,
-	};
-};
-
-export const signUpSuccess = {
-	type: SIGN_UP_SUCCESS,
-};
-
-export const loginAction = (data) => {
-	return {
-		type: LOG_IN,
-		data,
-	}
-};
-export const logoutAction = {
-	type: LOG_OUT,
-};
-
-export const signUp = (data) => {
-	return {
-		type: SIGN_UP,
-		data,
-	}
-};
-
-export const userModifyAction = (data) => {
-	return {
-		type: USER_MODIFY,
+export const AccountCheckRequestAction = (data) => {
+	return{
+		type: ACCOUNT_CHECK_REQUEST,
 		data,
 	}
 }
 
-export const popupOpen = (data) => {
+export const loginRequestAction = (data) => {
+	return {
+		type: LOG_IN_REQUEST,
+		data,
+	}
+};
+
+export const signUpRequestAction = (data) => {
+	return {
+		type: SIGN_UP_REQUEST,
+		data,
+	}
+};
+
+export const userModifyRequestAction = (data) => {
+	return {
+		type: USER_MODIFY_REQUEST,
+		data,
+	}
+}
+
+export const logoutRequestAction = {
+	type: LOG_OUT_REQUEST,
+};
+
+export const popupOpenRequestAction = (data) => {
 	return {
 		type: POPUP_OPEN,
 		data,
 	}
 };
-export const popupClose = {
+export const popupCloseRequestAction = {
 	type: POPUP_CLOSE,
 };
 
+
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case LOG_IN: {
+		case LOG_IN_REQUEST: {
 			return {
 				...state,
-				isLoggedIn: true,
-				user: dummyUser,
+				loginLoading: true,
+				loginDone: false,
+				logInError: null,
+			};
+		}
+
+		case LOG_IN_SUCCESS: {
+			return{
+				...state,
+				loginLoading: false,
+				loginDone:true,
+				me: dummyUser,
+			}
+		}
+
+		case LOG_IN_FAILURE: {
+			return {
+				...state,
+				loginLoading: false,
+				logInError: action.error,
+				loginData: null,
+			}
+		}
+
+		case ACCOUNT_CHECK_REQUEST: {
+			return{
+				...state,
 				loginData: action.data,
-			};
+			}
 		}
-		case LOG_OUT: {
+		case ACCOUNT_CHECK_SUCCESS: {
+			return{
+				...state,
+				loginData: action.data,
+			}
+		}
+		case ACCOUNT_CHECK_FAILURE: {
+			return{
+				...state,
+				loginData: action.data,
+			}
+		}
+
+		case LOG_OUT_REQUEST: {
 			return {
 				...state,
-				isLoggedIn: false,
-				user: null,
+				logoutLoading: true, // 로그아웃 시도중
+				logoutDone: false,
+				logoutError: null,
 			};
 		}
-		case SIGN_UP: {
+		case LOG_OUT_SUCCESS: {
 			return {
 				...state,
+				me: null,
+				logoutLoading: false,
+				logoutDone: true,
+			};
+		}
+		case LOG_OUT_FAILURE: {
+			return {
+				...state,
+				logoutLoading: false,
+				logoutError: action.error,
+			};
+		}
+
+		case SIGN_UP_REQUEST: {
+			return {
+				...state,
+				signupLoading: true,
+				signupDone:false,
+				signUpError: null,
+			};
+		}
+		case SIGN_UP_SUCCESS: {
+			return {
+				...state,
+				signupLoading: false,
+				signupDone: true,
 				signUpData: action.data,
 			};
 		}
-		case USER_MODIFY: {
+		case SIGN_UP_FAILURE: {
 			return {
 				...state,
+				signupLoading: false,
+				signUpError: action.error,
+			};
+		}
+
+		case USER_MODIFY_REQUEST: {
+			return {
+				...state,
+				userModifyLoading: true,
+				userModifyDone: false,
+				userModifyError: null,
+			}
+		}
+
+		case USER_MODIFY_SUCCESS: {
+			return {
+				...state,
+				userModifyLoading: false,
+				userModifyDone: true,
 				user: {
 					...state.user,
 					nickname: action.data.nickname,
@@ -105,6 +215,14 @@ export default (state = initialState, action) => {
 				},
 			}
 		}
+		case USER_MODIFY_FAILURE: {
+			return {
+				...state,
+				userModifyLoading: false,
+				userModifyError: action.error,
+			}
+		}
+
 		case POPUP_OPEN: {
 			return {
 				...state,

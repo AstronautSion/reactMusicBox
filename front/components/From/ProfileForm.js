@@ -6,8 +6,8 @@ import { StInput, StLable } from '../../style/Form';
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
-  const nickname = useSelector(state => state.user.user.nickname);
-  const userId = useSelector(state => state.user.user.userId);
+  const nickname = useSelector(state => state.user.me.nickname);
+  const userId = useSelector(state => state.user.me.userId);
   const [changeNickname, setChangeNickname] = useState(nickname);
   const [changeUserId, setChangeUserId] = useState(userId);
   const onChangeNickname = useCallback((e) => {

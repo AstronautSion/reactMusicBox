@@ -8,7 +8,7 @@ import LoginForm from '../From/LoginForm';
 
 
 const AppLayout = ({ children }) => {
-	const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+	const me = useSelector(state => state.user.me);
 	const isLoginPopup = useSelector( state => state.user.popup.isLoginPopup);
 	return (
 		<>
@@ -19,7 +19,7 @@ const AppLayout = ({ children }) => {
 				</Popup>
 			}
 			<StWrapper>
-				{ isLoggedIn ? children :
+				{ me ? children :
 					<StSmLayout>
 						<StTitleCenter>Please Login</StTitleCenter>
 						<LoginForm />

@@ -3,14 +3,23 @@ import GoogleLogin from 'react-google-login';
 import { StBtnLoginForm } from '../../style/LoginForm';
 import PropTypes from 'prop-types';
 
-const GoogleLoginButton = ({setOrder}) => {
+const GoogleLoginButton = ({setNickname, setOrder}) => {
   
-  const googleClientId = process.env.GOOGLE_CLIENT_ID;
-  console.log('googleClientId::',googleClientId)
-	const responseGoogle = useCallback((e) => {
+  const googleClientId = '1030853119585-cc2fqf9he0u14ue81l40ba66kkap9s82.apps.googleusercontent.com';
+  const responseGoogle = useCallback((e) => {
+    // 계정 검증 
+    // 없으면 추가후 order 2 이동
+    // 있으면 로그인 ->
     console.log(e);
-		setOrder(2);
-	}, []);
+    setNickname(e.profileObj.name);
+    //e.accessToken
+    //e.tokenId
+    //e.googleid
+    //e.profileObj.email
+    //e.profileObj.name
+    //e.profileObj.imageUrl
+    setOrder(2);
+	});
   
   return (
     <GoogleLogin
@@ -30,6 +39,7 @@ const GoogleLoginButton = ({setOrder}) => {
 };
 
 GoogleLoginButton.propTypes = {
+  setNickname: PropTypes.func.isRequired,
   setOrder: PropTypes.func.isRequired,
 }
 

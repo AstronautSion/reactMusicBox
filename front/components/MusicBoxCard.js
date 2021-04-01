@@ -2,7 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { musicPlayRequestAction, setMusicChangeRequestAction, setNowMusicRequestAction } from '../reducers/music';
 import { TYAPI } from './YoutubeAPI';
-import { 
+import MusicBoxProgressBar, { playProgressAnimation } from './MusicBoxProgressBar';
+import {
   StMusicBoxAuthor,
   StMusicBoxBottom,
   StMusicBoxButton,
@@ -10,66 +11,73 @@ import {
   StMusicboxCard,
   StMusicBoxControlArea,
   StMusicBoxImg,
-  StMusicBoxTitle
+  StMusicBoxTitle,
 } from '../style/components/MusicBoxCard';
-import MusicBoxProgressBar, { playProgressAnimation } from './MusicBoxProgressBar';
 
 export let onClickNext = null;
 
 const MusicBoxCard = () => {
-
   const dispatch = useDispatch();
   const [play, setPlay] = useState(true);
-  const isPlay = useSelector(state => state.music.isPlay);
-  const {link, title, author, id } = useSelector(state => state.music?.nowPlayList);
-  const playList = useSelector(state => state.music.playList);
+  const isPlay = useSelector((state) => state.music.isPlay);
+  const {
+    link,
+    title,
+    author,
+    id,
+  } = useSelector((state) => state.music?.nowPlayList);
+  const playList = useSelector((state) => state.music.playList);
   const [musicImg, setMusicImg] = useState();
 
-  useEffect(()=>{
-    setMusicImg('https://img.youtube.com/vi/'+link+'/hqdefault.jpg');  
-  },[link,TYAPI]);
+  useEffect(() => {
+    setMusicImg(`https://img.youtube.com/vi/${link}/hqdefault.jpg`);
+  }, [link, TYAPI]);
 
   const onClickPlay = useCallback(() => {
-    if(TYAPI){    
+    if (TYAPI) {
       setPlay((prev) => !prev);
       dispatch(musicPlayRequestAction(play));
       dispatch(setMusicChangeRequestAction(true));
-      if(play){
+      if (play) {
         TYAPI.playVideo();
         playProgressAnimation();
-      }else{
+      } else {
         TYAPI.pauseVideo();
       }
     }
-  },[play, isPlay, playProgressAnimation]);
+  }, [play, isPlay, playProgressAnimation]);
 
   const onClickPrev = useCallback(() => {
-    playList.map((v, i) => { 
-      if(v.id === id){ if(i !== 0){ 
-        dispatch(setNowMusicRequestAction(playList[i - 1]));
-        dispatch(setMusicChangeRequestAction(true)); 
-      }}
-    });  
-  },[playList, id, TYAPI]);
+    playList.map((v, i) => {
+      if (v.id === id) {
+        if (i !== 0) {
+          dispatch(setNowMusicRequestAction(playList[i - 1]));
+          dispatch(setMusicChangeRequestAction(true));
+        }
+      }
+    });
+  }, [playList, id, TYAPI]);
 
   onClickNext = useCallback(() => {
     playList.map((v, i) => {
-      if(v.id === id){ if(i !== (playList.length - 1) ){
-        dispatch(setNowMusicRequestAction(playList[i + 1]));
-        dispatch(setMusicChangeRequestAction(true));
-      }}
+      if (v.id === id) {
+        if (i !== (playList.length - 1)) {
+          dispatch(setNowMusicRequestAction(playList[i + 1]));
+          dispatch(setMusicChangeRequestAction(true));
+        }
+      }
     });
-  },[playList, id, TYAPI]);
+  }, [playList, id, TYAPI]);
 
   return (
     <StMusicboxCard>
-      <StMusicBoxImg StImgUrl={musicImg}/>
+      <StMusicBoxImg stImgUrl={musicImg} />
       <StMusicBoxControlArea>
         <StMusicBoxButton onClick={onClickPlay}>
-          <i className={isPlay ? 'fa fa-pause' : 'fa fa-play'}></i>
+          <i className={isPlay ? 'fa fa-pause' : 'fa fa-play'} />
         </StMusicBoxButton>
-        <StMusicBoxButtonSm onClick={onClickPrev}><i className="fa fa-backward"></i></StMusicBoxButtonSm>
-        <StMusicBoxButtonSm onClick={onClickNext}><i className="fa fa-forward"></i></StMusicBoxButtonSm>
+        <StMusicBoxButtonSm onClick={onClickPrev}><i className="fa fa-backward" /></StMusicBoxButtonSm>
+        <StMusicBoxButtonSm onClick={onClickNext}><i className="fa fa-forward" /></StMusicBoxButtonSm>
       </StMusicBoxControlArea>
       <StMusicBoxBottom>
         <StMusicBoxTitle>{title}</StMusicBoxTitle>
@@ -78,6 +86,6 @@ const MusicBoxCard = () => {
       </StMusicBoxBottom>
     </StMusicboxCard>
   );
-}
+};
 
 export default MusicBoxCard;

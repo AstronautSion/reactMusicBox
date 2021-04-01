@@ -32,7 +32,7 @@ const MusicBox = ({ Component }) => {
 			</Head>
 			<Reset />
 			{me && 
-				<StBackgroundYouTube StImg={`https://img.youtube.com/vi/${link}/hqdefault.jpg`}>
+				<StBackgroundYouTube stImg={`https://img.youtube.com/vi/${link}/hqdefault.jpg`}>
 					<YoutubeAPI />
 				</StBackgroundYouTube>
 			}

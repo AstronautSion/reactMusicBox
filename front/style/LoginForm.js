@@ -1,4 +1,3 @@
-
 import styled, { css } from 'styled-components';
 
 export const StBtnLoginForm = styled.button`
@@ -13,9 +12,8 @@ export const StBtnLoginForm = styled.button`
 	color:#fff;
 	border: 0;
 	background-color:#5f56e0;
-	margin: ${props => 
-		props.stMargin || "1em 0 0" 
-	};
+	margin: ${props =>  props.stMargin || "1em 0 0"};
+
 	${props => props.stGoogle && css`
 		color:#222;
 		border:1px solid #ccc;
@@ -35,7 +33,7 @@ export const StLoginFormTitle = styled.h3`
 	font-size:1.65rem;
 	font-weight:normal;
 	line-height:1.5;
-	color: #666;
+	color: #333;
 `;
 
 export const StButtonLonger = styled.button`

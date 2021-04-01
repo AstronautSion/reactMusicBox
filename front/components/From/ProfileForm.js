@@ -1,40 +1,44 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userModifyAction } from '../../reducers/user';
+import { userModifyRequestAction } from '../../reducers/user';
 import { StButton, StFieldset } from '../../style/components/AppLayout';
 import { StInput, StLable } from '../../style/Form';
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
-  const nickname = useSelector(state => state.user.me.nickname);
-  const userId = useSelector(state => state.user.me.userId);
+  const nickname = useSelector((state) => state.user.me.nickname);
+  const userId = useSelector((state) => state.user.me.userId);
   const [changeNickname, setChangeNickname] = useState(nickname);
   const [changeUserId, setChangeUserId] = useState(userId);
+
   const onChangeNickname = useCallback((e) => {
     setChangeNickname(e.target.value);
-  },[]);
+  }, []);
+
   const onChangeUserId = useCallback((e) => {
     setChangeUserId(e.target.value);
-  },[]);
+  }, []);
+
   const onSubmitProfileEdit = useCallback((e) => {
     e.preventDefault();
-    dispatch(userModifyAction({
+    dispatch(userModifyRequestAction({
       userId: changeUserId,
       nickname: changeNickname,
     }));
-  },[changeNickname, changeUserId])
-  return(
+  }, [changeNickname, changeUserId]);
+
+  return (
     <form onSubmit={onSubmitProfileEdit}>
       <StFieldset>
         <StLable>User Id</StLable>
-        <StInput value={changeUserId} onChange={onChangeUserId}></StInput>
+        <StInput value={changeUserId} onChange={onChangeUserId} />
       </StFieldset>
       <StFieldset>
         <StLable>Display Name</StLable>
-        <StInput value={changeNickname} onChange={onChangeNickname}></StInput>
+        <StInput value={changeNickname} onChange={onChangeNickname} />
       </StFieldset>
-      <StButton main type="submit">수정</StButton>
+      <StButton stMain type="submit">수정</StButton>
     </form>
   );
-}
+};
 export default ProfileForm;

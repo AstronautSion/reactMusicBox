@@ -81,7 +81,7 @@ export const StBtnSignin = styled.button`
     margin-left:1em;
     line-height:1;
 
-    ${props => props.stOrange && css`
+    ${props => props.stMainColor && css`
         border:1px solid #5f56e0;
         background-color:#5f56e0;
     `}

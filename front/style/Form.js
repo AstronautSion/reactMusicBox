@@ -33,45 +33,34 @@ export const StCheckbox = styled.label`
             width:17px; 
             background-color: #fff; 
             border:1px solid #ddd;
-
-            &:after{
-                content:""; 
+            i{
                 position:absolute; 
-                display:none; 
+                display:block; 
                 left:6px; 
                 top:2px; 
                 width:4px; 
                 height:8px; 
-                border:solid white; 
+                border:solid #fff; 
                 border-width:0 2px 2px 0; 
+                border-color:#5f56e0;
                 -webkit-transform:rotate(45deg);  
                 -ms-transform:rotate(45deg); 
                 transform:rotate(45deg);
             }
-        }
-
-        &:checked ~ span{
-            background-color:#5f56e0;
-            &:after{
-                display:block;
+            &.disabled{
+                background-color:#ddd;
+                i{
+                    display:none;
+                }
             }
-        }
-
-        &:disabled ~ span{
-            background-color:#ddd;
-            &:after{
-                display:none;
-            }
-        }
-
-        &:disabled:checked ~ span{
-            background-color:rgba(213,63,65,.4);
-            &:after{
-                display:block;
+            &.disabled.checked{
+                background-color:rgba(213,63,65,.4);
+                i{
+                    display:block;
+                }
             }
         }
     }
-    
 `;
 
 export const StInput = styled.input`
@@ -98,13 +87,7 @@ export const StLable = styled.label`
     margin-bottom:.5em;
     display:block;
     font-weight:300;
-    color:${props => {
-        if(props.color){
-            return props.color;
-        }else{
-            return '#9195b5';
-        }
-    }};
+    color:#333;
 `;
 
 export const StSelect = styled.select`

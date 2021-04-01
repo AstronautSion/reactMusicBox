@@ -70,8 +70,8 @@ export const StMusicBoxImg = styled.div`
   border-radius:1em;
   box-shadow:0 0 7px rgba(0,0,0,0.2);
   
-  ${props => props.StImgUrl && css`
-    background:url(${props.StImgUrl}) no-repeat center;
+  ${props => props.stImgUrl && css`
+    background:url(${props.stImgUrl}) no-repeat center;
   `}
 `;
 export const StMusicBoxControlArea = styled.div`
@@ -112,7 +112,7 @@ export const StMusicBoxProgressBarItem = styled.div`
   position:absolute;
   top:0;
   left:0;
-  width: ${props => props.StWidth || '0px' };
+  width: ${props => props.stWidth || '0px' };
   height:5px;
   border-radius:2em;
   background-color:#9195b5;

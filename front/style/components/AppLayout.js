@@ -1,35 +1,35 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const StWrapper = styled.div`
-    max-width:1200px;
-    width: 95%;
-    margin:0 auto;
+  max-width:1200px;
+  width: 95%;
+  margin:0 auto;
 `;
 export const StSection = styled.div`
-    position:relative;
-    padding:2em 0;
+  position:relative;
+  padding:2em 0;
 `;
 
 export const StPopupWrapper = styled.div`
-    z-index:10000;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    display:flex;
-    justify-contents:center;
-    align-items: center;
-    background-color:rgba(0,0,0,.75);
-    > div{
-      position:relative;
-      background-color:#fff;
-      max-width:500px;
-      width:95%;
-      margin:0 auto;
-      padding:2em;
-      box-sizing:border-box;
-    }
+  z-index:10000;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-contents:center;
+  align-items: center;
+  background-color:rgba(0,0,0,.75);
+  > div{
+    position:relative;
+    background-color:#fff;
+    max-width:500px;
+    width:95%;
+    margin:0 auto;
+    padding:2em;
+    box-sizing:border-box;
+  }
 `;
 
 export const StSmLayout = styled.div`
@@ -45,22 +45,22 @@ export const StSmLayout = styled.div`
 `;
 
 export const StPopupBtnClose = styled.button`
-    position:absolute;
-    top:1em;
-    right:1em;
-    font-size:1rem;
-    color:#fff;
+  position:absolute;
+  top:1em;
+  right:1em;
+  font-size:1rem;
+  color:#fff;
 `;
 
 export const StContainer = styled.div`
-    padding:1em 1em 3em 1em;
+  padding:1em 1em 3em 1em;
 `;
- 
+
 export const StP = styled.p`
 display:block;
 font-weight:normal;
 line-height:1.4;
-font-size: ${props => {
+font-size: ${ props => {
     if(props.sm){ return '.785rem';}
     else if(props.lg){return '1.2rem;';}
     else{return '1rem;'} 
@@ -69,7 +69,7 @@ color: ${props => {
     if(props.light){return '#666'}
     else{return '#111'}
 }};
-margin: ${props => props.StMargin || '0'};
+margin: ${props => props.stMargin || '0'};
 `;
 
 export const StTitleCenter = styled.strong`
@@ -111,11 +111,14 @@ export const StLocalNav = styled.ul`
   }
 `;
 export const StButtonBack = styled.button`
-  color:#9195b5;
+  color:#666;
   padding:1em;
   box-sizing:border-box;
   display:block;
   cursor:pointer;
+  &:hover{
+    color:#111;
+  }
 `;
 
 export const StFixedButton = styled.div`
@@ -181,12 +184,11 @@ export const StButton = styled.button`
   border-radius:.2em;
   font-size:.875rem;
 
-  ${props => props.main && css`
+  ${props => props.stMain && css`
     background-color:#5f56e0;
     border:1px solid #5f56e0;
   `}
 `;
-
 
 export const StBackgroundYouTube = styled.div`
   transition:all 1s;
@@ -197,8 +199,8 @@ export const StBackgroundYouTube = styled.div`
   height:100%;
   overflow:hidden;
   background:#333;
-  ${props => props.StImg && css`
-    background:url(${props.StImg}) no-repeat center;
+  ${props => props.stImg && css`
+    background:url(${props.stImg}) no-repeat center;
   `}
   background-size:cover;
   filter: blur(10px);
@@ -224,4 +226,3 @@ export const StBackgroundYouTube = styled.div`
     }
   }
 `;
-

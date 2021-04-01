@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const StHeader = styled.div`
     z-index:9999;
@@ -65,7 +65,6 @@ export const StMenuUl = styled.ul`
     }
 `;
 
-
 export const StBtnSignin = styled.button`
     padding:.5rem 1rem;
     display:block;
@@ -86,7 +85,6 @@ export const StBtnSignin = styled.button`
         background-color:#5f56e0;
     `}
 `;
- 
 
 export const StButtonSm = styled.button`
     padding:.3rem .5rem;
@@ -107,4 +105,4 @@ export const StButtonSm = styled.button`
         background-color:#5f56e0;
     `}
 
-`
+`;

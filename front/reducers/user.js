@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 const dummyUser = {
   id: 1,
   userId: 'Astronaut.sion',
@@ -86,159 +88,106 @@ export const popupCloseRequestAction = {
   type: POPUP_CLOSE,
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
-    case LOG_IN_REQUEST: {
-      return {
-        ...state,
-        loginLoading: true,
-        loginDone: false,
-        logInError: null,
-      };
-    }
+    case LOG_IN_REQUEST:
+      draft.loginLoading = true;
+      draft.loginDone = false;
+      draft.logInError = null;
+      break;
 
-    case LOG_IN_SUCCESS: {
-      return {
-        ...state,
-        loginLoading: false,
-        loginDone: true,
-        me: dummyUser,
-      };
-    }
+    case LOG_IN_SUCCESS:
+      draft.loginLoading = false;
+      draft.loginDone = true;
+      draft.me = dummyUser;
+      break;
 
-    case LOG_IN_FAILURE: {
-      return {
-        ...state,
-        loginLoading: false,
-        logInError: action.error,
-        loginData: null,
-      };
-    }
+    case LOG_IN_FAILURE:
+      draft.loginLoading = false;
+      draft.logInError = action.error;
+      draft.loginData = null;
+      break;
 
-    case ACCOUNT_CHECK_REQUEST: {
-      return {
-        ...state,
-        AccountCheckLoading: true,
-        AccountCheckDone: false,
-        AccountCheckError: null,
-        loginData: action.data,
-      };
-    }
-    case ACCOUNT_CHECK_SUCCESS: {
-      return {
-        ...state,
-        AccountCheckLoading: false,
-        AccountCheckDone: true,
-        loginData: action.data,
-      };
-    }
-    case ACCOUNT_CHECK_FAILURE: {
-      return {
-        ...state,
-        AccountCheckLoading: false,
-        AccountCheckError: action.error,
-      };
-    }
+    case ACCOUNT_CHECK_REQUEST:
+      draft.AccountCheckLoading = true;
+      draft.AccountCheckDone = false;
+      draft.AccountCheckError = null;
+      draft.loginData = action.data;
+      break;
 
-    case LOG_OUT_REQUEST: {
-      return {
-        ...state,
-        logoutLoading: true, // 로그아웃 시도중
-        logoutDone: false,
-        logoutError: null,
-      };
-    }
-    case LOG_OUT_SUCCESS: {
-      return {
-        ...state,
-        me: null,
-        logoutLoading: false,
-        logoutDone: true,
-      };
-    }
-    case LOG_OUT_FAILURE: {
-      return {
-        ...state,
-        logoutLoading: false,
-        logoutError: action.error,
-      };
-    }
+    case ACCOUNT_CHECK_SUCCESS:
+      draft.AccountCheckLoading = false;
+      draft.AccountCheckDone = true;
+      draft.loginData = action.data;
+      break;
 
-    case SIGN_UP_REQUEST: {
-      return {
-        ...state,
-        signupLoading: true,
-        signupDone: false,
-        signupError: null,
-      };
-    }
-    case SIGN_UP_SUCCESS: {
-      return {
-        ...state,
-        signupLoading: false,
-        signupDone: true,
-        signupData: action.data,
-      };
-    }
-    case SIGN_UP_FAILURE: {
-      return {
-        ...state,
-        signupLoading: false,
-        signupError: action.error,
-      };
-    }
+    case ACCOUNT_CHECK_FAILURE:
+      draft.AccountCheckLoading = false;
+      draft.AccountCheckError = action.error;
+      break;
 
-    case USER_MODIFY_REQUEST: {
-      return {
-        ...state,
-        userModifyLoading: true,
-        userModifyDone: false,
-        userModifyError: null,
-      };
-    }
+    case LOG_OUT_REQUEST:
+      draft.logoutLoading = true;
+      draft.logoutDone = false;
+      draft.logoutError = null;
+      break;
 
-    case USER_MODIFY_SUCCESS: {
-      return {
-        ...state,
-        userModifyLoading: false,
-        userModifyDone: true,
-        user: {
-          ...state.user,
-          nickname: action.data.nickname,
-          userId: action.data.userId,
-        },
-      };
-    }
-    case USER_MODIFY_FAILURE: {
-      return {
-        ...state,
-        userModifyLoading: false,
-        userModifyError: action.error,
-      };
-    }
+    case LOG_OUT_SUCCESS:
+      draft.me = null;
+      draft.logoutLoading = false;
+      draft.logoutDone = true;
+      break;
 
-    case POPUP_OPEN: {
-      return {
-        ...state,
-        popup: {
-          ...state.popup,
-          [action.data.key]: true,
-          data: action.data.value,
-        },
-      };
-    }
-    case POPUP_CLOSE: {
-      return {
-        ...state,
-        popup: {
-          ...initialState.popup,
-        },
-      };
-    }
-    default: {
-      return {
-        ...state,
-      };
-    }
+    case LOG_OUT_FAILURE:
+      draft.logoutLoading = false;
+      draft.logoutError = action.error;
+      break;
+
+    case SIGN_UP_REQUEST:
+      draft.signupLoading = true;
+      draft.signupDone = false;
+      draft.signupError = null;
+      break;
+
+    case SIGN_UP_SUCCESS:
+      draft.signupLoading = false;
+      draft.signupDone = true;
+      draft.signupData = action.data;
+      break;
+
+    case SIGN_UP_FAILURE:
+      draft.signupLoading = false;
+      draft.signupError = action.error;
+      break;
+
+    case USER_MODIFY_REQUEST:
+      draft.userModifyLoading = true;
+      draft.userModifyDone = false;
+      draft.userModifyError = null;
+      break;
+
+    case USER_MODIFY_SUCCESS:
+      draft.userModifyLoading = false;
+      draft.userModifyDone = true;
+      draft.user.nickname = action.data.nickname;
+      draft.user.userId = action.data.userId;
+      break;
+
+    case USER_MODIFY_FAILURE:
+      draft.userModifyLoading = false;
+      draft.userModifyError = action.error;
+      break;
+
+    case POPUP_OPEN:
+      draft.popup[action.data.key] = true;
+      draft.popup.data = action.data.value;
+      break;
+
+    case POPUP_CLOSE:
+      draft.popup = initialState.popup;
+      break;
+
+    default:
+      break;
   }
-};
+});

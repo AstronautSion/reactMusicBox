@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 const dummyMusic = {
   playList: [
     {
@@ -94,120 +96,82 @@ export const setMusicChangeRequestAction = (data) => ({
   data,
 });
 
-export default (state = initialState, action) => {
+export default (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
-    case GET_MUSIC_REQUEST: {
-      return {
-        ...state,
-        getMusicLoading: true,
-        getMusicDone: false,
-        getMusicError: null,
-      };
-    }
-    case GET_MUSIC_SUCCESS: {
-      return {
-        ...state,
-        getMusicLoading: false,
-        getMusicDone: true,
-        playList: dummyMusic.playList,
-        nowPlayList: dummyMusic.playList[0],
-      };
-    }
-    case GET_MUSIC_FAILURE: {
-      return {
-        ...state,
-        getMusicLoading: false,
-        getMusicError: action.error,
-      };
-    }
+    case GET_MUSIC_REQUEST:
+      draft.getMusicLoading = true;
+      draft.getMusicDone = false;
+      draft.getMusicError = null;
+      break;
 
-    case MODIFY_MUSIC_REQUEST: {
-      return {
-        ...state,
-        modifyMusicLoading: true,
-        modifyMusicDone: false,
-        modifyMusicError: null,
-      };
-    }
-    case MODIFY_MUSIC_SUCCESS: {
-      const playLists = [...state.playList]
-      playLists.map((v) => {
+    case GET_MUSIC_SUCCESS:
+      draft.getMusicLoading = false;
+      draft.getMusicDone = true;
+      draft.playList = dummyMusic.playList;
+      draft.nowPlayList = dummyMusic.playList.map((v, i) => i === 0);
+      break;
+
+    case GET_MUSIC_FAILURE:
+      draft.getMusicLoading = false;
+      draft.getMusicError = action.error;
+      break;
+
+    case MODIFY_MUSIC_REQUEST:
+      draft.modifyMusicLoading = true;
+      draft.modifyMusicDone = false;
+      draft.modifyMusicError = null;
+      break;
+
+    case MODIFY_MUSIC_SUCCESS:
+      draft.modifyMusicLoading = false;
+      draft.modifyMusicDone = true;
+      draft.playList = state.playList.map((v) => {
         if (v.id === action.data.id) {
           v.title = action.data.title;
           v.author = action.data.author;
         }
       });
-      return {
-        ...state,
-        modifyMusicLoading: false,
-        modifyMusicDone: true,
-        playList: playLists,
-      };
-    }
-    case MODIFY_MUSIC_FAILURE: {
-      return {
-        ...state,
-        modifyMusicError: action.error,
-        modifyMusicLoading: false,
-      };
-    }
+      break;
 
-    case DELETE_MUSIC_REQUEST: {
-      return {
-        ...state,
-        deleteMusicLoading: true,
-        deleteMusicDone: true,
-        deleteMusicError: null,
-      };
-    }
-    case DELETE_MUSIC_SUCCESS: {
-      const playLists = [...state.playList];
-      return {
-        ...state,
-        deleteMusicLoading: false,
-        deleteMusicDone: true,
-        playList: playLists.filter((v) => v.id !== action.data),
-      };
-    }
-    case DELETE_MUSIC_FAILURE: {
-      return {
-        ...state,
-        deleteMusicLoading: false,
-        deleteMusicError: action.error,
-      };
-    }
+    case MODIFY_MUSIC_FAILURE:
+      draft.modifyMusicError = action.error;
+      draft.modifyMusicLoading = false;
+      break;
 
-    case SET_NOW_MUSIC_REQUEST: {
-      return {
-        ...state,
-        nowPlayList: action.data,
-      };
-    }
-    case MUSIC_PLAY: {
-      return {
-        ...state,
-        isPlay: action.data,
-      };
-    }
+    case DELETE_MUSIC_REQUEST:
+      draft.deleteMusicLoading = true;
+      draft.deleteMusicDone = true;
+      draft.deleteMusicError = null;
+      break;
 
-    case SET_DURATION: {
-      return {
-        ...state,
-        duration: action.data,
-      };
-    }
+    case DELETE_MUSIC_SUCCESS:
+      draft.deleteMusicLoading = false;
+      draft.deleteMusicDone = true;
+      draft.playList = state.playList.filter((v) => v.id !== action.data);
+      break;
 
-    case SET_MUSIC_CHANGE: {
-      return {
-        ...state,
-        musicChange: action.data,
-      };
-    }
+    case DELETE_MUSIC_FAILURE:
+      draft.deleteMusicLoading = false;
+      draft.deleteMusicError = action.error;
+      break;
 
-    default: {
-      return {
-        ...state,
-      };
-    }
+    case SET_NOW_MUSIC_REQUEST:
+      draft.nowPlayList = action.data;
+      break;
+
+    case MUSIC_PLAY:
+      draft.isPlay = action.data;
+      break;
+
+    case SET_DURATION:
+      draft.duration = action.data;
+      break;
+
+    case SET_MUSIC_CHANGE:
+      draft.musicChange = action.data;
+      break;
+
+    default:
+      break;
   }
-};
+});

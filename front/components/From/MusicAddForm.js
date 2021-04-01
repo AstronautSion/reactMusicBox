@@ -39,7 +39,7 @@ const MusicAddForm = () => {
       {!readySubmit
         ? (
           <form onSubmit={onSubmitAddMusic}>
-            <StTitle>Add Music</StTitle>
+            <StLable>Add Music</StLable>
             <StInput
               onChange={onChangeLink}
               value={link}

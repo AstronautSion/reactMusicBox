@@ -26,12 +26,13 @@
         "no-underscore-dangle": "off",
         "import/no-unresolved": "off",
         "no-nested-ternary": "off",
+        "prefer-default-export": "off",
         "react/forbid-prop-types": "off",
         "react/jsx-filename-extension": "off",
         "react/jsx-one-expression-per-line": "off",
         "react/require-default-props": "off",
         "objext-curly-newline": "off",
-        "linebreak-style": "off"
-        
+        "linebreak-style": "off",
+        "no-param-reassign": "off"
     }
 }

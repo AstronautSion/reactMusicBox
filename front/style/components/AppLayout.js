@@ -80,36 +80,6 @@ export const StTitleCenter = styled.strong`
   margin-bottom:3em;
   color:#fff;
 `;
-export const StLocalNav = styled.ul`
-  border-bottom:1px solid #efefef;
-  box-sizing:border-box;
-  display:flex;
-
-  li{
-    padding:0 .875em;
-    a{
-      position:relative;
-      top:1px;
-      display:block;
-      padding:.875em 0;
-      font-size:1rem;
-      font-weight:bold;
-      text-decoration:none;
-      box-sizing:border-box;
-      border-bottom:1px solid transparent;
-      &:hover{
-        border-bottom:1px solid #111;
-      }
-    }
-    &:first-child{
-      padding-left:0;
-    }
-    &.active a{
-      color:#5f56e0;
-      border-color:#5f56e0;
-    }
-  }
-`;
 export const StButtonBack = styled.button`
   color:#666;
   padding:1em;

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import MusicList from '../components/MusicList';
 import AppLayout from '../components/Layout/AppLayout';
@@ -19,11 +20,14 @@ import {
 } from '../style/components/AppLayout';
 
 const Music = () => {
+  const { me } = useSelector((state) => state.user);
+  useEffect(() => { if (!(me && me.id)) { Router.push('/'); } }, [me && me.id]);
+  if (!me) { return null; }
+
   const dispatch = useDispatch();
-  const me = useSelector((state) => state.user.me);
-  const isAddMusic = useSelector((state) => state.user.popup.isAddMusic);
-  const isModiMusic = useSelector((state) => state.user.popup.isModiMusic);
-  const playList = useSelector((state) => state.music.playList);
+  const { isAddMusic, isModiMusic } = useSelector((state) => state.user.popup);
+  const { playList } = useSelector((state) => state.music);
+
   const onClickAddMusicButton = () => {
     dispatch(popupOpenRequestAction({
       key: 'isAddMusic',

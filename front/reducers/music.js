@@ -123,14 +123,11 @@ export default (state = initialState, action) => produce(state, (draft) => {
       break;
 
     case MODIFY_MUSIC_SUCCESS:
+      const findList = draft.playList.find((v) => v.id === action.data.id);
+      findList.title = action.data.title;
+      findList.author = action.data.author;
       draft.modifyMusicLoading = false;
       draft.modifyMusicDone = true;
-      draft.playList = state.playList.map((v) => {
-        if (v.id === action.data.id) {
-          v.title = action.data.title;
-          v.author = action.data.author;
-        }
-      });
       break;
 
     case MODIFY_MUSIC_FAILURE:
@@ -147,7 +144,7 @@ export default (state = initialState, action) => produce(state, (draft) => {
     case DELETE_MUSIC_SUCCESS:
       draft.deleteMusicLoading = false;
       draft.deleteMusicDone = true;
-      draft.playList = state.playList.filter((v) => v.id !== action.data);
+      draft.playList = draft.playList.filter((v) => v.id !== action.data);
       break;
 
     case DELETE_MUSIC_FAILURE:

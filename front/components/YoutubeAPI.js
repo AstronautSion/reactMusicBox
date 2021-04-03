@@ -16,6 +16,9 @@ const YoutubeAPI = () => {
     if (musicChange && e.target.getVideoData().title !== '') {
       e.target.pauseVideo();
       e.target.seekTo(0);
+
+      console.log(e.target);
+
       dispatch(setDurationRequestAction(e.target.getDuration()));
       dispatch(setMusicChangeRequestAction(false));
       playProgressAnimation();

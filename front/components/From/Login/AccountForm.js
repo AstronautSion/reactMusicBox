@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { StInput } from '../../../style/Form';
 import { StBtnLoginForm, StWarnningText } from '../../../style/LoginForm';
-import { AccountCheckRequestAction } from '../../../reducers/user';
+import { accountCheckRequestAction } from '../../../reducers/user';
 import { testEmail } from '../../Common';
 
-const CreateAccountForm = ({ setOrder }) => {
+const AccountForm = ({ setOrder }) => { // order0
   const dispatch = useDispatch();
   const [signin, setSignin] = useState('');
   const [checkEmail, setCheckEmail] = useState(true);
@@ -14,7 +14,7 @@ const CreateAccountForm = ({ setOrder }) => {
   const onSubmitFIndAccount = useCallback((e) => {
     e.preventDefault();
     if (checkEmail) {
-      dispatch(AccountCheckRequestAction({
+      dispatch(accountCheckRequestAction({
         email: signin,
       }));
       setOrder(1);
@@ -43,8 +43,8 @@ const CreateAccountForm = ({ setOrder }) => {
   );
 };
 
-CreateAccountForm.propTypes = {
+AccountForm.propTypes = {
   setOrder: PropTypes.func.isRequired,
 };
 
-export default CreateAccountForm;
+export default AccountForm;

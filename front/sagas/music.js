@@ -1,5 +1,11 @@
 import { all, put, fork, delay, takeLatest } from 'redux-saga/effects';
-import { ADD_MUSIC_FAILURE, ADD_MUSIC_REQUEST, ADD_MUSIC_SUCCESS, DELETE_MUSIC_FAILURE, DELETE_MUSIC_REQUEST, DELETE_MUSIC_SUCCESS, GET_MUSIC_FAILURE, GET_MUSIC_REQUEST, GET_MUSIC_SUCCESS, MODIFY_MUSIC_FAILURE, MODIFY_MUSIC_REQUEST, MODIFY_MUSIC_SUCCESS, SET_NOW_MUSIC_FAILURE, SET_NOW_MUSIC_REQUEST, SET_NOW_MUSIC_SUCCESS } from '../reducers/music';
+import { 
+  ADD_MUSIC_FAILURE, ADD_MUSIC_REQUEST, ADD_MUSIC_SUCCESS,
+  DELETE_MUSIC_FAILURE, DELETE_MUSIC_REQUEST, DELETE_MUSIC_SUCCESS,
+  GET_MUSIC_FAILURE, GET_MUSIC_REQUEST, GET_MUSIC_SUCCESS,
+  MODIFY_MUSIC_FAILURE, MODIFY_MUSIC_REQUEST, MODIFY_MUSIC_SUCCESS,
+  SET_NOW_MUSIC_FAILURE, SET_NOW_MUSIC_REQUEST, SET_NOW_MUSIC_SUCCESS
+} from '../reducers/music';
 
 function getMusicAPI(data) {
   console.log(data);
@@ -63,15 +69,15 @@ function* modifyMusic(action) {
 }
 
 function deleteMusicAPI(data) {
-  return data;
+  console.log(data);
 }
 function* deleteMusic(action) {
   try {
-    yield delay(2000);
+    yield delay(1000);
     // const result = yield call(deleteMusicAPI, action.data);
     yield put({
       type: DELETE_MUSIC_SUCCESS,
-      // data: result.data
+      data: action.data,
     });
   } catch (error) {
     yield put({

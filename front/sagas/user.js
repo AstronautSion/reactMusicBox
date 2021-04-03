@@ -87,6 +87,7 @@ function* signup(action) {
 function* watchLogin() {
   yield throttle(2000, LOG_IN_REQUEST, login);
 }
+
 function* watchAccountCheck() {
   yield throttle(2000, ACCOUNT_CHECK_REQUEST, accountCheck);
 }

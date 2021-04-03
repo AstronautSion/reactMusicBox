@@ -6,7 +6,8 @@ import { StBtnLoginForm } from '../../style/LoginForm';
 import CreateAccountPasswordForm from './Login/CreateAccountPasswordForm';
 import CreateAccountInfoForm from './Login/CreateAccountInfoForm';
 import CreateAccountNicknameForm from './Login/CreateAccountNicknameForm';
-import CreateAccountForm from './Login/createAccountForm';
+import AccountForm from './Login/AccountForm';
+import AccountPasswordForm from './Login/AccountPasswordForm';
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -39,16 +40,19 @@ function LoginForm() {
           />
         </div>
         <hr />
-        <CreateAccountForm setOrder={setOrder} />
+        <AccountForm setOrder={setOrder} />
       </>
       )}
       {order === 1 && (
+        <AccountPasswordForm setOrder={setOrder} />
+      )}
+      {order === 2 && (
         <CreateAccountPasswordForm
           setOrder={setOrder}
         />
       )}
-      {order === 2 && <CreateAccountInfoForm setOrder={setOrder} />}
-      {order === 3 && (
+      {order === 3 && <CreateAccountInfoForm setOrder={setOrder} />}
+      {order === 4 && (
         <CreateAccountNicknameForm
           nickname={nickname}
           setNickname={setNickname}

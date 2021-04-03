@@ -2,9 +2,19 @@ import produce from 'immer';
 
 const dummyUser = {
   id: 1,
-  userId: 'Astronaut.sion',
-  nickname: '사자',
+  email: 'Astronaut.sion@gmail.com',
+  nickname: '그냥가입한사람',
+  age: '22',
+  gender: 'male',
 };
+
+const dummyUser2 = {
+  id: 2,
+  email: 'google.sion@gmail.com',
+  nickname: '구글로 가입',
+  age: '32',
+  gender: 'female',
+}
 
 export const initialState = {
   loginLoading: false, // 로그인 시도중
@@ -13,9 +23,9 @@ export const initialState = {
   logoutLoading: false, // 로그아웃 시도중
   logoutDone: false,
   logoutError: null,
-  AccountCheckLoading: false, // 계정 확인 시도중
-  AccountCheckDone: false,
-  AccountCheckError: null,
+  accountCheckLoading: false, // 계정 확인 시도중
+  accountCheckDone: false,
+  accountCheckError: null,
   signupLoading: false, // 회원가입 시도중
   signupDone: false,
   signupError: null,
@@ -30,7 +40,7 @@ export const initialState = {
     isModiMusic: false,
   },
   loginData: {},
-  signUpData: {},
+  signupData: {},
 };
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
@@ -56,7 +66,7 @@ export const USER_MODIFY_FAILURE = 'USER_MODIFY_FAILURE';
 export const POPUP_OPEN = 'POPUP_OPEN';
 export const POPUP_CLOSE = 'POPUP_CLOSE';
 
-export const AccountCheckRequestAction = (data) => ({
+export const accountCheckRequestAction = (data) => ({
   type: ACCOUNT_CHECK_REQUEST,
   data,
 });
@@ -109,21 +119,21 @@ export default (state = initialState, action) => produce(state, (draft) => {
       break;
 
     case ACCOUNT_CHECK_REQUEST:
-      draft.AccountCheckLoading = true;
-      draft.AccountCheckDone = false;
-      draft.AccountCheckError = null;
+      draft.accountCheckLoading = true;
+      draft.accountCheckDone = false;
+      draft.accountCheckError = null;
       draft.loginData = action.data;
       break;
 
     case ACCOUNT_CHECK_SUCCESS:
-      draft.AccountCheckLoading = false;
-      draft.AccountCheckDone = true;
+      draft.accountCheckLoading = false;
+      draft.accountCheckDone = true;
       draft.loginData = action.data;
       break;
 
     case ACCOUNT_CHECK_FAILURE:
-      draft.AccountCheckLoading = false;
-      draft.AccountCheckError = action.error;
+      draft.accountCheckLoading = false;
+      draft.accountCheckError = action.error;
       break;
 
     case LOG_OUT_REQUEST:

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StCheckbox = styled.label`
     display:inline-block; 
@@ -13,7 +13,7 @@ export const StCheckbox = styled.label`
     user-select:none; 
     vertical-align:top;
     margin:1em 0;
-    color:#9195b5;
+    color:#333;
     font-size:.875rem;
     text-indent:5px;
     line-height:1;

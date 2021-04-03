@@ -70,21 +70,25 @@ const MusicBoxCard = () => {
   }, [playList, id, TYAPI]);
 
   return (
-    <StMusicboxCard>
-      <StMusicBoxImg stImgUrl={musicImg} />
-      <StMusicBoxControlArea>
-        <StMusicBoxButton onClick={onClickPlay}>
-          <i className={isPlay ? 'fa fa-pause' : 'fa fa-play'} />
-        </StMusicBoxButton>
-        <StMusicBoxButtonSm onClick={onClickPrev}><i className="fa fa-backward" /></StMusicBoxButtonSm>
-        <StMusicBoxButtonSm onClick={onClickNext}><i className="fa fa-forward" /></StMusicBoxButtonSm>
-      </StMusicBoxControlArea>
-      <StMusicBoxBottom>
-        <StMusicBoxTitle>{title}</StMusicBoxTitle>
-        <StMusicBoxAuthor>{author}</StMusicBoxAuthor>
-        <MusicBoxProgressBar />
-      </StMusicBoxBottom>
-    </StMusicboxCard>
+    <>
+      { playList && (
+        <StMusicboxCard>
+          <StMusicBoxImg stImgUrl={musicImg} />
+          <StMusicBoxControlArea>
+            <StMusicBoxButton onClick={onClickPlay}>
+              <i className={isPlay ? 'fa fa-pause' : 'fa fa-play'} />
+            </StMusicBoxButton>
+            <StMusicBoxButtonSm onClick={onClickPrev}><i className="fa fa-backward" /></StMusicBoxButtonSm>
+            <StMusicBoxButtonSm onClick={onClickNext}><i className="fa fa-forward" /></StMusicBoxButtonSm>
+          </StMusicBoxControlArea>
+          <StMusicBoxBottom>
+            <StMusicBoxTitle>{title}</StMusicBoxTitle>
+            <StMusicBoxAuthor>{author}</StMusicBoxAuthor>
+            <MusicBoxProgressBar />
+          </StMusicBoxBottom>
+        </StMusicboxCard>
+      )}
+    </>
   );
 };
 

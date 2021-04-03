@@ -17,7 +17,7 @@ const CreateAccountInfoForm = ({ setOrder }) => { // order 2
       <StLoginFormTitle>Create your MusicBox account</StLoginFormTitle>
       <div>
         <StLable>Tell us your age</StLable>
-        <StInput type="number" stMargin="0 0 1em 0" value={age} onChange={onChangeAge} autoFocus />
+        <StInput type="number" stMargin="0 0 1em 0" min="0" max="100" value={age} onChange={onChangeAge} autoFocus />
       </div>
       <div>
         <StLable>Gender</StLable>

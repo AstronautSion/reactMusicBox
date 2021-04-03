@@ -108,7 +108,9 @@ export default (state = initialState, action) => produce(state, (draft) => {
       draft.getMusicLoading = false;
       draft.getMusicDone = true;
       draft.playList = dummyMusic.playList;
-      draft.nowPlayList = dummyMusic.playList.map((v, i) => i === 0);
+      const firstList = draft.playList.find((v, i) => i === 0);
+      console.log(firstList);
+      draft.nowPlayList = firstList;
       break;
 
     case GET_MUSIC_FAILURE:
@@ -137,7 +139,7 @@ export default (state = initialState, action) => produce(state, (draft) => {
 
     case DELETE_MUSIC_REQUEST:
       draft.deleteMusicLoading = true;
-      draft.deleteMusicDone = true;
+      draft.deleteMusicDone = false;
       draft.deleteMusicError = null;
       break;
 

@@ -13,7 +13,7 @@ import { logoutRequestAction, popupOpenRequestAction } from '../../reducers/user
 
 const Header = () => {
   const dispatch = useDispatch();
-  const me = useSelector((state) => state.user.me);
+  const { me } = useSelector((state) => state.user);
   const [accountMenu, setAccountMenu] = useState(true);
   const accountMenuRef = useRef();
 
@@ -54,7 +54,7 @@ const Header = () => {
               <>
                 <StAccountMenu>
                   <span onClick={onClickBtnMenu}>
-                    Astronaut.sion
+                    {me.nickname}
                   </span>
                   <StMenuUl ref={accountMenuRef}>
                     <li><Link href="/profile"><a rel="noreferrer noopener">Profile</a></Link></li>

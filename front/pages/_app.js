@@ -12,7 +12,6 @@ import { StBackgroundYouTube } from '../style/components/AppLayout';
 const MusicBox = ({ Component }) => {
   const dispatch = useDispatch();
   const me = useSelector((state) => state.user.me);
-  const link = useSelector((state) => state.music.nowPlayList.link);
   useEffect(() => {
     if (me) {
       dispatch(getMusicRequestAction);
@@ -31,7 +30,7 @@ const MusicBox = ({ Component }) => {
       <Reset />
       {me
         && (
-          <StBackgroundYouTube stImg={`https://img.youtube.com/vi/${link}/hqdefault.jpg`}>
+          <StBackgroundYouTube>
             <YoutubeAPI />
           </StBackgroundYouTube>
         )}

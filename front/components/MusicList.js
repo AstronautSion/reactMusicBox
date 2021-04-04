@@ -3,8 +3,15 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { deleteMusicRequestAction } from '../reducers/music';
 import { popupOpenRequestAction } from '../reducers/user';
+import {
+  StMusicListItem,
+  StMusicListItemControl,
+  StMusicListItemInfo,
+  StMusicListItemThumb,
+  StMusicListItemWrapper,
+} from '../style/components/MusicList';
 
-const MusicList = ({data}) => {
+const MusicList = ({ data }) => {
   const dispatch = useDispatch();
   const onClickDeleteButton = () => {
     if (confirm('삭제하시겠습니까?')) {
@@ -14,15 +21,15 @@ const MusicList = ({data}) => {
 
   const onClickModifyButton = () => {
     dispatch(popupOpenRequestAction({
-      key: 'isModiMusic',
+      key: 'modifyMusic',
       value: data,
     }));
   };
   return (
-    <li>
-      <div className="music-list__wrapper">
-        <div className="music-list__thumb" />
-        <div className="music-list__info">
+    <StMusicListItem>
+      <StMusicListItemWrapper>
+        <StMusicListItemThumb />
+        <StMusicListItemInfo>
           <p
             className="music-list__title"
             title={`${data.title}-${data.author}`}
@@ -31,13 +38,13 @@ const MusicList = ({data}) => {
             <span className="music-list__author">{data.author}</span>
           </p>
           <span className="music-list__writter">{data.writter}</span>
-        </div>
-        <div className="music-list__control">
+        </StMusicListItemInfo>
+        <StMusicListItemControl>
           <button type="button" onClick={onClickModifyButton} className="music-list__button--modify">수정</button>
           <button type="button" onClick={onClickDeleteButton} className="music-list__button--delete">삭제</button>
-        </div>
-      </div>
-    </li>
+        </StMusicListItemControl>
+      </StMusicListItemWrapper>
+    </StMusicListItem>
   );
 };
 

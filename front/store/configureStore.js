@@ -8,7 +8,6 @@ import rootSaga from '../sagas';
 
 const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
-  console.log('1111',process.env.NODE_ENV, process.env.GOOGLE_CLIENT_ID)
   const middlewares = [sagaMiddleware];
   const enhancer = process.env.NODE_ENV === 'production'
     ? compose(applyMiddleware(...middlewares))

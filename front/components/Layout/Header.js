@@ -9,7 +9,7 @@ import {
   StMenuUl,
 } from '../../style/components/Header';
 import { StWrapper } from '../../style/components/AppLayout';
-import { logoutRequestAction, popupOpenRequestAction } from '../../reducers/user';
+import { logoutRequestAction } from '../../reducers/user';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -30,13 +30,6 @@ const Header = () => {
     setAccountMenu(!accountMenu);
   };
 
-  const onclickLoginForm = useCallback(() => {
-    dispatch(popupOpenRequestAction({
-      key: 'isLoginPopup',
-      value: null,
-    }));
-  }, []);
-
   const onClickLogout = useCallback(() => {
     dispatch(logoutRequestAction);
   }, []);
@@ -53,9 +46,9 @@ const Header = () => {
             ? (
               <>
                 <StAccountMenu>
-                  <span onClick={onClickBtnMenu}>
+                  <button type="button" onClick={onClickBtnMenu}>
                     {me.nickname}
-                  </span>
+                  </button>
                   <StMenuUl ref={accountMenuRef}>
                     <li><Link href="/profile"><a rel="noreferrer noopener">Profile</a></Link></li>
                   </StMenuUl>
@@ -64,8 +57,8 @@ const Header = () => {
               </>
             ) : (
               <>
-                <StBtnSignin onClick={onclickLoginForm}>Sign in</StBtnSignin>
-                <StBtnSignin stMainColor onClick={onclickLoginForm}>Create account</StBtnSignin>
+                <Link href="/login"><StBtnSignin rel="noreferrer noopener">Login</StBtnSignin></Link>
+                <Link href="/signup"><StBtnSignin stMainColor rel="noreferrer noopener">Create Account</StBtnSignin></Link>
               </>
             )}
         </div>

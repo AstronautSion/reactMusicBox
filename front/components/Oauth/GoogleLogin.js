@@ -3,9 +3,9 @@ import GoogleLogin from 'react-google-login';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { StBtnLoginForm } from '../../style/LoginForm';
-import { loginRequestAction, popupCloseRequestAction } from '../../reducers/user';
+import { loginRequestAction, setLoginPopupOrder } from '../../reducers/user';
 
-const GoogleLoginButton = ({ setNickname, setOrder }) => {
+const GoogleLoginButton = ({ setNickname }) => {
   const dispatch = useDispatch();
   const googleClientId = '1030853119585-cc2fqf9he0u14ue81l40ba66kkap9s82.apps.googleusercontent.com';
 
@@ -35,10 +35,10 @@ const GoogleLoginButton = ({ setNickname, setOrder }) => {
 
   useEffect(() => {
     if (loginDone) {
-      dispatch(popupCloseRequestAction);
+      // login 완료
     }
     if (loginError) {
-      setOrder(2);
+      dispatch(setLoginPopupOrder(2));
     }
   }, [loginDone]);
 
@@ -64,7 +64,6 @@ const GoogleLoginButton = ({ setNickname, setOrder }) => {
 
 GoogleLoginButton.propTypes = {
   setNickname: PropTypes.func.isRequired,
-  setOrder: PropTypes.func.isRequired,
 };
 
 export default GoogleLoginButton;

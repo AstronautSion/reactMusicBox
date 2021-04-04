@@ -1,21 +1,5 @@
 import produce from 'immer';
 
-const dummyUser = {
-  id: 1,
-  email: 'Astronaut.sion@gmail.com',
-  nickname: '그냥가입한사람',
-  age: '22',
-  gender: 'male',
-};
-
-const dummyUser2 = {
-  id: 2,
-  email: 'google.sion@gmail.com',
-  nickname: '구글로 가입',
-  age: '32',
-  gender: 'female',
-}
-
 export const initialState = {
   loginLoading: false, // 로그인 시도중
   loginDone: false,
@@ -23,9 +7,6 @@ export const initialState = {
   logoutLoading: false, // 로그아웃 시도중
   logoutDone: false,
   logoutError: null,
-  accountCheckLoading: false, // 계정 확인 시도중
-  accountCheckDone: false,
-  accountCheckError: null,
   signupLoading: false, // 회원가입 시도중
   signupDone: false,
   signupError: null,
@@ -35,17 +16,18 @@ export const initialState = {
   me: null,
   popup: {
     data: null,
-    isLoginPopup: false,
-    isAddMusic: false,
-    isModiMusic: false,
+    loginPopup: false,
+    addMusic: false,
+    modifyMusic: false,
   },
+  loginPopupOrder: 0,
   loginData: {},
   signupData: {},
 };
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
-export const SIGN_UP_FAILURE = 'LOG_IN_FAILURE';
+export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
@@ -55,10 +37,6 @@ export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
 
-export const ACCOUNT_CHECK_REQUEST = 'ACCOUNT_CHECK_REQUEST';
-export const ACCOUNT_CHECK_SUCCESS = 'ACCOUNT_CHECK_SUCCESS';
-export const ACCOUNT_CHECK_FAILURE = 'ACCOUNT_CHECK_FAILURE';
-
 export const USER_MODIFY_REQUEST = 'USER_MODIFY_REQUEST';
 export const USER_MODIFY_SUCCESS = 'USER_MODIFY_SUCCESS';
 export const USER_MODIFY_FAILURE = 'USER_MODIFY_FAILURE';
@@ -66,8 +44,10 @@ export const USER_MODIFY_FAILURE = 'USER_MODIFY_FAILURE';
 export const POPUP_OPEN = 'POPUP_OPEN';
 export const POPUP_CLOSE = 'POPUP_CLOSE';
 
-export const accountCheckRequestAction = (data) => ({
-  type: ACCOUNT_CHECK_REQUEST,
+export const LOGIN_FORM_ORDER = 'LOGIN_FORM_ORDER';
+
+export const setLoginPopupOrder = (data) => ({
+  type: LOGIN_FORM_ORDER,
   data,
 });
 
@@ -103,37 +83,20 @@ export default (state = initialState, action) => produce(state, (draft) => {
     case LOG_IN_REQUEST:
       draft.loginLoading = true;
       draft.loginDone = false;
-      draft.logInError = null;
+      draft.loginError = null;
       break;
 
     case LOG_IN_SUCCESS:
+      console.log('LOG_IN_SUCCESS', action.data);
       draft.loginLoading = false;
       draft.loginDone = true;
-      draft.me = dummyUser;
+      draft.me = action.data;
       break;
 
     case LOG_IN_FAILURE:
       draft.loginLoading = false;
-      draft.logInError = action.error;
+      draft.loginError = action.error;
       draft.loginData = null;
-      break;
-
-    case ACCOUNT_CHECK_REQUEST:
-      draft.accountCheckLoading = true;
-      draft.accountCheckDone = false;
-      draft.accountCheckError = null;
-      draft.loginData = action.data;
-      break;
-
-    case ACCOUNT_CHECK_SUCCESS:
-      draft.accountCheckLoading = false;
-      draft.accountCheckDone = true;
-      draft.loginData = action.data;
-      break;
-
-    case ACCOUNT_CHECK_FAILURE:
-      draft.accountCheckLoading = false;
-      draft.accountCheckError = action.error;
       break;
 
     case LOG_OUT_REQUEST:
@@ -143,9 +106,10 @@ export default (state = initialState, action) => produce(state, (draft) => {
       break;
 
     case LOG_OUT_SUCCESS:
-      draft.me = null;
       draft.logoutLoading = false;
       draft.logoutDone = true;
+      draft.me = null;
+      draft.loginDone = false;
       break;
 
     case LOG_OUT_FAILURE:
@@ -166,6 +130,7 @@ export default (state = initialState, action) => produce(state, (draft) => {
       break;
 
     case SIGN_UP_FAILURE:
+      console.log(action);
       draft.signupLoading = false;
       draft.signupError = action.error;
       break;
@@ -195,6 +160,10 @@ export default (state = initialState, action) => produce(state, (draft) => {
 
     case POPUP_CLOSE:
       draft.popup = initialState.popup;
+      draft.loginPopupOrder = 0;
+      break;
+    case LOGIN_FORM_ORDER:
+      draft.loginPopupOrder = action.data;
       break;
 
     default:

@@ -32,7 +32,7 @@ export const StAccountMenu = styled.div`
     position:relative;
     display:inline-block;
     padding-right:1em;
-    > span{
+    > button{
         color:#fff;
         font-size:.875rem;
         cursor:pointer;
@@ -65,7 +65,7 @@ export const StMenuUl = styled.ul`
     }
 `;
 
-export const StBtnSignin = styled.button`
+export const StBtnSignin = styled.a`
     padding:.5rem 1rem;
     display:block;
     text-align:center;
@@ -79,8 +79,11 @@ export const StBtnSignin = styled.button`
     cursor:pointer;
     margin-left:1em;
     line-height:1;
+    &:hover{
+        text-decoration:none;
+    }
 
-    ${props => props.stMainColor && css`
+    ${(props) => props.stMainColor && css`
         border:1px solid #5f56e0;
         background-color:#5f56e0;
     `}
@@ -100,7 +103,7 @@ export const StButtonSm = styled.button`
     margin-left:1em;
     line-height:1;
 
-    ${props => props.stOrange && css`
+    ${(props) => props.stOrange && css`
         border:1px solid #5f56e0;
         background-color:#5f56e0;
     `}

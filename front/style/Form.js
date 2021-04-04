@@ -13,7 +13,7 @@ export const StCheckbox = styled.label`
     user-select:none; 
     vertical-align:top;
     margin:1em 0;
-    color:#333;
+    color:#8d8fa0;
     font-size:.875rem;
     text-indent:5px;
     line-height:1;
@@ -74,8 +74,8 @@ export const StInput = styled.input`
     padding:0 1em;
     box-sizing:border-box;
     border-radius:.25em;
-    border-color: ${ props => props.stColor || '#ddd'};
-    margin: ${props => props.stMargin || '0'};
+    border-color: ${(props) => props.stColor || '#ddd'};
+    margin: ${(props) => props.stMargin || '0'};
     background-color:#fff;
     &[readonly]{
         background-color:#eee;
@@ -87,7 +87,7 @@ export const StLable = styled.label`
     margin-bottom:.5em;
     display:block;
     font-weight:300;
-    color:#333;
+    color:#8d8fa0;
 `;
 
 export const StSelect = styled.select`
@@ -102,8 +102,6 @@ export const StSelect = styled.select`
     box-sizing:border-box;
     border-radius:.25em;
     background-color:#fff;
-    border-color: ${ props => props.stColor || '#ddd'};
-    margin: ${props => props.stMargin || '0'};
+    border-color: ${(props) => props.stColor || '#ddd'};
+    margin: ${(props) => props.stMargin || '0'};
 `;
- 
-

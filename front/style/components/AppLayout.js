@@ -10,46 +10,16 @@ export const StSection = styled.div`
   padding:2em 0;
 `;
 
-export const StPopupWrapper = styled.div`
-  z-index:10000;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  display:flex;
-  justify-contents:center;
-  align-items: center;
-  background-color:rgba(0,0,0,.75);
-  > div{
-    position:relative;
-    background-color:#fff;
-    max-width:500px;
-    width:95%;
-    margin:0 auto;
-    padding:2em;
-    box-sizing:border-box;
-  }
-`;
-
 export const StSmLayout = styled.div`
   position: relative;
-  padding:10rem 0;
+  padding:5rem 0;
   box-sizing:border-box;
   max-width:500px;
   width:100%;
   margin:0 auto;
   @media screen and (max-width: 768px){
-    padding:5rem 0;
+    padding:3rem 0;
   }
-`;
-
-export const StPopupBtnClose = styled.button`
-  position:absolute;
-  top:1em;
-  right:1em;
-  font-size:1rem;
-  color:#fff;
 `;
 
 export const StContainer = styled.div`
@@ -60,16 +30,16 @@ export const StP = styled.p`
 display:block;
 font-weight:normal;
 line-height:1.4;
-font-size: ${ props => {
-    if(props.sm){ return '.785rem';}
-    else if(props.lg){return '1.2rem;';}
-    else{return '1rem;'} 
-}};
-color: ${props => {
-    if(props.light){return '#666'}
-    else{return '#111'}
-}};
-margin: ${props => props.stMargin || '0'};
+font-size: ${(props) => {
+    if (props.sm) { return '.785rem'; }
+    if (props.lg) { return '1.2rem;'; }
+    return '1rem;';
+  }};
+color: ${(props) => {
+    if (props.light) { return '#666'; }
+    return '#111';
+  }};
+margin: ${(props) => props.stMargin || '0'};
 `;
 
 export const StTitleCenter = styled.strong`
@@ -154,7 +124,7 @@ export const StButton = styled.button`
   border-radius:.2em;
   font-size:.875rem;
 
-  ${props => props.stMain && css`
+  ${(props) => props.stMain && css`
     background-color:#5f56e0;
     border:1px solid #5f56e0;
   `}
@@ -169,7 +139,7 @@ export const StBackgroundYouTube = styled.div`
   height:100%;
   overflow:hidden;
   background:#333;
-  ${props => props.stImg && css`
+  ${(props) => props.stImg && css`
     background:url(${props.stImg}) no-repeat center;
   `}
   background-size:cover;

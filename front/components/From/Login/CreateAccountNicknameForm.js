@@ -1,19 +1,22 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { StBtnLoginForm, StLoginFormTitle } from '../../../style/LoginForm';
 import { StInput, StLable } from '../../../style/Form';
 import { StButtonBack, StP } from '../../../style/components/AppLayout';
+import { setLoginPopupOrder } from '../../../reducers/user';
 
-const CreateAccountNicknameForm = ({ nickname, setNickname, setOrder }) => { // order 3
+const CreateAccountNicknameForm = ({ nickname, setNickname }) => { // order 3
+  const dispatch = useDispatch();
   const onChangeNickname = useCallback((e) => {
     setNickname(e.target.value);
   }, []);
   const onClickBackContents = () => {
-    setOrder(2);
+    dispatch(setLoginPopupOrder(2));
   };
   const onClickNext = () => {
     // nickname 추가
-    setOrder(0);
+    dispatch(setLoginPopupOrder(0));
   };
   return (
     <form>
@@ -35,7 +38,6 @@ const CreateAccountNicknameForm = ({ nickname, setNickname, setOrder }) => { // 
 CreateAccountNicknameForm.propTypes = {
   nickname: PropTypes.string.isRequired,
   setNickname: PropTypes.func.isRequired,
-  setOrder: PropTypes.func.isRequired,
 };
 
 export default CreateAccountNicknameForm;

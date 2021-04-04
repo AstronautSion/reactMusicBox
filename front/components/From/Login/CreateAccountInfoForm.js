@@ -1,16 +1,18 @@
-import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { useCallback, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { StInput, StLable, StSelect } from '../../../style/Form';
 import { StBtnLoginForm, StLoginFormTitle } from '../../../style/LoginForm';
 import useInput from '../../../hooks/useInput';
+import { setLoginPopupOrder } from '../../../reducers/user';
 
-const CreateAccountInfoForm = ({ setOrder }) => { // order 2
+const CreateAccountInfoForm = () => { // order 2
+  const dispatch = useDispatch();
   const [age, onChangeAge] = useInput(0);
   const gender = useRef();
-  const onClickNext = () => {
+  const onClickNext = useCallback(() => {
     // age gender 추가
-    setOrder(3);
-  };
+    dispatch(setLoginPopupOrder(3));
+  }, []);
 
   return (
     <form>
@@ -33,10 +35,6 @@ const CreateAccountInfoForm = ({ setOrder }) => { // order 2
       </div>
     </form>
   );
-};
-
-CreateAccountInfoForm.propTypes = {
-  setOrder: PropTypes.func.isRequired,
 };
 
 export default CreateAccountInfoForm;

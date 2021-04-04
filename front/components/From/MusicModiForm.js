@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StInput, StLable } from '../../style/Form';
 import { StButton, StFieldset } from '../../style/components/AppLayout';
 import { modifyMusicRequestAction } from '../../reducers/music';
-import { popupCloseRequestAction } from '../../reducers/user';
 
 const StMusicModiForm = styled.div`
   
@@ -37,7 +36,6 @@ const MusicModiForm = () => {
       author,
       title,
     }));
-    dispatch(popupCloseRequestAction);
   };
   return (
     <StMusicModiForm>

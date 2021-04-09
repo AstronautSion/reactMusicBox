@@ -22,7 +22,7 @@ youtube API V3를 이용해 테스트를 해보았지만 요청 제한이 있어
 - [x] 회원정보 수정 / 로그아웃 <br>
 - [ ] youtube 데이터 요청 및 추가/수정/삭제 <br>
 - [x] video list 무한스크롤 <br>
-- [] video detail 페이지 <br>
+- [ ] video detail 페이지 <br>
 - [ ] 단위테스트 <br>
 
 

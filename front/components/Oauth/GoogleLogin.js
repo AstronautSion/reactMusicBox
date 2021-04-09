@@ -17,7 +17,6 @@ const GoogleLoginButton = ({ setNickname }) => {
     // 계정 검증
     // 없으면 추가후 order 2 이동
     // 있으면 로그인 ->
-    console.log(e);
     setNickname(e.profileObj.name);
     setEmail(e.profileObj.email);
     setAccessToken(accessToken);

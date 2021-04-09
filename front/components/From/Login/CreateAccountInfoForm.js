@@ -16,7 +16,7 @@ const CreateAccountInfoForm = () => { // order 2
 
   return (
     <form>
-      <StLoginFormTitle>Create your MusicBox account</StLoginFormTitle>
+      <StLoginFormTitle>Create your YTList account</StLoginFormTitle>
       <div>
         <StLable>Tell us your age</StLable>
         <StInput type="number" stMargin="0 0 1em 0" min="0" max="100" value={age} onChange={onChangeAge} autoFocus />

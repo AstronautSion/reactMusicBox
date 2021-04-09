@@ -20,8 +20,8 @@ export const initialState = {
   popup: {
     data: null,
     loginPopup: false,
-    addMusic: false,
-    modifyMusic: false,
+    addVideo: false,
+    updateVideo: false,
   },
   loginPopupOrder: 0,
   loginData: {},

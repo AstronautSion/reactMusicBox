@@ -72,7 +72,7 @@ router.post('/signup', isNotLoggedIn, async(req, res, next) => { // POST /user  
     res.status(201).send('ok');
 
   } catch (error) {
-    console.log(error);
+    console.error(error);
     next(error);
   }
 });

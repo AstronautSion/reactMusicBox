@@ -6,7 +6,8 @@ const passport = require('passport');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 
-const musicRouter = require('./routes/music');
+const videoRouter = require('./routes/video');
+const videosRouter = require('./routes/videos');
 const userRouter = require('./routes/user');
 const db = require('./models');
 const passportConfig = require('./passport');
@@ -36,7 +37,8 @@ app.use(passport.session({
   secret: process.env.COOKIE_SECRET,
 }));
 
-app.use('/music',musicRouter);
+app.use('/videos',videosRouter);
+app.use('/video',videoRouter);
 app.use('/user', userRouter);
 
 

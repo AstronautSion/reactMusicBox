@@ -5,20 +5,21 @@ import { StInput, StLable } from '../../style/Form';
 import {
   StButtonBack,
   StFieldset,
-  StAddMusicYoutube,
-  StAddMusicSpanText,
+  StAddVideoYoutube,
+  StAddVideoSpanText,
 } from '../../style/components/AppLayout';
 import { StButtonLonger } from '../../style/LoginForm';
 import { popupCloseRequestAction } from '../../reducers/user';
-import { addMusicRequestAction } from '../../reducers/music';
+import { addVideoRequestAction } from '../../reducers/video';
 
-const MusicAddForm = () => {
+const VideoAddForm = () => {
   const dispatch = useDispatch();
   const [link, setLink] = useState('');
   const [readySubmit, setReadySubmit] = useState(false);
-  const [musicId, setMusicId] = useState('');
+  const [videoId, setVideoId] = useState('');
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
+  const [duration, setDuration] = useState('');
   const [loadingVideo, setLoadingVideo] = useState('Loading'); // loading, complete, error
   const { id: UserId } = useSelector((state) => state.user.me);
 
@@ -27,37 +28,47 @@ const MusicAddForm = () => {
   }, [link]);
 
   const checkLink = useCallback(() => {
-    const substring = 'https://www.youtube.com/';
-    const substring2 = 'https://youtu.be/';
-    if (link.includes(substring)) {
-      setMusicId(link.split(substring)[1].split('watch?v=')[1]);
-    } else if (link.includes(substring2)) {
-      setMusicId(link.split(substring2)[1]);
-    } else {
-      setMusicId(link);
-    }
+    const piece = 'watch?v=';
+    const piece2 = '&';
+
+    const splitFront = link.includes(piece) ? link.split(piece)[1] : link;
+    const splitFinal = splitFront.includes(piece2) ? splitFront.split(piece2)[0] : splitFront;
+
+    setVideoId(splitFinal);
+    // if (link.includes(substring)  ) {
+    //   setVideoId(link.split(substring)[1].split(piece1)[1]);
+    // } else if (link.includes(substring2)) {
+    //   if (link.split(substring2)[1].includes(substring3)) {
+    //     setVideoId(link.split(substring2)[1].split(substring3)[0]);
+    //   } else {
+    //     setVideoId(link.split(substring2)[1]);
+    //   }
+    // } else {
+    //   setVideoId(link);
+    // }
   }, [link]);
 
-  const onSubmitAddMusicConfirm = useCallback((e) => {
+  const onSubmitAddVideoConfirm = useCallback((e) => {
     e.preventDefault();
     setReadySubmit(true);
     checkLink();
   }, [link]);
 
-  const onSubmitAddMusicComplete = useCallback((e) => {
+  const onSubmitAddVideoComplete = useCallback((e) => {
     e.preventDefault();
+    dispatch(addVideoRequestAction({
+      videoId,
+      title,
+      author,
+      UserId,
+      duration,
+    }));
     dispatch(popupCloseRequestAction);
     setTitle('');
     setAuthor('');
     setLoadingVideo('Loading');
     setReadySubmit(false);
-    dispatch(addMusicRequestAction({
-      musicId,
-      title,
-      author,
-      UserId,
-    }));
-  }, [musicId, title, author]);
+  }, [duration, videoId, title, author]);
 
   const onclickBack = () => {
     setTitle('');
@@ -74,18 +85,20 @@ const MusicAddForm = () => {
     setAuthor(e.target.value);
   }, []);
 
-  const onStateChangesAddMusic = useCallback((e) => {
-    e.target.setVolume(0);
-    setTitle(e.target.getVideoData().title.substring(0, 49));
-    setAuthor(e.target.getVideoData().author.substring(0, 49));
-    if (e.target.getVideoData().title !== '') {
-      e.target.pauseVideo();
-      e.target.seekTo(0);
+  const onStateChangesAddVideo = useCallback((e) => {
+    const video = e.target;
+    video.setVolume(0);
+    setDuration(video.getDuration());
+    setTitle(video.getVideoData().title.substring(0, 49));
+    setAuthor(video.getVideoData().author.substring(0, 49));
+    if (video.getVideoData().title !== '') {
+      video.pauseVideo();
+      video.seekTo(0);
       setLoadingVideo('Complete');
     }
   }, []);
 
-  const onReadyYouTubeAddMusic = useCallback((e) => {
+  const onReadyYouTubeAddVideo = useCallback((e) => {
     e.target.setVolume(0);
   }, []);
 
@@ -99,12 +112,12 @@ const MusicAddForm = () => {
     <div>
       {!readySubmit
         ? (
-          <form onSubmit={onSubmitAddMusicConfirm}>
-            <StLable>Add Music</StLable>
+          <form onSubmit={onSubmitAddVideoConfirm}>
+            <StLable>Add Video</StLable>
             <StInput
               onChange={onChangeLink}
               value={link}
-              placeholder="Youtube 또는 SoundCloud 링크를 입력해주세요."
+              placeholder="Youtube 링크를 입력해주세요."
               required
               readOnly={readySubmit}
             />
@@ -112,11 +125,12 @@ const MusicAddForm = () => {
           </form>
         ) : (
           <>
-            <form onSubmit={onSubmitAddMusicComplete}>
+            <form onSubmit={onSubmitAddVideoComplete}>
               <StButtonBack onClick={onclickBack}>&larr;</StButtonBack>
               <StFieldset>
                 <StLable>Video ID</StLable>
-                <StInput value={musicId} readOnly />
+                <StInput value={videoId} readOnly />
+                <span>{duration}</span>
               </StFieldset>
               <StFieldset>
                 <StLable>Title</StLable>
@@ -127,28 +141,28 @@ const MusicAddForm = () => {
                 <StInput onChange={onChangeYutubeAuthor} value={author} minLength="3" maxLength="50" />
               </StFieldset>
               {loadingVideo !== 'Loading'
-                && <StButtonLonger type="submit">Add Music</StButtonLonger>}
+                && <StButtonLonger type="submit">Add Video</StButtonLonger>}
             </form>
-            <StAddMusicYoutube>
+            <StAddVideoYoutube>
               <YouTube
-                videoId={musicId}
+                videoId={videoId}
                 containerClassName="embed embed-youtube"
-                onStateChange={(e) => onStateChangesAddMusic(e)}
+                onStateChange={(e) => onStateChangesAddVideo(e)}
                 opts={opts}
-                onReady={onReadyYouTubeAddMusic}
+                onReady={onReadyYouTubeAddVideo}
               />
-            </StAddMusicYoutube>
+            </StAddVideoYoutube>
             {loadingVideo === 'Loading'
               ? (
-                <StAddMusicSpanText>
+                <StAddVideoSpanText>
                   Title, author값을 불러오지 못한다면<br />Video ID 값을 다시 확인해 주세요.
-                </StAddMusicSpanText>
+                </StAddVideoSpanText>
               ) : (
-                <StAddMusicSpanText stColor="#33b73c">{loadingVideo}!!</StAddMusicSpanText>
+                <StAddVideoSpanText stColor="#33b73c">{loadingVideo}!!</StAddVideoSpanText>
               )}
           </>
         )}
     </div>
   );
 };
-export default MusicAddForm;
+export default VideoAddForm;

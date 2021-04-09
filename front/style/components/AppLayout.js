@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components';
 
 export const StWrapper = styled.div`
-  z-index:1;
-  position:relative;
   max-width:1200px;
   width: 95%;
   margin:0 auto;
@@ -67,7 +65,7 @@ export const StFixedButton = styled.div`
   z-index:1;
   position:fixed;
   bottom:10%;
-  right:1rem;
+  right:3%;
   width:50px;
   height:50px;
   background-color:#5f56e0;
@@ -143,7 +141,7 @@ export const StBackgroundYouTube = styled.div`
   }
 `;
 
-export const StAddMusicYoutube = styled.div`
+export const StAddVideoYoutube = styled.div`
   position:relative;
   opacity:0;
   iframe{
@@ -152,7 +150,7 @@ export const StAddMusicYoutube = styled.div`
   }
 `;
 
-export const StAddMusicSpanText = styled.span`
+export const StAddVideoSpanText = styled.span`
   display:block;
   font-size:.75rem;
   line-height:1.4;

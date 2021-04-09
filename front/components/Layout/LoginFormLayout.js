@@ -9,7 +9,7 @@ import {
 } from '../../style/LoginForm';
 import CreateAccountInfoForm from '../From/Login/CreateAccountInfoForm';
 import CreateAccountNicknameForm from '../From/Login/CreateAccountNicknameForm';
-import MusicBoxLoginForm from '../From/Login/MusicBoxLoginForm';
+import LoginForm from '../From/Login/LoginForm';
 
 const LoginFormLayout = () => {
   const { loginPopupOrder } = useSelector((state) => state.user);
@@ -19,12 +19,12 @@ const LoginFormLayout = () => {
     <div>
       {loginPopupOrder === 0 && (
       <>
-        <StLoginFormTitle>Login MusicBox</StLoginFormTitle>
+        <StLoginFormTitle>Login YTList</StLoginFormTitle>
         <div>
           <GoogleLoginButton setNickname={setNickname} />
         </div>
         <StHr />
-        <MusicBoxLoginForm />
+        <LoginForm />
         <Link href="/signup"><StSingupTextButton>Create Account</StSingupTextButton></Link>
       </>
       )}

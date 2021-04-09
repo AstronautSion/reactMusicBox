@@ -1,6 +1,33 @@
 import styled, { css } from 'styled-components';
 
-export const StMusicListItem = styled.li`
+export const StNoVideoCard = styled.div`
+  position:relative;
+  width:25%;
+  border:1px solid #ddd;
+  opacity:.2;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+
+  > i {
+    padding:30% 0;
+    display:block;
+    font-size:2rem;
+    line-height:1;
+    vertical-align:middle;
+    color:#fff;
+  }
+  :hover {
+    opacity:.5;
+  }
+`;
+export const StVideoImgList = styled.ul`
+  display:flex;
+  flex-wrap:wrap;
+`;
+
+export const StVideoListItem = styled.li`
   position: relative;
   z-index: 1;
   width: 100%;
@@ -13,12 +40,12 @@ export const StMusicListItem = styled.li`
   border-radius: .5em;
 `;
 
-export const StMusicListItemWrapper = styled.div`
+export const StVideoListItemWrapper = styled.div`
   position: relative;
   display: flex;
 `;
 
-export const StMusicListItemThumb = styled.div`
+export const StVideoListItemThumb = styled.div`
   display:block;
   width:70px;
   height:70px;
@@ -30,20 +57,20 @@ export const StMusicListItemThumb = styled.div`
   `}
   
 `;
-export const StMusicListItemInfo = styled.div`
+export const StVideoListItemInfo = styled.div`
   padding-left:1em;
   box-sizing: border-box;
   width: calc(100% - 70px);
   word-break: break-all;
 
-  .music-list__title{
+  .video-list__title{
     font-size:1rem;
     display:block;
     padding-bottom:.25em;
     line-height:1.4;
     color:#474c71;
 
-    .music-list__author {
+    .video-list__author {
       color:#9195b5;
       display:inline-block;
       font-size:.75rem;
@@ -52,7 +79,7 @@ export const StMusicListItemInfo = styled.div`
       padding-left:1em;
     }
   }
-  .music-list__writter {
+  .video-list__writter {
     padding-top:1em;
     font-size:.75rem;
     display:block;
@@ -60,7 +87,7 @@ export const StMusicListItemInfo = styled.div`
   }
 `;
 
-export const StMusicListItemControl = styled.div`
+export const StVideoListItemControl = styled.div`
   position:absolute;
   bottom:0;
   right:0;
@@ -74,13 +101,13 @@ export const StMusicListItemControl = styled.div`
     color:#9195b5;
   }
 
-  .music-list__button--delete {
+  .video-list__button--delete {
     border-color:#9195b5;
     background-color:#9195b5;
     color:#fff;
   }
 `;
 
-export const StMusicList = styled.ul`
+export const StVideoList = styled.ul`
   position:relative;
 `;

@@ -4,12 +4,13 @@ import React, {
   useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Router from 'next/router';
 import { StInput, StLable, StSelect } from '../../style/Form';
 import { StBtnLoginForm, StLoginFormTitle, StWarnningText } from '../../style/LoginForm';
 import { StFieldset, StP } from '../../style/components/AppLayout';
-import Checkbox from '../Checkbox';
+import Checkbox from '../Items/Checkbox';
 import { testEmail, textPassword } from '../Common';
-import { setLoginPopupOrder, signUpRequestAction } from '../../reducers/user';
+import { signUpRequestAction } from '../../reducers/user';
 import useInput from '../../hooks/useInput';
 
 const SignUpForm = () => { // order 1
@@ -70,7 +71,8 @@ const SignUpForm = () => { // order 1
 
   useEffect(() => {
     if (signupDone) {
-      dispatch(setLoginPopupOrder(0));
+      alert('회원가입 되었습니다. 다시 로그인 해주세요.');
+      Router.push('/login');
     }
     if (signupError) {
       alert(signupError);
@@ -80,7 +82,7 @@ const SignUpForm = () => { // order 1
   return (
     <form>
       <div>
-        <StLoginFormTitle stBlack>Create your MusicBox account</StLoginFormTitle>
+        <StLoginFormTitle stBlack>Create your YTList account</StLoginFormTitle>
         <StFieldset>
           <StLable>Choose an account</StLable>
           <StInput

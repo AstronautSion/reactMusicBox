@@ -1,19 +1,19 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import YouTube from 'react-youtube';
-import { setDurationRequestAction, setMusicChangeRequestAction } from '../reducers/music';
+import { setDurationRequestAction, setVideoChangeRequestAction } from '../reducers/video';
 
-export let TYAPI = null;
+export let YTAPI = null;
 
 const YoutubeAPI = () => {
   const dispatch = useDispatch();
-  const musicId = useSelector((state) => state.music.nowPlayList?.link);
-  const isPlay = useSelector((state) => state.music.isPlay);
-  const musicChange = useSelector((state) => state.music.musicChange);
+  const videoId = useSelector((state) => state.video.nowPlayList?.link);
+  const isPlay = useSelector((state) => state.video.isPlay);
+  const videoChange = useSelector((state) => state.video.videoChange);
 
   const onStateChanges = useCallback((e) => {
     console.log('API:: [YOUTUBE ONCHANGE]');
-    if (musicChange && e.target.getVideoData().title !== '') {
+    if (videoChange && e.target.getVideoData().title !== '') {
       console.log('API:: ', e.target.getVideoData().title);
       console.log('API:: ', e.target);
       // console.log(e.target.playerInfo);
@@ -22,7 +22,7 @@ const YoutubeAPI = () => {
       // }
 
       dispatch(setDurationRequestAction(e.target.getDuration()));
-      dispatch(setMusicChangeRequestAction(false));
+      dispatch(setVideoChangeRequestAction(false));
       console.log('API:: [ YOUTUBE ONCHANGE WITH TITLE]');
     }
 
@@ -31,10 +31,10 @@ const YoutubeAPI = () => {
     } else {
       e.target.pauseVideo();
     }
-  }, [isPlay, musicChange]);
+  }, [isPlay, videoChange]);
 
   const onReadyYouTube = useCallback((e) => {
-    TYAPI = e.target;
+    YTAPI = e.target;
     console.log('API:: [[READY]]');
   }, []);
 
@@ -46,7 +46,7 @@ const YoutubeAPI = () => {
 
   return (
     <YouTube
-      videoId={musicId}
+      videoId={videoId}
       containerClassName="embed embed-youtube"
       onStateChange={(e) => onStateChanges(e)}
       opts={opts}

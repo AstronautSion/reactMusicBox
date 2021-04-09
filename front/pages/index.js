@@ -3,27 +3,29 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import AppLayout from '../components/Layout/AppLayout';
-import { getMusicRequestAction } from '../reducers/music';
+import { getVideosRequestAction } from '../reducers/video';
 import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 import wrapper from '../store/configureStore';
 import MainContents from '../components/Contents/MainContents';
-import MusicImgListContents from '../components/Contents/MusicImgListContents';
-import MusicBoxLayout from '../components/Layout/MusicBoxLayout';
+import VideoImgListContents from '../components/Contents/VideoImgListContents';
+import { StContainer } from '../style/components/AppLayout';
 
 const Home = () => {
   const { me } = useSelector((state) => state.user);
 
   return (
-    <>
-      <AppLayout>
-        <>
-          {me
-            ? <MusicImgListContents />
-            : <MainContents />}
-        </>
-      </AppLayout>
-      <MusicBoxLayout />
-    </>
+    <AppLayout>
+      <>
+        {me
+          ? (
+            <StContainer>
+              <VideoImgListContents />
+            </StContainer>
+          ) : (
+            <MainContents />
+          )}
+      </>
+    </AppLayout>
   );
 };
 
@@ -38,7 +40,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     type: LOAD_MY_INFO_REQUEST,
   });
   if (cookie) {
-    context.store.dispatch(getMusicRequestAction);
+    context.store.dispatch(getVideosRequestAction);
   }
 
   context.store.dispatch(END);

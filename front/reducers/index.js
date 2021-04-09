@@ -2,7 +2,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { combineReducers } from 'redux';
 
 import user from './user';
-import music from './music';
+import video from './video';
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -12,7 +12,7 @@ const rootReducer = (state, action) => {
     default: {
       const combinedReducer = combineReducers({
         user,
-        music,
+        video,
       });
       return combinedReducer(state, action);
     }

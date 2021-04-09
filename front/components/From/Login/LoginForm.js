@@ -6,7 +6,7 @@ import { StBtnLoginForm, StWarnningText } from '../../../style/LoginForm';
 import { loginRequestAction } from '../../../reducers/user';
 import { testEmail, textPassword } from '../../Common';
 
-const MusicBoxLoginForm = () => { // order0
+const LoginForm = () => { // order0
   const dispatch = useDispatch();
 
   const { loginDone, loginError } = useSelector((state) => state.user);
@@ -70,7 +70,7 @@ const MusicBoxLoginForm = () => { // order0
         { !checkPassword
           && <StWarnningText>비밀번를 확인해주세요 [대문자, 숫자, 특수문자를 포함한 최소 8 자]  </StWarnningText>}
 
-        <StBtnLoginForm type="submit">MusicBox Login</StBtnLoginForm>
+        <StBtnLoginForm type="submit">YTList Login</StBtnLoginForm>
       </form>
       {loginError
         && <StWarnningText>{loginError}</StWarnningText>}
@@ -78,4 +78,4 @@ const MusicBoxLoginForm = () => { // order0
   );
 };
 
-export default MusicBoxLoginForm;
+export default LoginForm;

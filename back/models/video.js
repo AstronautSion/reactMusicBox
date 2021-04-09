@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Music = sequelize.define('Music', {
+  const Video = sequelize.define('Video', {
     title: {
       type: DataTypes.STRING(50),
       allowNull: false,
@@ -8,18 +8,22 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    musicId: {
+    videoId: {
       type: DataTypes.STRING(30),
+      allowNull: false,
+    },
+    duration: {
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
   },{
     charset: 'utf8mb4',
     collate: 'utf8mb4_general_ci',
   });
-  Music.associate = (db) => {
-    db.Music.belongsTo(db.User);
-    db.Music.hasOne(db.Image);
+  Video.associate = (db) => {
+    db.Video.belongsTo(db.User);
+    
   };
 
-  return Music;
+  return Video;
 }

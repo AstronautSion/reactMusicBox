@@ -7,7 +7,7 @@ import {
   StButtonSm,
   StHeader,
   StMenuUl,
-} from '../../style/components/Header';
+} from '../../style/components/HeaderLayout';
 import { StWrapper } from '../../style/components/AppLayout';
 import { logoutRequestAction } from '../../reducers/user';
 
@@ -39,7 +39,7 @@ const HeaderLayout = () => {
       <StWrapper>
         <div className="menu">
           <Link href="/"><a rel="noreferrer noopener">Home</a></Link>
-          {me && <Link href="/music"><a rel="noreferrer noopener">Music</a></Link> }
+          {me && <Link href="/video"><a rel="noreferrer noopener">Video</a></Link> }
         </div>
         <div className="header__right">
           {me

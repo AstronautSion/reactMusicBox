@@ -63,7 +63,7 @@ const db = {};
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 db.User = require('./user')(sequelize, Sequelize);
-db.Music = require('./music')(sequelize, Sequelize);
+db.Video = require('./video')(sequelize, Sequelize);
 db.Image = require('./image')(sequelize, Sequelize);
 
 
@@ -111,7 +111,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = (db) => {
-    db.User.hasMay(db.Music);
+    db.User.hasMay(db.Video);
   };
 
   return User;

@@ -47,6 +47,7 @@ export const StButtonLonger = styled.button`
   text-align:center;
   box-sizing:border-box;
   border-radius:.25em;
+  cursor:pointer;
 `;
 export const StSingupTextButton = styled.a`
   font-size:.875rem;

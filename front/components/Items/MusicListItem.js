@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { deleteMusicRequestAction } from '../reducers/music';
-import { popupOpenRequestAction } from '../reducers/user';
+import { deleteMusicRequestAction } from '../../reducers/music';
+import { popupOpenRequestAction } from '../../reducers/user';
 import {
   StMusicListItem,
   StMusicListItemControl,
   StMusicListItemInfo,
   StMusicListItemThumb,
   StMusicListItemWrapper,
-} from '../style/components/MusicList';
+} from '../../style/components/MusicList';
 
-const MusicList = ({ data }) => {
+const MusicListItem = ({ data }) => {
   const dispatch = useDispatch();
   const onClickDeleteButton = () => {
     if (confirm('삭제하시겠습니까?')) {
@@ -28,7 +28,7 @@ const MusicList = ({ data }) => {
   return (
     <StMusicListItem>
       <StMusicListItemWrapper>
-        <StMusicListItemThumb />
+        <StMusicListItemThumb stImg={`https://img.youtube.com/vi/${data.link}/default.jpg`} />
         <StMusicListItemInfo>
           <p
             className="music-list__title"
@@ -48,8 +48,8 @@ const MusicList = ({ data }) => {
   );
 };
 
-MusicList.propTypes = {
+MusicListItem.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-export default MusicList;
+export default MusicListItem;

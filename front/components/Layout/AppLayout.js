@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Header from './Header';
+import HeaderLayout from './HeaderLayout';
 import { StWrapper } from '../../style/components/AppLayout';
 
 const AppLayout = ({ children }) => (
   <>
-    <Header />
+    <HeaderLayout />
     <StWrapper>
       { children }
     </StWrapper>

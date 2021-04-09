@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StMusicListItem = styled.li`
   position: relative;
@@ -23,6 +23,12 @@ export const StMusicListItemThumb = styled.div`
   width:70px;
   height:70px;
   background-color:#9195b5;
+
+  ${(props) => props.stImg && css`
+    background:url(${props.stImg}) no-repeat center;
+    background-size:cover;
+  `}
+  
 `;
 export const StMusicListItemInfo = styled.div`
   padding-left:1em;

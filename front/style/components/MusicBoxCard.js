@@ -1,26 +1,67 @@
 import styled, { css } from 'styled-components';
 
-export const StMusicboxCard = styled.div`
+export const StMusicBoxLayout = styled.div`
+  transition: all .3s;
+  z-index:1;
   position:fixed;
-  top:50%;
-  left:50%;
-  transform:translateX(-50%) translateY(-50%);
-  width:28rem;
-  min-height:34rem;
-  background-color:#fafafb;
-  border-radius:.85em;
-  box-shadow: 0 0 1rem rgba(9,56,128,0.1);
+  left:0;
+  bottom:-100%;
+  width:100%;
+  padding:.5em 0;
+  background-color:#103493;
+  box-sizing:border-box;
+  opacity:0;
+  ${(props) => props.isShow && css`
+    opacity:1;
+    bottom:0;
+  `}
+`;
+export const StMusicPlayerWrapper = styled.div`
+  max-width:1200px;
+  width:95%;
+  margin:0 auto;
   display:flex;
   flex-wrap:wrap;
+  align-items: center;
 `;
+
+export const StMusicPlayerControl = styled.div`
+    width:20%;
+    display:flex;
+`;
+
+export const StMusicPlayerInfo = styled.div`
+
+`;
+export const StMusicPlayerTitle = styled.strong`
+  display:block;
+  font-size:.875rem;
+  color:#9195b5;
+  font-weight:400;
+  line-height:1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+export const StMusicPlayerAuthor = styled.p`
+  dispaly:block;
+  font-size:.75rem;
+  color:#c6c7d0;
+  font-weight:400;
+  line-height:1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 export const StMusicBoxButton = styled.button`
   transition:all .3s;
   position:relative;
   display:block;
-  width:65px;
-  height:65px;
+  width:40px;
+  height:40px;
+  margin-right:5px;
   border-radius:50%;
-  box-shadow:0 0 7px rgba(9,56,128,0.1);
   box-sizing:border-box;
   background-color:#fff;
   outline:none;
@@ -29,7 +70,7 @@ export const StMusicBoxButton = styled.button`
     transition:all .3s;
     display:block;
     color:#9195b5;
-    font-size:1.5rem;
+    font-size:1rem;
     position:relative;
     
     &.fa-play{
@@ -47,60 +88,23 @@ export const StMusicBoxButton = styled.button`
 export const StMusicBoxButtonSm = styled.button`
   transition:all .3s;
   display:block;
-  width:50px;
-  height:50px;
+  width:30px;
+  height:30px;
   color:#9195b5;
   border-radius:50%;
-  margin: 1em auto 0;
+  margin: 5px 3px; 
   cursor:pointer;
   outline:none;
   &:hover{
     color:#333;
   }
 `;
-export const StMusicBoxImg = styled.div`
-  transition:all .5s;
-  position:relative;
-  top:1.5rem;
-  left:-2rem;
-  display:block;
-  width:20rem;
-  height:20rem;
-  background:#333;
-  background-size:cover;
-  border-radius:1em;
-  box-shadow:0 0 7px rgba(0,0,0,0.2);
-  
-  ${(props) => props.stImgUrl && css`
-    background:url(${props.stImgUrl}) no-repeat center;
-  `}
-`;
-export const StMusicBoxControlArea = styled.div`
-  padding:1.5rem 0 0 1rem;
-  box-sizing:border-box;
-`;
-export const StMusicBoxBottom = styled.div`
-  padding:1.5em;
-  width:100%;
-  box-sizing:border-box;
-`;
-export const StMusicBoxTitle = styled.strong`
-  display:block;
-  font-size:1.125rem;
-  color:#9195b5;
-  font-weight:400;
-  line-height:1.2;
-  padding-bottom:.875em;
-`;
-export const StMusicBoxAuthor = styled.p`
-  dispaly:block;
-  font-size:.875rem;
-  color:#c6c7d0;
-  font-weight:400;
-  line-height:1.2;
-`;
+
+/**
+ * progress bar
+ */
 export const StMusicBoxProgress = styled.div`
-  margin-top:1.5em;
+  width:60%;
 `;
 export const StMusicBoxProgressBar = styled.div`
   position:relative;

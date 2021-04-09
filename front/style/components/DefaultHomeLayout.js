@@ -4,7 +4,7 @@ export const StHomeArea = styled.div`
   position:fixed;
   top:50%;
   left:50%;
-  transform:translate(-50%, -43%);
+  transform:translate(-50%, -35%);
   text-align:center;  
 `;
 export const StHomeContent = styled.div`

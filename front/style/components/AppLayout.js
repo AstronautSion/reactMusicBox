@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 
 export const StWrapper = styled.div`
+  z-index:1;
+  position:relative;
   max-width:1200px;
   width: 95%;
   margin:0 auto;
@@ -23,7 +25,7 @@ export const StSmLayout = styled.div`
 `;
 
 export const StContainer = styled.div`
-  padding:1em 1em 3em 1em;
+  padding:3em 1em 3em 1em;
 `;
 
 export const StP = styled.p`
@@ -131,38 +133,29 @@ export const StButton = styled.button`
 `;
 
 export const StBackgroundYouTube = styled.div`
-  transition:all 1s;
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:#333;
-  ${(props) => props.stImg && css`
-    background:url(${props.stImg}) no-repeat center;
-  `}
-  background-size:cover;
-  filter: blur(10px);
-  
-  &:after{
+  iframe{
     position:absolute;
-    content:'';
-    display:block;
-    left:0;
     top:0;
-    width:100%;
-    height:100%;
-    background-color:rgba(0,0,0,0.15);
+    left:0;
+    width:1px;
+    height:1px;
+    opacity:0;
   }
-  & > div{
-    iframe{
-      position:absolute;
-      top:0;
-      left:0;
-      width:1px;
-      height:1px;
-      opacity:0;
-    }
+`;
+
+export const StAddMusicYoutube = styled.div`
+  position:relative;
+  opacity:0;
+  iframe{
+    width:1px;
+    height:1px;
   }
+`;
+
+export const StAddMusicSpanText = styled.span`
+  display:block;
+  font-size:.75rem;
+  line-height:1.4;
+  color:${(props) => (props.stColor ? props.stColor : '#f50')};
+  
 `;

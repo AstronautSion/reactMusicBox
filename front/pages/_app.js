@@ -1,22 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Reset from '../style/Reset';
 import FormReset from '../style/FromReset';
 import wrapper from '../store/configureStore';
-import { getMusicRequestAction } from '../reducers/music';
 import YoutubeAPI from '../components/YoutubeAPI';
 import { StBackgroundYouTube } from '../style/components/AppLayout';
 
 const MusicBox = ({ Component }) => {
-  const dispatch = useDispatch();
-  const me = useSelector((state) => state.user.me);
-  useEffect(() => {
-    if (me) {
-      dispatch(getMusicRequestAction);
-    }
-  }, [me]);
+  const { me } = useSelector((state) => state.user);
+  const link = useSelector((state) => state.music.nowPlayList?.link);
 
   return (
     <>
@@ -25,7 +19,8 @@ const MusicBox = ({ Component }) => {
         <meta charSet="utf-8" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2Ces2015%2Ces2016%2Ces2017%2Ces2018%2Ces2019" />
       </Head>
       <Reset />
       {me

@@ -4,6 +4,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const dotenv = require('dotenv');
+const morgan = require('morgan');
 
 const musicRouter = require('./routes/music');
 const userRouter = require('./routes/user');
@@ -19,6 +20,7 @@ db.sequelize.sync()
   .catch(console.error);
 passportConfig();
 
+app.use(morgan('dev'))
 app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true,

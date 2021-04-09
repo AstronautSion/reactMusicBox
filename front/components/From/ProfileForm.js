@@ -1,44 +1,81 @@
-import React, { useCallback, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userModifyRequestAction } from '../../reducers/user';
-import { StButton, StFieldset } from '../../style/components/AppLayout';
-import { StInput, StLable } from '../../style/Form';
+import { updateMyInfoRequestAction } from '../../reducers/user';
+import { StButton, StFieldset, StTitleCenter } from '../../style/components/AppLayout';
+import { StInput, StLable, StSelect } from '../../style/Form';
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
-  const nickname = useSelector((state) => state.user.me.nickname);
-  const userId = useSelector((state) => state.user.me.userId);
+  const {
+    nickname,
+    email,
+    age,
+    gender,
+  } = useSelector((state) => state.user.me);
+
   const [changeNickname, setChangeNickname] = useState(nickname);
-  const [changeUserId, setChangeUserId] = useState(userId);
+  const [changeAge, setChangeAge] = useState(age);
+  const [changeGender, setChangeGender] = useState(gender);
+  const SelectGender = useRef();
 
   const onChangeNickname = useCallback((e) => {
     setChangeNickname(e.target.value);
   }, []);
 
-  const onChangeUserId = useCallback((e) => {
-    setChangeUserId(e.target.value);
+  const onChangeAge = useCallback((e) => {
+    setChangeAge(e.target.value);
   }, []);
+
+  const onChangeGender = useCallback((e) => {
+    setChangeGender(e.target.value);
+  }, [changeGender]);
 
   const onSubmitProfileEdit = useCallback((e) => {
     e.preventDefault();
-    dispatch(userModifyRequestAction({
-      userId: changeUserId,
+    dispatch(updateMyInfoRequestAction({
       nickname: changeNickname,
+      age: changeAge,
+      gender: changeGender,
     }));
-  }, [changeNickname, changeUserId]);
+  }, [changeNickname]);
+
+  useEffect(() => {
+    SelectGender.current.value = gender;
+  }, [SelectGender, gender]);
 
   return (
-    <form onSubmit={onSubmitProfileEdit}>
-      <StFieldset>
-        <StLable>User Id</StLable>
-        <StInput value={changeUserId} onChange={onChangeUserId} />
-      </StFieldset>
-      <StFieldset>
-        <StLable>Display Name</StLable>
-        <StInput value={changeNickname} onChange={onChangeNickname} />
-      </StFieldset>
-      <StButton stMain type="submit">수정</StButton>
-    </form>
+    <>
+      <StTitleCenter>Profile</StTitleCenter>
+      <form onSubmit={onSubmitProfileEdit}>
+        <StFieldset>
+          <StLable>email</StLable>
+          <StInput value={email} readOnly />
+        </StFieldset>
+        <StFieldset>
+          <StLable>Display Name</StLable>
+          <StInput value={changeNickname} onChange={onChangeNickname} />
+        </StFieldset>
+        <StFieldset>
+          <StLable>Age</StLable>
+          <StInput value={changeAge} onChange={onChangeAge} />
+        </StFieldset>
+        <StFieldset>
+          <StLable>Gender</StLable>
+          <StSelect ref={SelectGender} onChange={onChangeGender}>
+            <option value="notSay">Prefer not to say</option>
+            <option value="female">Female</option>
+            <option value="Male">Male</option>
+          </StSelect>
+        </StFieldset>
+        <br />
+        <StButton stMain type="submit">Modify</StButton>
+      </form>
+    </>
   );
 };
 export default ProfileForm;

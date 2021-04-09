@@ -7,7 +7,26 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 const router = express.Router();
 
-router.post('/login', isNotLoggedIn, (req, res, next) => {
+router.get('/', async (req, res, next) => { // GET /user  @내정보
+  try {
+    if( req.user ){ 
+      const fullUserWidthPassword = await User.findOne({
+        where: {id: req.user.id },
+        attributes: {
+          exclude: ['password'],
+        }
+      });
+      return res.status(200).json(fullUserWidthPassword);
+    }else{
+      return res.status(200).json(null);  
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.post('/login', isNotLoggedIn, (req, res, next) => { // POST /user/login @로그인
   password.authenticate('local', (err, user, info) => {
     if (err) {
       console.error(error);
@@ -22,7 +41,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
         return next(loginErr);
       }
       const fullUserWidthPassword = await User.findOne({
-        where: {id: user.id },
+        where: {id: req.user.id },
         attributes: {
           exclude: ['password'],
         }
@@ -58,10 +77,32 @@ router.post('/signup', isNotLoggedIn, async(req, res, next) => { // POST /user  
   }
 });
 
-router.post('/logout', isLoggedIn, (req, res) => {
+router.post('/logout', isLoggedIn, (req, res) => { // POST /user/logout @로그아웃
   req.logout();
   req.session.destroy();
   res.send('ok');
+});
+
+
+router.post('/update', isLoggedIn, async (req, res, next) => {  // POST /user/update @회원정보수정
+  try {
+    if (req.user) {
+      await User.update({
+        nickname: req.body.nickname,
+        age: req.body.age,
+        gender: req.body.gender
+      },{
+        where: { id: req.user.id }
+      });
+
+      res.status(200).json(req.body);
+    } else {
+      res.status(200).send(null);
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
 });
 
 module.exports = router;

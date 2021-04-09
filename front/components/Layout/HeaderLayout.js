@@ -11,7 +11,7 @@ import {
 import { StWrapper } from '../../style/components/AppLayout';
 import { logoutRequestAction } from '../../reducers/user';
 
-const Header = () => {
+const HeaderLayout = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
   const [accountMenu, setAccountMenu] = useState(true);
@@ -67,4 +67,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderLayout;

@@ -5,8 +5,8 @@ const Reset = createGlobalStyle`
     padding:0;
     margin:0;
     font-size: 16px;
-    font-family: 'Arvo','Noto Sans KR', 'Titillium Web', 'Nanum Gothic', '굴림', sans-serif;
-    background-color:#16171f;
+    font-family: 'Karla','Noto Sans KR', 'Titillium Web', 'Nanum Gothic', '굴림', sans-serif;
+    background-color:#0d0e19;
   }
 
   div,

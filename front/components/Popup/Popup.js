@@ -18,6 +18,7 @@ export const StPopupWrapper = styled.div`
   background-color:rgba(0,0,0,.75);
 `;
 export const StPopupBtnClose = styled.button`
+  z-index:1;
   position:absolute;
   top:1em;
   right:1em;

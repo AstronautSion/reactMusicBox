@@ -1,37 +1,16 @@
 import produce from 'immer';
 
-const dummyMusic = {
-  playList: [
-    {
-      id: 0, title: 'Photograph ', author: 'offonoff', writter: '우주인', link: '2b1E-zu-QEM', type: 0,
-    },
-    {
-      id: 1, title: 'Weekend', author: 'PERC%NT', writter: '우주인', link: 'WRtbq1W1GFY', type: 0,
-    },
-    {
-      id: 2, title: 'Slow dancing in the dark', author: 'Joji', writter: '우주인', link: 'K3Qzzggn--s', type: 0,
-    },
-    {
-      id: 3, title: '5초 샘플입니다.', author: '5초', writter: '우주인', link: 'Jv8YaypLNBc', type: 0,
-    },
-    {
-      id: 4, title: 'Sanctuary', author: 'Joji', writter: '우주인', link: '5-uWlFq380M', type: 0,
-    },
-    {
-      id: 5, title: 'Liar', author: 'Taek ', writter: '우주인', link: 'XP0lIqnvFCY', type: 0,
-    },
-  ],
-};
-
 export const initialState = {
+  hasMoreMusic: true,
   getMusicLoading: false, // 음악가져오기 시도중
   getMusicDone: false,
   getMusicError: null,
-
+  addMusicLoading: false, // 음악추가 시도중
+  addMusicDone: false,
+  addMusicError: null,
   modifyMusicLoading: false, // 음악수정 시도중
   modifyMusicDone: false,
   modifyMusicError: null,
-
   deleteMusicLoading: false, // 음악삭제 시도중
   deleteMusicDone: false,
   deleteMusicError: null,
@@ -39,7 +18,7 @@ export const initialState = {
   isPlay: false,
   musicChange: true,
   duration: 0,
-  nowPlayList: {},
+  nowPlayList: null,
   playList: [],
 };
 
@@ -50,6 +29,10 @@ export const ADD_MUSIC_FAILURE = 'ADD_MUSIC_FAILURE';
 export const GET_MUSIC_REQUEST = 'GET_MUSIC_REQUEST';
 export const GET_MUSIC_SUCCESS = 'GET_MUSIC_SUCCESS';
 export const GET_MUSIC_FAILURE = 'GET_MUSIC_FAILURE';
+
+export const LOAD_MUSIC_REQUEST = 'LOAD_MUSIC_REQUEST';
+export const LOAD_MUSIC_SUCCESS = 'LOAD_MUSIC_SUCCESS';
+export const LOAD_MUSIC_FAILURE = 'LOAD_MUSIC_FAILURE';
 
 export const MODIFY_MUSIC_REQUEST = 'MODIFY_MUSIC_REQUEST';
 export const MODIFY_MUSIC_SUCCESS = 'MODIFY_MUSIC_SUCCESS';
@@ -80,6 +63,10 @@ export const modifyMusicRequestAction = (data) => ({
   type: MODIFY_MUSIC_REQUEST,
   data,
 });
+export const loadMusicRequestAction = (data) => ({
+  type: LOAD_MUSIC_REQUEST,
+  data,
+});
 export const getMusicRequestAction = {
   type: GET_MUSIC_REQUEST,
 };
@@ -103,19 +90,46 @@ export default (state = initialState, action) => produce(state, (draft) => {
       draft.getMusicDone = false;
       draft.getMusicError = null;
       break;
-
     case GET_MUSIC_SUCCESS:
       draft.getMusicLoading = false;
       draft.getMusicDone = true;
-      draft.playList = dummyMusic.playList;
-      const firstList = draft.playList.find((v, i) => i === 0);
-      console.log(firstList);
-      draft.nowPlayList = firstList;
+      draft.playList = action.data;
       break;
-
     case GET_MUSIC_FAILURE:
       draft.getMusicLoading = false;
       draft.getMusicError = action.error;
+      break;
+
+    case ADD_MUSIC_REQUEST:
+      draft.addMusicLoading = true;
+      draft.addMusicDone = false;
+      draft.addMusicError = null;
+      break;
+    case ADD_MUSIC_SUCCESS:
+      console.log(action.data);
+      draft.addMusicLoading = false;
+      draft.addMusicDone = true;
+      draft.playList.unshift(action.data);
+      break;
+    case ADD_MUSIC_FAILURE:
+      draft.addMusicLoading = false;
+      draft.addMusicError = action.error;
+      break;
+
+    case LOAD_MUSIC_REQUEST:
+      draft.loadMusicLoading = true;
+      draft.loadMusicDone = false;
+      draft.loadMusicError = null;
+      break;
+    case LOAD_MUSIC_SUCCESS:
+      draft.loadMusicLoading = false;
+      draft.loadMusicDone = true;
+      draft.playList = draft.playList.concat(action.data);
+      draft.hasMoreMusic = action.data.length === 20;
+      break;
+    case LOAD_MUSIC_FAILURE:
+      draft.loadMusicLoading = false;
+      draft.loadMusicError = action.error;
       break;
 
     case MODIFY_MUSIC_REQUEST:
@@ -123,7 +137,6 @@ export default (state = initialState, action) => produce(state, (draft) => {
       draft.modifyMusicDone = false;
       draft.modifyMusicError = null;
       break;
-
     case MODIFY_MUSIC_SUCCESS:
       const findList = draft.playList.find((v) => v.id === action.data.id);
       findList.title = action.data.title;
@@ -131,7 +144,6 @@ export default (state = initialState, action) => produce(state, (draft) => {
       draft.modifyMusicLoading = false;
       draft.modifyMusicDone = true;
       break;
-
     case MODIFY_MUSIC_FAILURE:
       draft.modifyMusicError = action.error;
       draft.modifyMusicLoading = false;
@@ -142,13 +154,11 @@ export default (state = initialState, action) => produce(state, (draft) => {
       draft.deleteMusicDone = false;
       draft.deleteMusicError = null;
       break;
-
     case DELETE_MUSIC_SUCCESS:
       draft.deleteMusicLoading = false;
       draft.deleteMusicDone = true;
       draft.playList = draft.playList.filter((v) => v.id !== action.data);
       break;
-
     case DELETE_MUSIC_FAILURE:
       draft.deleteMusicLoading = false;
       draft.deleteMusicError = action.error;

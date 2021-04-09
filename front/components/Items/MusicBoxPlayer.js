@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { musicPlayRequestAction, setMusicChangeRequestAction, setNowMusicRequestAction } from '../reducers/music';
-import { TYAPI } from './YoutubeAPI';
-import MusicBoxProgressBar, { playProgressAnimation } from './MusicBoxProgressBar';
+import { musicPlayRequestAction, setMusicChangeRequestAction, setNowMusicRequestAction } from '../../reducers/music';
+import { TYAPI } from '../YoutubeAPI';
+import MusicBoxProgressBar from './MusicBoxProgressBar';
 import {
   StMusicBoxAuthor,
   StMusicBoxBottom,
@@ -12,26 +12,24 @@ import {
   StMusicBoxControlArea,
   StMusicBoxImg,
   StMusicBoxTitle,
-} from '../style/components/MusicBoxCard';
+} from '../../style/components/MusicBoxCard';
 
-export let onClickNext = null;
-
-const MusicBoxCard = () => {
+const MusicBoxPlayer = () => {
   const dispatch = useDispatch();
   const [play, setPlay] = useState(true);
   const isPlay = useSelector((state) => state.music.isPlay);
   const {
-    link,
+    musicId,
     title,
     author,
     id,
-  } = useSelector((state) => state.music?.nowPlayList);
+  } = useSelector((state) => state.music.nowPlayList);
   const playList = useSelector((state) => state.music.playList);
   const [musicImg, setMusicImg] = useState();
 
   useEffect(() => {
-    setMusicImg(`https://img.youtube.com/vi/${link}/hqdefault.jpg`);
-  }, [link, TYAPI]);
+    setMusicImg(`https://img.youtube.com/vi/${musicId}/hqdefault.jpg`);
+  }, [musicId, TYAPI]);
 
   const onClickPlay = useCallback(() => {
     if (TYAPI) {
@@ -40,12 +38,11 @@ const MusicBoxCard = () => {
       dispatch(setMusicChangeRequestAction(true));
       if (play) {
         TYAPI.playVideo();
-        playProgressAnimation();
       } else {
         TYAPI.pauseVideo();
       }
     }
-  }, [play, isPlay, playProgressAnimation]);
+  }, [play, isPlay]);
 
   const onClickPrev = useCallback(() => {
     playList.map((v, i) => {
@@ -58,7 +55,7 @@ const MusicBoxCard = () => {
     });
   }, [playList, id, TYAPI]);
 
-  onClickNext = useCallback(() => {
+  const onClickNext = useCallback(() => {
     playList.map((v, i) => {
       if (v.id === id) {
         if (i !== (playList.length - 1)) {
@@ -92,4 +89,4 @@ const MusicBoxCard = () => {
   );
 };
 
-export default MusicBoxCard;
+export default MusicBoxPlayer;

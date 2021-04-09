@@ -1,6 +1,9 @@
 import produce from 'immer';
 
 export const initialState = {
+  loadMyInfoLoading: false, // 유저정보 가져오기 시도중
+  loadMyInfoDone: false,
+  loadMyInfoError: null,
   loginLoading: false, // 로그인 시도중
   loginDone: false,
   loginError: null,
@@ -10,9 +13,9 @@ export const initialState = {
   signupLoading: false, // 회원가입 시도중
   signupDone: false,
   signupError: null,
-  userModifyLoading: false, // 회원정보수정 시도중
-  userModifyDone: false,
-  userModifyError: null,
+  updateMyInfoLoading: false, // 회원정보수정 시도중
+  updateMyInfoDone: false,
+  updateMyInfoError: null,
   me: null,
   popup: {
     data: null,
@@ -37,9 +40,13 @@ export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
 
-export const USER_MODIFY_REQUEST = 'USER_MODIFY_REQUEST';
-export const USER_MODIFY_SUCCESS = 'USER_MODIFY_SUCCESS';
-export const USER_MODIFY_FAILURE = 'USER_MODIFY_FAILURE';
+export const UPDATE_MY_INFO_REQUEST = 'UPDATE_MY_INFO_REQUEST';
+export const UPDATE_MY_INFO_SUCCESS = 'UPDATE_MY_INFO_SUCCESS';
+export const UPDATE_MY_INFO_FAILURE = 'UPDATE_MY_INFO_FAILURE';
+
+export const LOAD_MY_INFO_REQUEST = 'LOAD_MY_INFO_REQUEST';
+export const LOAD_MY_INFO_SUCCESS = 'LOAD_MY_INFO_SUCCESS';
+export const LOAD_MY_INFO_FAILURE = 'LOAD_MY_INFO_FAILURE';
 
 export const POPUP_OPEN = 'POPUP_OPEN';
 export const POPUP_CLOSE = 'POPUP_CLOSE';
@@ -55,14 +62,12 @@ export const loginRequestAction = (data) => ({
   type: LOG_IN_REQUEST,
   data,
 });
-
 export const signUpRequestAction = (data) => ({
   type: SIGN_UP_REQUEST,
   data,
 });
-
-export const userModifyRequestAction = (data) => ({
-  type: USER_MODIFY_REQUEST,
+export const updateMyInfoRequestAction = (data) => ({
+  type: UPDATE_MY_INFO_REQUEST,
   data,
 });
 
@@ -80,6 +85,23 @@ export const popupCloseRequestAction = {
 
 export default (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
+    case LOAD_MY_INFO_REQUEST:
+      draft.loadMyInfoLoading = true;
+      draft.loadMyInfoDone = false;
+      draft.loadMyInfoError = null;
+      break;
+
+    case LOAD_MY_INFO_SUCCESS:
+      draft.loadMyInfoLoading = false;
+      draft.loadMyInfoDone = true;
+      draft.me = action.data;
+      break;
+
+    case LOAD_MY_INFO_FAILURE:
+      draft.loadMyInfoLoading = false;
+      draft.loadMyInfoError = action.error;
+      break;
+
     case LOG_IN_REQUEST:
       draft.loginLoading = true;
       draft.loginDone = false;
@@ -87,7 +109,6 @@ export default (state = initialState, action) => produce(state, (draft) => {
       break;
 
     case LOG_IN_SUCCESS:
-      console.log('LOG_IN_SUCCESS', action.data);
       draft.loginLoading = false;
       draft.loginDone = true;
       draft.me = action.data;
@@ -130,27 +151,27 @@ export default (state = initialState, action) => produce(state, (draft) => {
       break;
 
     case SIGN_UP_FAILURE:
-      console.log(action);
       draft.signupLoading = false;
       draft.signupError = action.error;
       break;
 
-    case USER_MODIFY_REQUEST:
-      draft.userModifyLoading = true;
-      draft.userModifyDone = false;
-      draft.userModifyError = null;
+    case UPDATE_MY_INFO_REQUEST:
+      draft.updateMyInfoLoading = true;
+      draft.updateMyInfoDone = false;
+      draft.updateMyInfoError = null;
       break;
 
-    case USER_MODIFY_SUCCESS:
-      draft.userModifyLoading = false;
-      draft.userModifyDone = true;
-      draft.user.nickname = action.data.nickname;
-      draft.user.userId = action.data.userId;
+    case UPDATE_MY_INFO_SUCCESS:
+      draft.updateMyInfoLoading = false;
+      draft.updateMyInfoDone = true;
+      draft.me.nickname = action.data.nickname;
+      draft.me.age = action.data.age;
+      draft.me.gender = action.data.gender;
       break;
 
-    case USER_MODIFY_FAILURE:
-      draft.userModifyLoading = false;
-      draft.userModifyError = action.error;
+    case UPDATE_MY_INFO_FAILURE:
+      draft.updateMyInfoLoading = false;
+      draft.updateMyInfoError = action.error;
       break;
 
     case POPUP_OPEN:

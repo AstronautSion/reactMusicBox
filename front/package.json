@@ -16,6 +16,7 @@
     "faker": "^5.5.2",
     "immer": "^9.0.1",
     "install": "^0.13.0",
+    "moment": "^2.29.1",
     "next": "^10.0.9",
     "next-redux-wrapper": "^6.0.2",
     "prop-types": "^15.7.2",

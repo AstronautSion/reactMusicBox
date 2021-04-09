@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { StCheckbox } from '../style/Form';
+import { StCheckbox } from '../../style/Form';
 
 const Checkbox = ({
   check,

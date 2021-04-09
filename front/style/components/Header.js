@@ -2,12 +2,15 @@ import styled, { css } from 'styled-components';
 
 export const StHeader = styled.div`
     z-index:9999;
-    position:relative;
+    position:fixed;
+    top:0;
+    left:0;
     width:100%;
+    background-color:#0d0e19;
     /* .wrapper */
     > div{
         display:flex;
-        justify-content: space-between;    
+        justify-content: space-between;
     }
     .menu{
         display:flex;

@@ -376,3 +376,39 @@ db.sequelize.sync()
 ```
 npx sequelize db:create
 ```
+
+<br>
+<br>
+<br>
+
+## `EI 크로스브라우징`
+
+[polyfill.io](https://polyfill.io/v3/url-builder/)
+
+```
+default
+es2015
+es2016
+es2017
+es2018
+es2019
+```
+정도 적용해준다.
+
+babel polyfill로도 해결 가능하지만 무겁기 때문에 [polyfill.io](https://polyfill.io/v3/url-builder/) 추천
+
+
+
+
+## next 에서 process.env 접근이 안될때
+
+### `next.config.js`생성
+```js
+module.exports = {
+  env: {
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
+  },
+};
+```
+

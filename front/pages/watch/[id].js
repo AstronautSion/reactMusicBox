@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
 import Router from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { END } from 'redux-saga';
 import axios from 'axios';
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
+import moment from 'moment';
 import AppLayout from '../../components/Layout/AppLayout';
 import { LOAD_MY_INFO_REQUEST } from '../../reducers/user';
 import {
@@ -13,7 +14,6 @@ import {
 } from '../../style/components/AppLayout';
 import wrapper from '../../store/configureStore';
 import { getOneVideoRequestAction } from '../../reducers/video';
-import moment from 'moment';
 
 const StDetailWatchTitle = styled.strong`
   font-size:1.25rem;
@@ -37,13 +37,11 @@ const Video = () => {
   const createdAt = useSelector((state) => state.video.nowPlayList?.createdAt);
 
   const onStateChangesAddVideo = useCallback((e) => {
-
+    console.log(e);
   }, []);
   const onReadyYouTubeAddVideo = useCallback((e) => {
-
+    console.log(e);
   }, []);
-
-  
 
   return (
     <AppLayout>

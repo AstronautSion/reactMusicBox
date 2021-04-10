@@ -1,15 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
   const Video = sequelize.define('Video', {
     title: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
     author: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
     videoId: {
-      type: DataTypes.STRING(30),
+      type: DataTypes.STRING(50),
       allowNull: false,
     },
     duration: {

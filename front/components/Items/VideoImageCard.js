@@ -55,7 +55,6 @@ const StVideoId = styled.span`
     background-color:#201e3c;
     font-size:.75rem;
     color:#ddd;
-
 `;
 const StVideoBoxTime = styled.div`
   margin-top:1em;

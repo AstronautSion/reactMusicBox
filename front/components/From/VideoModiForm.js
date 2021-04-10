@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StInput, StLable } from '../../style/Form';
 import { StButton, StFieldset } from '../../style/components/AppLayout';
 import { updateVideoRequestAction } from '../../reducers/video';
+import { popupCloseRequestAction } from '../../reducers/user';
 
 const VideoModiForm = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const VideoModiForm = () => {
       title,
       author,
     }));
+    dispatch(popupCloseRequestAction);
   }, [data.id, data.videoId, author, title]);
   return (
     <div>
@@ -34,11 +36,11 @@ const VideoModiForm = () => {
         </StFieldset>
         <StFieldset>
           <StLable>Title</StLable>
-          <StInput value={title} onChange={onChangeVideoTitle} minLength="1" maxLength="30" required />
+          <StInput value={title} onChange={onChangeVideoTitle} minLength="1" maxLength="100" required />
         </StFieldset>
         <StFieldset>
           <StLable>Author</StLable>
-          <StInput value={author} onChange={onChangeVideoAuthor} minLength="1" maxLength="30" required />
+          <StInput value={author} onChange={onChangeVideoAuthor} minLength="1" maxLength="100" required />
         </StFieldset>
         <StButton stMain type="submit">수정</StButton>
       </form>

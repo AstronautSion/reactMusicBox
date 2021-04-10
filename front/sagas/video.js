@@ -76,15 +76,14 @@ function* addVideo(action) {
 }
 
 function updateVideoAPI(data) {
-  // return axios.post('/api/login')
+  return axios.patch('/video/update', data);
 }
 function* updateVideo(action) {
   try {
-    yield delay(2000);
-    // const result = yield call(updateVideoAPI, action.data);
+    const result = yield call(updateVideoAPI, action.data);
     yield put({
       type: MODIFY_VIDEO_SUCCESS,
-      // data: result.data
+      data: result.data,
     });
   } catch (error) {
     yield put({
@@ -95,15 +94,14 @@ function* updateVideo(action) {
 }
 
 function deleteVideoAPI(data) {
-  // return
+  return axios.delete(`/video/${data}`);
 }
 function* deleteVideo(action) {
   try {
-    yield delay(1000);
-    // const result = yield call(deleteVideoAPI, action.data);
+    const result = yield call(deleteVideoAPI, action.data);
     yield put({
       type: DELETE_VIDEO_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (error) {
     yield put({

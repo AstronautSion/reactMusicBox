@@ -167,8 +167,11 @@ export default (state = initialState, action) => produce(state, (draft) => {
       break;
     case MODIFY_VIDEO_SUCCESS:
       const findList = draft.playList.find((v) => v.id === action.data.id);
-      findList.title = action.data.title;
-      findList.author = action.data.author;
+      if (findList) {
+        findList.title = action.data.title;
+        findList.author = action.data.author;
+      }
+      draft.nowPlayList = action.data;
       draft.updateVideoLoading = false;
       draft.updateVideoDone = true;
       break;

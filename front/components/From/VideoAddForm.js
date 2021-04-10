@@ -33,19 +33,7 @@ const VideoAddForm = () => {
 
     const splitFront = link.includes(piece) ? link.split(piece)[1] : link;
     const splitFinal = splitFront.includes(piece2) ? splitFront.split(piece2)[0] : splitFront;
-
     setVideoId(splitFinal);
-    // if (link.includes(substring)  ) {
-    //   setVideoId(link.split(substring)[1].split(piece1)[1]);
-    // } else if (link.includes(substring2)) {
-    //   if (link.split(substring2)[1].includes(substring3)) {
-    //     setVideoId(link.split(substring2)[1].split(substring3)[0]);
-    //   } else {
-    //     setVideoId(link.split(substring2)[1]);
-    //   }
-    // } else {
-    //   setVideoId(link);
-    // }
   }, [link]);
 
   const onSubmitAddVideoConfirm = useCallback((e) => {
@@ -134,11 +122,11 @@ const VideoAddForm = () => {
               </StFieldset>
               <StFieldset>
                 <StLable>Title</StLable>
-                <StInput onChange={onChangetitle} value={title} minLength="3" maxLength="50" />
+                <StInput onChange={onChangetitle} value={title} minLength="3" maxLength="100" />
               </StFieldset>
               <StFieldset>
                 <StLable>author</StLable>
-                <StInput onChange={onChangeYutubeAuthor} value={author} minLength="3" maxLength="50" />
+                <StInput onChange={onChangeYutubeAuthor} value={author} minLength="3" maxLength="100" />
               </StFieldset>
               {loadingVideo !== 'Loading'
                 && <StButtonLonger type="submit">Add Video</StButtonLonger>}

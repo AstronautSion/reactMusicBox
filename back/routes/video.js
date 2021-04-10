@@ -34,21 +34,14 @@ router.get('/', async (req, res, next) => { // GET /videos
 router.post('/add', async (req, res, next) => { // POST /video/add @음악추가
   try {
     if (req.user) { 
-      await Video.create({
+      const addVideos = await Video.create({
         title: req.body.title,
         author: req.body.author,
         videoId: req.body.videoId,
         duration: req.body.duration,
         UserId: req.body.UserId,
-
       });
-      const addVideo = await Video.findOne({
-        where: { 
-          UserId: req.user.id, 
-          VideoId: req.body.videoId 
-        }
-      });
-      return res.status(201).json(addVideo);
+      return res.status(201).json(addVideos);
 
     } else {
       return res.status(200).json(null);  
@@ -59,11 +52,52 @@ router.post('/add', async (req, res, next) => { // POST /video/add @음악추가
   }
 });
 
-router.post('/update', (req, res) => { // POST /video/update @음악수정
-  
+router.patch('/update', async (req, res, next) => { // POST /video/update @음악수정
+  try {
+    if (req.user) {
+      await Video.update({
+        title: req.body.title,
+        author: req.body.author,
+      },{
+        where: {
+          UserId: req.user.id,
+          id: req.body.id,
+        }
+      });
+
+      const resultPlayList = await Video.findOne({
+        where: { 
+          UserId: req.user.id, 
+          id: req.body.id,
+        }
+      });
+      return res.status(200).json(resultPlayList);
+    } else {
+      return res.status(200).json(null);
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
 });
 
-router.delete('/', (req, res) => { // DELETE /video/ @음악제거
+router.delete('/:videoId', async (req, res, next) => { // DELETE /video/ @음악제거
+  try {
+    if (req.user) { 
+      await Video.destroy({
+        where: {
+          id: req.params.videoId,
+          UserId: req.user.id,
+        }
+      });
+      return res.status(200).json('ok');
+    } else {
+      return res.status(200).json(null);
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
   res.json('제거 완료');
 });
 

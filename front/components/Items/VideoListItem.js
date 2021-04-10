@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { deleteVideoRequestAction } from '../../reducers/video';
@@ -19,12 +19,17 @@ const VideoListItem = ({ data }) => {
     }
   };
 
-  const onClickModifyButton = () => {
+  const onClickModifyButton = useCallback(() => {
     dispatch(popupOpenRequestAction({
       key: 'updateVideo',
-      value: data,
+      value: {
+        id: data.id,
+        videoId: data.videoId,
+        title: data.title,
+        author: data.author,
+      },
     }));
-  };
+  }, [data.id, data.title, data.author, data.videoId]);
   return (
     <StVideoListItem>
       <StVideoListItemWrapper>

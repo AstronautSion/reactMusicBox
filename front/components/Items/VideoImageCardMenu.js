@@ -35,9 +35,14 @@ const VideoImageCardMenu = ({ data }) => {
     e.preventDefault();
     dispatch(popupOpenRequestAction({
       key: 'updateVideo',
-      value: data,
+      value: {
+        id: data.id,
+        videoId: data.videoId,
+        title: data.title,
+        author: data.author,
+      },
     }));
-  });
+  }, [data.id, data.title, data.author, data.videoId]);
 
   const onCLickDeleteVideo = useCallback((e) => {
     e.preventDefault();

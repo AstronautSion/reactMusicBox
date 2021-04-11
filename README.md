@@ -23,6 +23,7 @@ React 연습용 프로젝트 <br>
 - [x] youtube 데이터 요청 및 추가/수정/삭제 <br>
 - [x] video list 무한스크롤 <br>
 - [x] video detail 페이지 <br>
+- [x] 검색기능 <br>
 - [ ] 단위테스트 <br>
 
 

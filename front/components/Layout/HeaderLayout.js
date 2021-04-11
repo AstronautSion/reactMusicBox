@@ -10,6 +10,7 @@ import {
 } from '../../style/components/HeaderLayout';
 import { StWrapper } from '../../style/components/AppLayout';
 import { logoutRequestAction } from '../../reducers/user';
+import Search from '../From/SearchForm';
 
 const HeaderLayout = () => {
   const dispatch = useDispatch();
@@ -38,9 +39,9 @@ const HeaderLayout = () => {
     <StHeader>
       <StWrapper>
         <div className="menu">
-          <Link href="/"><a rel="noreferrer noopener">Home</a></Link>
-          {me && <Link href="/video"><a rel="noreferrer noopener">Video</a></Link> }
+          <Link href="/"><a rel="noreferrer noopener">YTLIST</a></Link>
         </div>
+        <Search />
         <div className="header__right">
           {me
             ? (

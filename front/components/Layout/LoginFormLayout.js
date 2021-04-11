@@ -20,10 +20,10 @@ const LoginFormLayout = () => {
       {loginPopupOrder === 0 && (
       <>
         <StLoginFormTitle>Login YTList</StLoginFormTitle>
-        <div>
+        {/* <div>
           <GoogleLoginButton setNickname={setNickname} />
         </div>
-        <StHr />
+        <StHr /> */}
         <LoginForm />
         <Link href="/signup"><StSingupTextButton>Create Account</StSingupTextButton></Link>
       </>

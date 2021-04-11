@@ -7,24 +7,23 @@ import { getVideosRequestAction } from '../reducers/video';
 import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 import wrapper from '../store/configureStore';
 import MainContents from '../components/Contents/MainContents';
+import { StContainer, StWrapper } from '../style/components/AppLayout';
 import VideoImgListContents from '../components/Contents/VideoImgListContents';
-import { StContainer } from '../style/components/AppLayout';
 
 const Home = () => {
   const { me } = useSelector((state) => state.user);
 
   return (
     <AppLayout>
-      <>
-        {me
-          ? (
-            <StContainer>
-              <VideoImgListContents />
-            </StContainer>
-          ) : (
-            <MainContents />
-          )}
-      </>
+      {me ? (
+        <StWrapper>
+          <StContainer>
+            <VideoImgListContents />
+          </StContainer>
+        </StWrapper>
+      ) : (
+        <MainContents />
+      )}
     </AppLayout>
   );
 };
@@ -39,8 +38,11 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   context.store.dispatch({
     type: LOAD_MY_INFO_REQUEST,
   });
+
   if (cookie) {
-    context.store.dispatch(getVideosRequestAction);
+    context.store.dispatch(getVideosRequestAction({
+      word: context.query.word || '',
+    }));
   }
 
   context.store.dispatch(END);

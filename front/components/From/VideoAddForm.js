@@ -11,6 +11,7 @@ import {
 import { StButtonLonger } from '../../style/LoginForm';
 import { popupCloseRequestAction } from '../../reducers/user';
 import { addVideoRequestAction } from '../../reducers/video';
+import { timeFormat } from '../Common';
 
 const VideoAddForm = () => {
   const dispatch = useDispatch();
@@ -75,11 +76,13 @@ const VideoAddForm = () => {
 
   const onStateChangesAddVideo = useCallback((e) => {
     const video = e.target;
-    video.setVolume(0);
-    setDuration(video.getDuration());
-    setTitle(video.getVideoData().title.substring(0, 49));
-    setAuthor(video.getVideoData().author.substring(0, 49));
-    if (video.getVideoData().title !== '') {
+    if (video.data === null) {
+      e.target.setVolume(0);
+    } else {
+      setDuration(video.getDuration());
+      setTitle(video.getVideoData().title.substring(0, 100));
+      setAuthor(video.getVideoData().author.substring(0, 100));
+
       video.pauseVideo();
       video.seekTo(0);
       setLoadingVideo('Complete');
@@ -90,11 +93,7 @@ const VideoAddForm = () => {
     e.target.setVolume(0);
   }, []);
 
-  const opts = {
-    playerVars: {
-      autoplay: 1,
-    },
-  };
+  const opts = { playerVars: { autoplay: 1 } };
 
   return (
     <div>
@@ -118,7 +117,10 @@ const VideoAddForm = () => {
               <StFieldset>
                 <StLable>Video ID</StLable>
                 <StInput value={videoId} readOnly />
-                <span>{duration}</span>
+              </StFieldset>
+              <StFieldset>
+                <StLable>Duratino</StLable>
+                <StInput value={timeFormat(duration)} readOnly />
               </StFieldset>
               <StFieldset>
                 <StLable>Title</StLable>
@@ -142,9 +144,11 @@ const VideoAddForm = () => {
             </StAddVideoYoutube>
             {loadingVideo === 'Loading'
               ? (
-                <StAddVideoSpanText>
-                  Title, author값을 불러오지 못한다면<br />Video ID 값을 다시 확인해 주세요.
-                </StAddVideoSpanText>
+                <>
+                  <StAddVideoSpanText>
+                    Title, author값을 불러오지 못한다면<br />Video ID 값을 다시 확인해 주세요.
+                  </StAddVideoSpanText>
+                </>
               ) : (
                 <StAddVideoSpanText stColor="#33b73c">{loadingVideo}!!</StAddVideoSpanText>
               )}

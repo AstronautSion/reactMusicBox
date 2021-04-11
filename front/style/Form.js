@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StCheckbox = styled.label`
     display:inline-block; 
@@ -77,9 +77,10 @@ export const StInput = styled.input`
     border-color: ${(props) => props.stColor || '#ddd'};
     margin: ${(props) => props.stMargin || '0'};
     background-color:#fff;
-    &[readonly]{
+
+    ${(props) => props.readOnly && css`
         background-color:#eee;
-    }
+    `}
 `;
 
 export const StLable = styled.label`

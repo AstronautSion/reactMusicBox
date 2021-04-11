@@ -2,7 +2,6 @@ import {
   all,
   put,
   fork,
-  delay,
   takeLatest,
   throttle,
   call,
@@ -23,7 +22,6 @@ function getOneVideoAPI(data) {
 }
 
 function* getOneVideo(action) {
-  console.log(action);
   try {
     const result = yield call(getOneVideoAPI, action.data);
     yield put({
@@ -33,25 +31,6 @@ function* getOneVideo(action) {
   } catch (error) {
     yield put({
       type: GET_ONE_VIDEO_FAILURE,
-      error: error.response.data,
-    });
-  }
-}
-
-function getVideosAPI() {
-  return axios.get('/videos');
-}
-
-function* getVideos(action) {
-  try {
-    const result = yield call(getVideosAPI, action.data);
-    yield put({
-      type: GET_VIDEOS_SUCCESS,
-      data: result.data,
-    });
-  } catch (error) {
-    yield put({
-      type: GET_VIDEOS_FAILURE,
       error: error.response.data,
     });
   }
@@ -111,8 +90,27 @@ function* deleteVideo(action) {
   }
 }
 
+function getVideosAPI(data) {
+  return axios.get(`/videos?word=${encodeURI(data.word)}`);
+}
+function* getVideos(action) {
+  try {
+    const result = yield call(getVideosAPI, action.data);
+    // console.log('result Sagas:::', result);
+    yield put({
+      type: GET_VIDEOS_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    yield put({
+      type: GET_VIDEOS_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
 function loadVideosAPI(data) {
-  return axios.get(`/videos?lastId=${data.lastId || 0}`);
+  return axios.get(`/videos?lastId=${data.lastId || 0}&word=${encodeURI(data.word)}`);
 }
 function* loadVideos(action) {
   try {
@@ -144,7 +142,6 @@ function* watchUpdateVideo() {
 function* watchDeleteVideo() {
   yield takeLatest(DELETE_VIDEO_REQUEST, deleteVideo);
 }
-
 function* watchGetOneVideo() {
   yield takeLatest(GET_ONE_VIDEO_REQUEST, getOneVideo);
 }

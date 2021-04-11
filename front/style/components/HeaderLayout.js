@@ -7,6 +7,8 @@ export const StHeader = styled.div`
     left:0;
     width:100%;
     background-color:#0d0e19;
+    box-shadow:0 0 2em rgba(0,0,0,1);
+
     /* .wrapper */
     > div{
         display:flex;
@@ -15,12 +17,15 @@ export const StHeader = styled.div`
     .menu{
         display:flex;
         a {
-            color:#fff;
+            color:#5f56e0;
             padding:1em;
             display:block;
             text-align:center;이거 
             text-decoration:none;
             font-weight:bold;
+            &:hover{
+                text-decoration:none;
+            }
         }
     }
     .header__right{

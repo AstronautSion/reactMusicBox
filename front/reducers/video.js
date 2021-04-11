@@ -17,7 +17,7 @@ export const initialState = {
   deleteVideoLoading: false, // 비디오삭제 시도중
   deleteVideoDone: false,
   deleteVideoError: null,
-
+  searchWord: '',
   isPlay: false,
   videoChange: true,
   duration: 0,
@@ -76,9 +76,10 @@ export const loadVideosRequestAction = (data) => ({
   type: LOAD_VIDEOS_REQUEST,
   data,
 });
-export const getVideosRequestAction = {
+export const getVideosRequestAction = (data) => ({
   type: GET_VIDEOS_REQUEST,
-};
+  data,
+});
 
 export const setNowVideoRequestAction = (data) => ({
   type: SET_NOW_VIDEO_REQUEST,
@@ -188,7 +189,7 @@ export default (state = initialState, action) => produce(state, (draft) => {
     case DELETE_VIDEO_SUCCESS:
       draft.deleteVideoLoading = false;
       draft.deleteVideoDone = true;
-      draft.playList = draft.playList.filter((v) => v.id !== action.data);
+      draft.playList = draft.playList.filter((v) => v.id !== parseInt(action.data.id, 10));
       break;
     case DELETE_VIDEO_FAILURE:
       draft.deleteVideoLoading = false;

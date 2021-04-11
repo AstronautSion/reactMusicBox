@@ -3,15 +3,15 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 const StLoading = styled.div`
-  display: inline-block;
   position: relative;
+  display: inline-block;
   width: 53px;
   height: 50px;
   ${(props) => props.center && css`
     display:block;
     margin: 0 auto;  
   `}
-
+  
   div {
     position: absolute;
     top: 25px;
@@ -21,6 +21,7 @@ const StLoading = styled.div`
     background: #fff;
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
+  
   div:nth-child(1) { left: 0px; animation: loading1 0.6s infinite; }
   div:nth-child(2) { left: 0px; animation: loading2 0.6s infinite; }
   div:nth-child(3) { left: 25px; animation: loading2 0.6s infinite; }

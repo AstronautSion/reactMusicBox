@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import { loadVideosRequestAction } from '../../reducers/video';
-import { StFixedButton, StTitle } from '../../style/components/AppLayout';
-
+import { StFixedButton } from '../../style/components/AppLayout';
 import Loading from '../Items/Loading';
 import VideoImageCard from '../Items/VideoImageCard';
 import VideoAddForm from '../From/VideoAddForm';
@@ -16,6 +16,7 @@ const VideoImgListContents = () => {
   const playList = useSelector((state) => state.video.playList);
   const { addVideo, updateVideo } = useSelector((state) => state.user.popup);
   const { hasMoreVideo, loadVideosLoading } = useSelector((state) => state.video);
+  const router = useRouter();
 
   useEffect(() => {
     function onScroll() {
@@ -25,12 +26,15 @@ const VideoImgListContents = () => {
           const lastNum = playList.length - 1;
           dispatch(loadVideosRequestAction({
             lastId: playList[lastNum].id,
+            word: router.query.word || '',
           }));
         }
       }
     }
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    if (playList) {
+      window.addEventListener('scroll', onScroll);
+      return () => window.removeEventListener('scroll', onScroll);
+    }
   }, [playList, hasMoreVideo, loadVideosLoading]);
 
   const onClickAddMusic = useCallback(() => {
@@ -42,8 +46,6 @@ const VideoImgListContents = () => {
 
   return (
     <>
-      <StTitle>Video List</StTitle>
-
       {playList && (
         <StVideoImgList>
           {playList.map((v) => (

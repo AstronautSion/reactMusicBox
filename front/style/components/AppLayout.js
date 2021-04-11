@@ -23,7 +23,7 @@ export const StSmLayout = styled.div`
 `;
 
 export const StContainer = styled.div`
-  padding:3em 1em 3em 1em;
+  padding:4em 0;
 `;
 
 export const StP = styled.p`

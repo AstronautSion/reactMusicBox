@@ -90,7 +90,7 @@ router.delete('/:videoId', async (req, res, next) => { // DELETE /video/ @음악
           UserId: req.user.id,
         }
       });
-      return res.status(200).json('ok');
+      return res.status(200).json({id: req.params.videoId});
     } else {
       return res.status(200).json(null);
     }
@@ -100,7 +100,6 @@ router.delete('/:videoId', async (req, res, next) => { // DELETE /video/ @음악
   }
   res.json('제거 완료');
 });
-
 
 module.exports = router;
 

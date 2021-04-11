@@ -1,8 +1,8 @@
 # React Youtube_List
-
-youtube API V3를 이용해 테스트를 해보았지만 요청 제한이 있어서.. 작업도중 요청 컷 당함..
-<br> 그냥 Iframe을 이용해서 계속 작업 진행하기로 했다.
-
+React 연습용 프로젝트 <br>
+원하는 유투브 링크를 추가하면 고유의 vidoeId를 추출하여 디비에 저장하고,<br>
+저장한 videoId로 Iframe방식으로 영상을 볼 수 있다.<br>
+( youtube API V3는 작업 도중 요청제한으로 진행이 불가능.. )
 <br>
 
 ## 작업하면서 정리
@@ -20,9 +20,9 @@ youtube API V3를 이용해 테스트를 해보았지만 요청 제한이 있어
 - [x] Redux, Saga 사용
 - [x] styled-components 사용
 - [x] 회원정보 수정 / 로그아웃 <br>
-- [ ] youtube 데이터 요청 및 추가/수정/삭제 <br>
+- [x] youtube 데이터 요청 및 추가/수정/삭제 <br>
 - [x] video list 무한스크롤 <br>
-- [ ] video detail 페이지 <br>
+- [x] video detail 페이지 <br>
 - [ ] 단위테스트 <br>
 
 

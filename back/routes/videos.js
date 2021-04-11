@@ -7,11 +7,20 @@ const router = express.Router();
 router.get('/', async (req, res, next) => { // GET /videos
   try {
     if (req.user) {
-      const where = {};
-      if (parseInt(req.query.lastId, 10)) { // 초기 로딩이 아닐 때
-        where.UserId = req.user.id
-        where.id = { [Op.lt]: parseInt(req.query.lastId, 10)}
-      } // 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1
+      const where = {}; 
+      where.UserId = req.user.id
+      if (req.query.word !== 'undefined') {
+        Object.assign(where,{
+          [Op.or]: [{
+            title: {[Op.like]: `%${req.query.word}%`}
+          },{
+            author: {[Op.like]: `%${req.query.word}%`}
+          }]
+        });
+      }
+      if (parseInt(req.query.lastId, 10)) {
+        where.id = {[Op.lt]: parseInt(req.query.lastId, 10)}
+      }
       const myVideo = await Video.findAll({
         where,
         limit: 20,
@@ -24,8 +33,8 @@ router.get('/', async (req, res, next) => { // GET /videos
           where: { id : req.user.id },
           attibutes: ['nickname'],
         }],
-        
       });
+      
       return res.status(201).json(myVideo);
     } else {
       return res.status(200).json(null);

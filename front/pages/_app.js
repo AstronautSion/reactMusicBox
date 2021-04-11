@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Reset from '../style/Reset';
 import FormReset from '../style/FromReset';
 import wrapper from '../store/configureStore';
+import Seo from '../components/Seo';
 
 const YTList = ({ Component }) => (
   <>
@@ -15,6 +16,7 @@ const YTList = ({ Component }) => (
       <link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
       <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2Ces2015%2Ces2016%2Ces2017%2Ces2018%2Ces2019" />
     </Head>
+    <Seo />
     <Reset />
     <FormReset />
     <Component />

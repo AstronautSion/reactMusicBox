@@ -21,6 +21,7 @@ React 연습용 프로젝트 <br>
 - [x] styled-components 사용
 - [x] 회원정보 수정 / 로그아웃 <br>
 - [x] youtube 데이터 요청 및 추가/수정/삭제 <br>
+- [x] 다이나믹 라우터 사용해보기 <br>
 - [x] video list 무한스크롤 <br>
 - [x] video detail 페이지 <br>
 - [x] 검색기능 <br>

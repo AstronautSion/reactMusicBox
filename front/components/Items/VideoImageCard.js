@@ -14,6 +14,16 @@ const StVideoBoxImgItem = styled.li`
   &:hover .videoCard__showItem{
     opacity:1;
   }
+  @media screen and (max-width: 1200px){
+    width:33.333%;
+  }
+  @media screen and (max-width: 768px){
+    width:50%;
+  }
+  @media screen and (max-width: 560px){
+    width:100%;
+    margin-bottom:2em;
+  }
 `;
 const StVideoBoxFigure = styled.figure`
   position:relative;

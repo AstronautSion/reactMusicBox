@@ -5,8 +5,6 @@ import { useRouter } from 'next/router';
 const Seo = () => {
   const router = useRouter();
   const routerPathName = router.pathname;
-  
-  console.log(router);
   const seoData = [{
     router: '/',
     title: 'YT List',
@@ -77,7 +75,7 @@ const Seo = () => {
       ));
     }
   }));
-  console.log(metaItems);
+  
   return (
     <Head>
       <title>{titleItem || 'MyApp'}</title>

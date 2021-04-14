@@ -1,11 +1,13 @@
 const express = require('express');
+const passport = require('passport');
+
 const cors = require('cors');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const passport = require('passport');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 
+const authRouter = require('./routes/auth');
 const videoRouter = require('./routes/video');
 const videosRouter = require('./routes/videos');
 const userRouter = require('./routes/user');
@@ -23,9 +25,11 @@ passportConfig();
 
 app.use(morgan('dev'))
 app.use(cors({
-  origin: 'http://localhost:3000',
+  allowedHeaders: ['Content-Type'],
+  origin: true,
   credentials: true,
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -37,11 +41,13 @@ app.use(passport.session({
   secret: process.env.COOKIE_SECRET,
 }));
 
+
+
 app.use('/videos',videosRouter);
 app.use('/video',videoRouter);
 app.use('/user', userRouter);
-
+app.use('/auth', authRouter);
 
 app.listen(3065, () => {
-  console.log('서버 실행 중');
+  console.log('서버 실행 중 port:3065');
 });

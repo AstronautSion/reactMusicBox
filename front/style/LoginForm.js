@@ -26,6 +26,26 @@ export const StBtnLoginForm = styled.button`
   `}
 `;
 
+export const StButtonGoogleLogin = styled.a`
+  font-size:16px;
+  line-height:18px;
+  padding:10px 15px;
+  height:40px;
+  cursor:pointer;
+  display:block;
+  width:100%;
+  border-radius:.25em;
+  color:#222;
+  border:1px solid #ccc;
+  background-color:#fff;
+  text-align:center;
+  box-sizing:border-box;
+  &:hover{
+    text-decoration:none;
+    font-weight:bold;
+  }
+`;
+
 export const StLoginFormTitle = styled.h3`
   display:block;
   text-align:center;

@@ -27,10 +27,12 @@ const StVideoBoxImgItem = styled.li`
 `;
 const StVideoBoxFigure = styled.figure`
   position:relative;
+  overflow:hidden;
 `;
 const StVideoBoxImgThumb = styled.img`
   display:block;
   width:100%;
+  transition: all .7s;
   -webkit-animation: text-focus-in .4s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
   animation: text-focus-in .4s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 
@@ -41,6 +43,9 @@ const StVideoBoxImgThumb = styled.img`
   @keyframes text-focus-in {
     0% { -webkit-filter: blur(12px); filter: blur(12px); opacity: 0; }
     100% { -webkit-filter: blur(0px); filter: blur(0px); opacity: 1; }
+  }
+  &:hover{
+    transform:scale(1.025);
   }
 `;
 const StVideoBoxImgInfo = styled.div`

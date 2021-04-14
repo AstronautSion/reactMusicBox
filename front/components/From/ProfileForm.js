@@ -1,7 +1,5 @@
 import React, {
   useCallback,
-  useEffect,
-  useRef,
   useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,9 +17,8 @@ const ProfileForm = () => {
   } = useSelector((state) => state.user.me);
 
   const [changeNickname, setChangeNickname] = useState(nickname);
-  const [changeAge, setChangeAge] = useState(age);
-  const [changeGender, setChangeGender] = useState(gender);
-  const SelectGender = useRef();
+  const [changeAge, setChangeAge] = useState(age || 0);
+  const [changeGender, setChangeGender] = useState(gender || 'notSay');
 
   const onChangeNickname = useCallback((e) => {
     setChangeNickname(e.target.value);
@@ -44,10 +41,6 @@ const ProfileForm = () => {
     }));
   }, [changeNickname]);
 
-  useEffect(() => {
-    SelectGender.current.value = gender;
-  }, [SelectGender, gender]);
-
   return (
     <>
       <StTitleCenter>Profile</StTitleCenter>
@@ -66,7 +59,10 @@ const ProfileForm = () => {
         </StFieldset>
         <StFieldset>
           <StLable>Gender</StLable>
-          <StSelect ref={SelectGender} onChange={onChangeGender}>
+          <StSelect
+            onChange={onChangeGender}
+            selectedValue={gender}
+          >
             <option value="notSay">Prefer not to say</option>
             <option value="female">Female</option>
             <option value="Male">Male</option>

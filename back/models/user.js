@@ -11,13 +11,21 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING(100),
-      allowNull: false,
+      allowNull: true,
     },
     age: {
       type: DataTypes.INTEGER(2),
       allowNull: true,
     },
     gender: {
+      type: DataTypes.STRING(10),
+      allowNull: true,
+    },
+    oauthId: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+    },
+    types: {
       type: DataTypes.STRING(10),
       allowNull: true,
     }

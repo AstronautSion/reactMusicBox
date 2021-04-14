@@ -23,6 +23,7 @@ const VideoAddForm = () => {
   const [duration, setDuration] = useState('');
   const [loadingVideo, setLoadingVideo] = useState('Loading'); // loading, complete, error
   const { id: UserId } = useSelector((state) => state.user.me);
+  const { addVideoDone, addVideoError } = useSelector((state) => state.video);
 
   const onChangeLink = useCallback((e) => {
     setLink(e.target.value);
@@ -52,12 +53,14 @@ const VideoAddForm = () => {
       UserId,
       duration,
     }));
-    dispatch(popupCloseRequestAction);
-    setTitle('');
-    setAuthor('');
-    setLoadingVideo('Loading');
-    setReadySubmit(false);
-  }, [duration, videoId, title, author]);
+    if (addVideoDone && !addVideoError) {
+      dispatch(popupCloseRequestAction);
+      setTitle('');
+      setAuthor('');
+      setLoadingVideo('Loading');
+      setReadySubmit(false);
+    }
+  }, [duration, videoId, title, author, addVideoDone, addVideoError]);
 
   const onclickBack = () => {
     setTitle('');
@@ -142,6 +145,7 @@ const VideoAddForm = () => {
                 onReady={onReadyYouTubeAddVideo}
               />
             </StAddVideoYoutube>
+            {addVideoError && <StAddVideoSpanText>이미 등록된 영상입니다.</StAddVideoSpanText>}
             {loadingVideo === 'Loading'
               ? (
                 <>

@@ -96,7 +96,6 @@ function getVideosAPI(data) {
 function* getVideos(action) {
   try {
     const result = yield call(getVideosAPI, action.data);
-    // console.log('result Sagas:::', result);
     yield put({
       type: GET_VIDEOS_SUCCESS,
       data: result.data,

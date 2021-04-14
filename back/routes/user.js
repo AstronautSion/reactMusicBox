@@ -1,13 +1,13 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const password = require('passport');
+const passport = require('passport');
 const { User } = require('../models');
 
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 const router = express.Router();
 
-router.get('/', async (req, res, next) => { // GET /user  @내정보
+router.get('/', async (req, res, next) => { // GET /user  @유저정보 불러오기
   try {
     if( req.user ){ 
       const fullUserWidthPassword = await User.findOne({
@@ -27,7 +27,7 @@ router.get('/', async (req, res, next) => { // GET /user  @내정보
 });
 
 router.post('/login', isNotLoggedIn, (req, res, next) => { // POST /user/login @로그인
-  password.authenticate('local', (err, user, info) => {
+  passport.authenticate('local', (err, user, info) => {
     if (err) {
       console.error(error);
       return next(err);
@@ -104,5 +104,6 @@ router.post('/update', isLoggedIn, async (req, res, next) => {  // POST /user/up
     next(error);
   }
 });
+
 
 module.exports = router;

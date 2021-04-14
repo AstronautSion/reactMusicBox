@@ -16,7 +16,7 @@ React와 친해지기 프로젝트 <br>
 ## TODO List
 
 - [x] Passport 로그인 /회원가입 <br>
-- [ ] Google OAuth2 로그인 / 회원가입 <br>
+- [x] Passport Google OAuth2 로그인 <br>
 - [x] Redux, Saga 사용
 - [x] styled-components 사용
 - [x] 회원정보 수정 / 로그아웃 <br>

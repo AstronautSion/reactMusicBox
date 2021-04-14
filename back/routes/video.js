@@ -34,15 +34,25 @@ router.get('/', async (req, res, next) => { // GET /videos
 router.post('/add', async (req, res, next) => { // POST /video/add @음악추가
   try {
     if (req.user) { 
-      const addVideos = await Video.create({
-        title: req.body.title,
-        author: req.body.author,
-        videoId: req.body.videoId,
-        duration: req.body.duration,
-        UserId: req.body.UserId,
+      const fineVideo = await Video.findOne({
+        where: {
+          videoId: req.body.videoId,
+          UserId: req.body.UserId,
+        }
       });
-      return res.status(201).json(addVideos);
 
+      if (fineVideo) {
+        return res.status(403).json('이미 등록된 영상입니다.');
+      } else {
+        const addVideos = await Video.create({
+          title: req.body.title,
+          author: req.body.author,
+          videoId: req.body.videoId,
+          duration: req.body.duration,
+          UserId: req.body.UserId,
+        });
+        return res.status(201).json(addVideos);
+      }
     } else {
       return res.status(200).json(null);  
     }

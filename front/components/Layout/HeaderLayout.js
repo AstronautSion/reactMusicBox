@@ -1,16 +1,16 @@
-import React, { useCallback, useRef, useState } from 'react';
-import Link from 'next/link';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback, useRef, useState } from "react";
+import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
 import {
   StAccountMenu,
   StBtnSignin,
   StButtonSm,
   StHeader,
   StMenuUl,
-} from '../../style/components/HeaderLayout';
-import { StWrapper } from '../../style/components/AppLayout';
-import { logoutRequestAction } from '../../reducers/user';
-import Search from '../From/SearchForm';
+} from "../../style/components/HeaderLayout";
+import { StWrapper } from "../../style/components/AppLayout";
+import { logoutRequestAction } from "../../reducers/user";
+import Search from "../From/SearchForm";
 
 const HeaderLayout = () => {
   const dispatch = useDispatch();
@@ -18,18 +18,18 @@ const HeaderLayout = () => {
   const [accountMenu, setAccountMenu] = useState(true);
   const accountMenuRef = useRef();
 
-  const onClickBtnMenu = () => {
+  const onClickBtnMenu = useCallback(() => {
     if (accountMenu) {
       accountMenuRef.current.style.opacity = 1;
-      accountMenuRef.current.style.top = '100%';
-      accountMenuRef.current.style.visibility = 'visible';
+      accountMenuRef.current.style.top = "100%";
+      accountMenuRef.current.style.visibility = "visible";
     } else {
       accountMenuRef.current.style.opacity = 0;
-      accountMenuRef.current.style.top = '70%';
-      accountMenuRef.current.style.visibility = 'hidden';
+      accountMenuRef.current.style.top = "70%";
+      accountMenuRef.current.style.visibility = "hidden";
     }
     setAccountMenu(!accountMenu);
-  };
+  }, [accountMenu]);
 
   const onClickLogout = useCallback(() => {
     dispatch(logoutRequestAction);
@@ -39,29 +39,40 @@ const HeaderLayout = () => {
     <StHeader>
       <StWrapper>
         <div className="menu">
-          <Link href="/"><a rel="noreferrer noopener">YTLIST</a></Link>
+          <Link href="/">
+            <a rel="noreferrer noopener">YTLIST</a>
+          </Link>
         </div>
         <Search />
         <div className="header__right">
-          {me
-            ? (
-              <>
-                <StAccountMenu>
-                  <button type="button" onClick={onClickBtnMenu}>
-                    {me.nickname}
-                  </button>
-                  <StMenuUl ref={accountMenuRef}>
-                    <li><Link href="/profile"><a rel="noreferrer noopener">Profile</a></Link></li>
-                  </StMenuUl>
-                </StAccountMenu>
-                <StButtonSm onClick={onClickLogout}>Logout</StButtonSm>
-              </>
-            ) : (
-              <>
-                <Link href="/login"><StBtnSignin rel="noreferrer noopener">Login</StBtnSignin></Link>
-                <Link href="/signup"><StBtnSignin stMainColor rel="noreferrer noopener">Create Account</StBtnSignin></Link>
-              </>
-            )}
+          {me ? (
+            <>
+              <StAccountMenu>
+                <button type="button" onClick={onClickBtnMenu}>
+                  {me.nickname}
+                </button>
+                <StMenuUl ref={accountMenuRef}>
+                  <li>
+                    <Link href="/profile">
+                      <a rel="noreferrer noopener">Profile</a>
+                    </Link>
+                  </li>
+                </StMenuUl>
+              </StAccountMenu>
+              <StButtonSm onClick={onClickLogout}>Logout</StButtonSm>
+            </>
+          ) : (
+            <>
+              <Link href="/login">
+                <StBtnSignin rel="noreferrer noopener">Login</StBtnSignin>
+              </Link>
+              <Link href="/signup">
+                <StBtnSignin stMainColor rel="noreferrer noopener">
+                  Create Account
+                </StBtnSignin>
+              </Link>
+            </>
+          )}
         </div>
       </StWrapper>
     </StHeader>

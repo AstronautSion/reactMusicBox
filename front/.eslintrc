@@ -1,41 +1,37 @@
 {
-    "parser": "babel-eslint",
-    "parserOptions": {
-        "ecmaVersion": 2020,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }   
-    },
-    "env": {
-        "browser": true,
-        "node": true,
-        "es6": true
-    },
-    "extends": [
-        "airbnb"
-    ],
-    "plugins": [
-        "import",
-        "react-hooks"
-    ],
-    "rules": {
-        "jsx-a11y/label-has-associated-control": "off",
-        "jsx-a11y/anchor-is-valid": "off",
-        "no-console": "off",
-        "no-underscore-dangle": "off",
-        "import/no-unresolved": "off",
-        "no-nested-ternary": "off",
-        "prefer-default-export": "off",
-        "react/forbid-prop-types": "off",
-        "react/jsx-filename-extension": "off",
-        "react/jsx-one-expression-per-line": "off",
-        "react/require-default-props": "off",
-        "objext-curly-newline": "off",
-        "linebreak-style": "off",
-        "no-param-reassign": "off",
-        "no-case-declarations": "off",
-        "array-callback-return": "off",
-        "consistent-return": "off"
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
     }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": ["airbnb"],
+  "plugins": ["import", "react-hooks"],
+  "rules": {
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "no-console": "off",
+    "no-underscore-dangle": "off",
+    "import/no-unresolved": "off",
+    "no-nested-ternary": "off",
+    "prefer-default-export": "off",
+    "react/forbid-prop-types": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/require-default-props": "off",
+    "objext-curly-newline": "off",
+    "linebreak-style": "off",
+    "no-param-reassign": "off",
+    "no-case-declarations": "off",
+    "array-callback-return": "off",
+    "consistent-return": "off",
+    "quotes": "off"
+  }
 }

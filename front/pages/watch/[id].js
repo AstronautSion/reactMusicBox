@@ -1,22 +1,27 @@
-import React, { useCallback, useEffect } from 'react';
-import Router from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
-import { END } from 'redux-saga';
-import axios from 'axios';
-import YouTube from 'react-youtube';
+import React, { useCallback, useEffect } from "react";
+import { NextSeo } from "next-seo";
+import Router from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { END } from "redux-saga";
+import axios from "axios";
+import YouTube from "react-youtube";
 
-import moment from 'moment';
-import AppLayout from '../../components/Layout/AppLayout';
-import { LOAD_MY_INFO_REQUEST, popupOpenRequestAction } from '../../reducers/user';
+import moment from "moment";
+import AppLayout from "../../components/Layout/AppLayout";
 import {
-  StContainer,
-  StWrapper,
-} from '../../style/components/AppLayout';
-import wrapper from '../../store/configureStore';
-import { deleteVideoRequestAction, getOneVideoRequestAction, getVideosRequestAction } from '../../reducers/video';
-import Popup from '../../components/Popup/Popup';
-import VideoAddForm from '../../components/From/VideoAddForm';
-import VideoModiForm from '../../components/From/VideoModiForm';
+  LOAD_MY_INFO_REQUEST,
+  popupOpenRequestAction,
+} from "../../reducers/user";
+import { StContainer, StWrapper } from "../../style/components/AppLayout";
+import wrapper from "../../store/configureStore";
+import {
+  deleteVideoRequestAction,
+  getOneVideoRequestAction,
+  getVideosRequestAction,
+} from "../../reducers/video";
+import Popup from "../../components/Popup/Popup";
+import VideoAddForm from "../../components/From/VideoAddForm";
+import VideoModiForm from "../../components/From/VideoModiForm";
 import {
   StDetailWatchAuthor,
   StDetailWatchButton,
@@ -26,8 +31,8 @@ import {
   StDetailWatchTitle,
   StDetailWatchView,
   StVideoId,
-} from '../../style/components/DetailWatchView';
-import VideoImgListContents from '../../components/Contents/VideoImgListContents';
+} from "../../style/components/DetailWatchView";
+import VideoImgListContents from "../../components/Contents/VideoImgListContents";
 
 const Video = () => {
   const dispatch = useDispatch();
@@ -40,92 +45,126 @@ const Video = () => {
   const author = useSelector((state) => state.video.nowPlayList?.author);
   const createdAt = useSelector((state) => state.video.nowPlayList?.createdAt);
 
-  const onStateChangesAddVideo = useCallback(() => {
-  }, []);
-  const onReadyYouTubeAddVideo = useCallback(() => {
-  }, []);
+  const onStateChangesAddVideo = useCallback(() => {}, []);
+  const onReadyYouTubeAddVideo = useCallback(() => {}, []);
 
-  const onClickUpdateVideo = useCallback((e) => {
-    e.preventDefault();
-    dispatch(popupOpenRequestAction({
-      key: 'updateVideo',
-      value: {
-        id,
-        videoId,
-        title,
-        author,
-      },
-    }));
-  }, [title, author, id, videoId]);
+  const onClickUpdateVideo = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch(
+        popupOpenRequestAction({
+          key: "updateVideo",
+          value: {
+            id,
+            videoId,
+            title,
+            author,
+          },
+        })
+      );
+    },
+    [title, author, id, videoId]
+  );
 
-  const onClickDeleteVideo = useCallback((e) => {
-    e.preventDefault();
-    if (confirm('삭제하시겠습니까?')) {
-      dispatch(deleteVideoRequestAction(id));
-      Router.replace('/');
-    }
-  }, [id]);
+  const onClickDeleteVideo = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (confirm("삭제하시겠습니까?")) {
+        dispatch(deleteVideoRequestAction(id));
+        Router.replace("/");
+      }
+    },
+    [id]
+  );
 
   useEffect(() => {
-    if (!(me && me.id)) { Router.push('/'); }
+    if (!(me && me.id)) {
+      Router.push("/");
+    }
   }, [me && me.id]);
 
-  if (!me) { return null; }
+  if (!me) {
+    return null;
+  }
 
   return (
-    <AppLayout>
-      <StWrapper>
-        <StContainer>
-          <StDetailWatchView>
-            <YouTube
-              videoId={videoId}
-              containerClassName="embed embed-youtube"
-              onStateChange={(e) => onStateChangesAddVideo(e)}
-              opts={opts}
-              onReady={onReadyYouTubeAddVideo}
-            />
-            <StDetailWatchInfoArea>
-              <StDetailWatchTitle>{title}</StDetailWatchTitle>
-              <StDetailWatchAuthor>{author}</StDetailWatchAuthor>
-              <StVideoId>{videoId}</StVideoId>
-              <StDetailWatchTime>{moment(createdAt).format('YYYY.MM.DD hh:mm:ss a')}</StDetailWatchTime>
+    <>
+      <NextSeo
+        title="YTList Watch"
+        description="Try adding various YouTube links."
+      />
+      <AppLayout>
+        <StWrapper>
+          <StContainer>
+            <StDetailWatchView>
+              <YouTube
+                videoId={videoId}
+                containerClassName="embed embed-youtube"
+                onStateChange={(e) => onStateChangesAddVideo(e)}
+                opts={opts}
+                onReady={onReadyYouTubeAddVideo}
+              />
+              <StDetailWatchInfoArea>
+                <StDetailWatchTitle>{title}</StDetailWatchTitle>
+                <StDetailWatchAuthor>{author}</StDetailWatchAuthor>
+                <StVideoId>{videoId}</StVideoId>
+                <StDetailWatchTime>
+                  {moment(createdAt).format("YYYY.MM.DD hh:mm:ss a")}
+                </StDetailWatchTime>
 
-              <StDetailWatchSta>
-                <StDetailWatchButton className="fa fa-pencil" onClick={onClickUpdateVideo} />
-                <StDetailWatchButton className="fa fa-trash-o" onClick={onClickDeleteVideo} />
-              </StDetailWatchSta>
-            </StDetailWatchInfoArea>
-          </StDetailWatchView>
-          {addVideo
-            && <Popup><VideoAddForm /></Popup>}
-          {updateVideo
-            && <Popup> <VideoModiForm /> </Popup>}
+                <StDetailWatchSta>
+                  <StDetailWatchButton
+                    className="fa fa-pencil"
+                    onClick={onClickUpdateVideo}
+                  />
+                  <StDetailWatchButton
+                    className="fa fa-trash-o"
+                    onClick={onClickDeleteVideo}
+                  />
+                </StDetailWatchSta>
+              </StDetailWatchInfoArea>
+            </StDetailWatchView>
+            {addVideo && (
+              <Popup>
+                <VideoAddForm />
+              </Popup>
+            )}
+            {updateVideo && (
+              <Popup>
+                <VideoModiForm />
+              </Popup>
+            )}
 
-          <VideoImgListContents />
-        </StContainer>
-      </StWrapper>
-    </AppLayout>
+            <VideoImgListContents />
+          </StContainer>
+        </StWrapper>
+      </AppLayout>
+    </>
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
-  const cookie = context.req ? context.req.headers.cookie : '';
-  axios.defaults.headers.Cookie = '';
-  if (context.req && cookie) {
-    axios.defaults.headers.Cookie = cookie;
+export const getServerSideProps = wrapper.getServerSideProps(
+  async (context) => {
+    const cookie = context.req ? context.req.headers.cookie : "";
+    axios.defaults.headers.Cookie = "";
+    if (context.req && cookie) {
+      axios.defaults.headers.Cookie = cookie;
+    }
+
+    context.store.dispatch({ type: LOAD_MY_INFO_REQUEST });
+
+    if (cookie) {
+      context.store.dispatch(getOneVideoRequestAction(context.query.id));
+      context.store.dispatch(
+        getVideosRequestAction({
+          word: context.query.word || "",
+        })
+      );
+    }
+
+    context.store.dispatch(END);
+    await context.store.sagaTask.toPromise();
   }
-
-  context.store.dispatch({ type: LOAD_MY_INFO_REQUEST });
-
-  if (cookie) {
-    context.store.dispatch(getOneVideoRequestAction(context.query.id));
-    context.store.dispatch(getVideosRequestAction({
-      word: context.query.word || '',
-    }));
-  }
-
-  context.store.dispatch(END);
-  await context.store.sagaTask.toPromise();
-});
+);
 
 export default Video;

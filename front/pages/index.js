@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { END } from "redux-saga";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import AppLayout from "../components/Layout/AppLayout";
+import Router from "next/router";
 import { getVideosRequestAction } from "../reducers/video";
 import { LOAD_MY_INFO_REQUEST } from "../reducers/user";
+import AppLayout from "../Layout/AppLayout";
+import { StContainer, StWrapper } from "../Layout/AppLayout/styles";
+import ContentsVideoImgList from "../Layout/ContentsVideoImgList";
+import ContentsMain from "../Layout/ContentsMain";
 import wrapper from "../store/configureStore";
-import MainContents from "../components/Contents/MainContents";
-import { StContainer, StWrapper } from "../style/components/AppLayout";
-import VideoImgListContents from "../components/Contents/VideoImgListContents";
 
 const Home = () => {
   const { me } = useSelector((state) => state.user);
+  const { loadMyInfoError } = useSelector((state) => state.user);
+  useEffect(() => {
+    if (loadMyInfoError) {
+      alert(loadMyInfoError);
+
+      Router.push("/login");
+    }
+  }, [loadMyInfoError]);
 
   return (
     <>
@@ -19,11 +28,11 @@ const Home = () => {
         {me ? (
           <StWrapper>
             <StContainer>
-              <VideoImgListContents />
+              <ContentsVideoImgList />
             </StContainer>
           </StWrapper>
         ) : (
-          <MainContents />
+          <ContentsMain />
         )}
       </AppLayout>
     </>
@@ -37,6 +46,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     if (context.req && cookie) {
       axios.defaults.headers.Cookie = cookie;
     }
+
     context.store.dispatch({
       type: LOAD_MY_INFO_REQUEST,
     });

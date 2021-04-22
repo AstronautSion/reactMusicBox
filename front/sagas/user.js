@@ -1,22 +1,25 @@
+import { all, put, call, fork, takeLatest, throttle } from "redux-saga/effects";
+import axios from "axios";
 import {
-  all,
-  put,
-  call,
-  fork,
-  takeLatest,
-  throttle,
-} from 'redux-saga/effects';
-import axios from 'axios';
-import {
-  LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE,
-  LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE,
-  SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE,
-  LOAD_MY_INFO_REQUEST, LOAD_MY_INFO_SUCCESS, LOAD_MY_INFO_FAILURE,
-  UPDATE_MY_INFO_REQUEST, UPDATE_MY_INFO_SUCCESS, UPDATE_MY_INFO_FAILURE,
-} from '../reducers/user';
+  LOG_IN_REQUEST,
+  LOG_IN_SUCCESS,
+  LOG_IN_FAILURE,
+  LOG_OUT_REQUEST,
+  LOG_OUT_SUCCESS,
+  LOG_OUT_FAILURE,
+  SIGN_UP_REQUEST,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_FAILURE,
+  LOAD_MY_INFO_REQUEST,
+  LOAD_MY_INFO_SUCCESS,
+  LOAD_MY_INFO_FAILURE,
+  UPDATE_MY_INFO_REQUEST,
+  UPDATE_MY_INFO_SUCCESS,
+  UPDATE_MY_INFO_FAILURE,
+} from "../reducers/user";
 
 function loginAPI(data) {
-  return axios.post('/user/login', data);
+  return axios.post("/user/login", data);
 }
 function* login(action) {
   try {
@@ -34,7 +37,7 @@ function* login(action) {
 }
 
 function logoutAPI() {
-  return axios.post('/user/logout');
+  return axios.post("/user/logout");
 }
 function* logout() {
   try {
@@ -51,7 +54,7 @@ function* logout() {
 }
 
 function signupAPI(data) {
-  return axios.post('/user/signup', data);
+  return axios.post("/user/signup", data);
 }
 function* signup(action) {
   try {
@@ -69,15 +72,22 @@ function* signup(action) {
 }
 
 function loadMyInfoAPI() {
-  return axios.get('/user');
+  return axios.get("/user");
 }
 function* loadMyInfo() {
   try {
     const result = yield call(loadMyInfoAPI);
-    yield put({
-      type: LOAD_MY_INFO_SUCCESS,
-      data: result.data,
-    });
+    if (result.data.error) {
+      yield put({
+        type: LOAD_MY_INFO_FAILURE,
+        error: result.data.error,
+      });
+    } else {
+      yield put({
+        type: LOAD_MY_INFO_SUCCESS,
+        data: result.data,
+      });
+    }
   } catch (error) {
     yield put({
       type: LOAD_MY_INFO_FAILURE,
@@ -87,7 +97,7 @@ function* loadMyInfo() {
 }
 
 function updateMyInfoAPI(data) {
-  return axios.post('/user/update', data);
+  return axios.post("/user/update", data);
 }
 function* updateMyInfo(action) {
   try {

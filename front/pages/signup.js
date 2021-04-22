@@ -1,8 +1,8 @@
 import React from "react";
 import { NextSeo } from "next-seo";
 import SignUpForm from "../components/From/SiginUpFrom";
-import AppLayout from "../components/Layout/AppLayout";
-import { StContainer, StSmLayout } from "../style/components/AppLayout";
+import AppLayout from "../Layout/AppLayout";
+import { StContainer, StSmLayout } from "../Layout/AppLayout/styles";
 
 const Signup = () => (
   <>

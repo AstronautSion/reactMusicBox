@@ -5,9 +5,9 @@ import axios from "axios";
 import { getVideosRequestAction } from "../../reducers/video";
 import wrapper from "../../store/configureStore";
 import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
-import AppLayout from "../../components/Layout/AppLayout";
-import { StContainer, StWrapper } from "../../style/components/AppLayout";
-import VideoImgListContents from "../../components/Contents/VideoImgListContents";
+import AppLayout from "../../Layout/AppLayout";
+import { StContainer, StWrapper } from "../../Layout/AppLayout/styles";
+import ContentsVideoImgList from "../../Layout/ContentsVideoImgList";
 
 const SearchWord = () => (
   <>
@@ -15,7 +15,7 @@ const SearchWord = () => (
     <AppLayout>
       <StWrapper>
         <StContainer>
-          <VideoImgListContents />
+          <ContentsVideoImgList />
         </StContainer>
       </StWrapper>
     </AppLayout>

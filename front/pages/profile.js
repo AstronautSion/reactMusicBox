@@ -1,14 +1,20 @@
-import React, { useEffect } from 'react';
-import Router from 'next/router';
-import { useSelector } from 'react-redux';
-import ProfileForm from '../components/From/ProfileForm';
-import AppLayout from '../components/Layout/AppLayout';
-import { StContainer, StSmLayout } from '../style/components/AppLayout';
+import React, { useEffect } from "react";
+import Router from "next/router";
+import { useSelector } from "react-redux";
+import ProfileForm from "../components/From/ProfileForm";
+import { StContainer, StSmLayout } from "../Layout/AppLayout/styles";
+import AppLayout from "../Layout/AppLayout";
 
 const Profile = () => {
   const { me } = useSelector((state) => state.user);
-  useEffect(() => { if (!(me && me.id)) { Router.push('/'); } }, [me && me.id]);
-  if (!me) { return null; }
+  useEffect(() => {
+    if (!(me && me.id)) {
+      Router.push("/");
+    }
+  }, [me && me.id]);
+  if (!me) {
+    return null;
+  }
 
   return (
     <AppLayout>

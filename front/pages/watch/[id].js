@@ -7,19 +7,19 @@ import axios from "axios";
 import YouTube from "react-youtube";
 
 import moment from "moment";
-import AppLayout from "../../components/Layout/AppLayout";
+import AppLayout from "../../Layout/AppLayout";
 import {
   LOAD_MY_INFO_REQUEST,
   popupOpenRequestAction,
 } from "../../reducers/user";
-import { StContainer, StWrapper } from "../../style/components/AppLayout";
+import { StContainer, StWrapper } from "../../Layout/AppLayout/styles";
 import wrapper from "../../store/configureStore";
 import {
   deleteVideoRequestAction,
   getOneVideoRequestAction,
   getVideosRequestAction,
 } from "../../reducers/video";
-import Popup from "../../components/Popup/Popup";
+import Popup from "../../components/Popup";
 import VideoAddForm from "../../components/From/VideoAddForm";
 import VideoModiForm from "../../components/From/VideoModiForm";
 import {
@@ -31,8 +31,8 @@ import {
   StDetailWatchTitle,
   StDetailWatchView,
   StVideoId,
-} from "../../style/components/DetailWatchView";
-import VideoImgListContents from "../../components/Contents/VideoImgListContents";
+} from "./style";
+import ContentsVideoImgList from "../../Layout/ContentsVideoImgList";
 
 const Video = () => {
   const dispatch = useDispatch();
@@ -135,7 +135,7 @@ const Video = () => {
               </Popup>
             )}
 
-            <VideoImgListContents />
+            <ContentsVideoImgList />
           </StContainer>
         </StWrapper>
       </AppLayout>

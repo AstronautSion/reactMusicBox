@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateMyInfoRequestAction } from "../../../reducers/user";
 import {
@@ -13,22 +13,22 @@ const ProfileForm = () => {
   const { nickname, email, age, gender } = useSelector(
     (state) => state.user.me
   );
-
+  const updateMyInfoDone = useSelector((state) => state.user.updateMyInfoDone);
   const [changeNickname, setChangeNickname] = useState(nickname);
   const [changeAge, setChangeAge] = useState(age || 0);
   const [changeGender, setChangeGender] = useState(gender || "notSay");
 
   const onChangeNickname = useCallback((e) => {
-    setChangeNickname(e.target.value);
+    setChangeNickname(e.target.value.trim());
   }, []);
 
   const onChangeAge = useCallback((e) => {
-    setChangeAge(e.target.value);
+    setChangeAge(e.target.value.trim());
   }, []);
 
   const onChangeGender = useCallback(
     (e) => {
-      setChangeGender(e.target.value);
+      setChangeGender(e.target.value.trim());
     },
     [changeGender]
   );
@@ -44,8 +44,14 @@ const ProfileForm = () => {
         })
       );
     },
-    [changeNickname]
+    [changeNickname, changeAge, changeGender]
   );
+
+  useEffect(() => {
+    if (updateMyInfoDone) {
+      alert("수정되었습니다.");
+    }
+  }, [updateMyInfoDone]);
 
   return (
     <>
@@ -65,7 +71,7 @@ const ProfileForm = () => {
         </StFieldset>
         <StFieldset>
           <StLable>Gender</StLable>
-          <StSelect onChange={onChangeGender} selectedValue={gender}>
+          <StSelect onChange={onChangeGender} value={changeGender}>
             <option value="notSay">Prefer not to say</option>
             <option value="female">Female</option>
             <option value="Male">Male</option>

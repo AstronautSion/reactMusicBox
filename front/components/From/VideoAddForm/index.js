@@ -28,7 +28,7 @@ const VideoAddForm = () => {
 
   const onChangeLink = useCallback(
     (e) => {
-      setLink(e.target.value);
+      setLink(e.target.value.trim());
     },
     [link]
   );
@@ -59,9 +59,9 @@ const VideoAddForm = () => {
       dispatch(
         addVideoRequestAction({
           videoId,
-          title,
-          author,
-          UserId,
+          title: title.trim(),
+          author: author.trim(),
+          UserId: UserId.trim(),
           duration,
         })
       );

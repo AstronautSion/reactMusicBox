@@ -16,7 +16,7 @@ import {
   StVideoId,
 } from "./styles";
 
-const VideoImageCard = ({ data }) => (
+const VideoImageCard = ({ data, mini }) => (
   <StVideoBoxImgItem>
     <Link href={`/watch/${data.id}`}>
       <a>
@@ -26,7 +26,7 @@ const VideoImageCard = ({ data }) => (
             alt={data.title}
           />
           <StVideoBoxDuration>{timeFormat(data.duration)}</StVideoBoxDuration>
-          <VideoImageCardMenu data={data} />
+          {!mini && <VideoImageCardMenu data={data} />}
         </StVideoBoxFigure>
       </a>
     </Link>
@@ -37,8 +37,7 @@ const VideoImageCard = ({ data }) => (
         </a>
       </Link>
       <StVideoBoxImgAuthor>{data.author}</StVideoBoxImgAuthor>
-
-      <StVideoId>{data.videoId}</StVideoId>
+      {!mini && <StVideoId>{data.videoId}</StVideoId>}
       <StVideoBoxTime>
         {moment(data.createdAt).format("YYYY.MM.DD h:mm:ss a")}
       </StVideoBoxTime>
@@ -48,6 +47,7 @@ const VideoImageCard = ({ data }) => (
 
 VideoImageCard.propTypes = {
   data: PropTypes.object.isRequired,
+  mini: PropTypes.bool,
 };
 
 export default React.memo(VideoImageCard);

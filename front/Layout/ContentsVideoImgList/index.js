@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import PropTypes from "prop-types";
 import { loadVideosRequestAction } from "../../reducers/video";
 import { StFixedButton } from "../AppLayout/styles";
 import Loading from "../../components/Loading";
@@ -11,7 +12,10 @@ import { StVideoImgList } from "./styles";
 import { popupOpenRequestAction } from "../../reducers/user";
 import VideoModiForm from "../../components/From/VideoModiForm";
 
-const ContentsVideoImgList = () => {
+const ContentsVideoImgList = ({ mini }) => {
+  if (mini !== true) {
+    mini = false;
+  }
   const dispatch = useDispatch();
   const playList = useSelector((state) => state.video.playList);
   const addVideo = useSelector((state) => state.user.popup.addVideo);
@@ -59,7 +63,7 @@ const ContentsVideoImgList = () => {
       {playList && (
         <StVideoImgList>
           {playList.map((v) => (
-            <VideoImageCard key={v.id} data={v} />
+            <VideoImageCard key={v.id} data={v} mini={mini} />
           ))}
         </StVideoImgList>
       )}
@@ -81,6 +85,10 @@ const ContentsVideoImgList = () => {
       <StFixedButton onClick={onClickAddMusic} />
     </>
   );
+};
+
+ContentsVideoImgList.propTypes = {
+  mini: PropTypes.bool,
 };
 
 export default React.memo(ContentsVideoImgList);

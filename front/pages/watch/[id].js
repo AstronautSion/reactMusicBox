@@ -135,7 +135,7 @@ const Video = () => {
               </Popup>
             )}
 
-            <ContentsVideoImgList />
+            <ContentsVideoImgList mini={true} />
           </StContainer>
         </StWrapper>
       </AppLayout>

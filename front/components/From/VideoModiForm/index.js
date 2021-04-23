@@ -23,9 +23,9 @@ const VideoModiForm = () => {
       dispatch(
         updateVideoRequestAction({
           id: data.id,
-          videoId: data.videoId,
-          title,
-          author,
+          videoId: data.videoId.trim(),
+          title: title.trim(),
+          author: author.trim(),
         })
       );
       dispatch(popupCloseRequestAction);

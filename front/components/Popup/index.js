@@ -16,21 +16,18 @@ const Popup = ({ children }) => {
     dispatch(popupCloseRequestAction);
   }, []);
 
-  const onClickLayout = useCallback((e) => {
+  const stopPropagation = useCallback((e) => {
     e.stopPropagation();
-    if (e.target.className.includes("popup__overlay")) {
-      dispatch(popupCloseRequestAction);
-    }
   }, []);
 
   return (
-    <StPopupWrapper>
-      <StPopupBtnClose
-        onClick={onClickClosePopup}
-        className="fa fa-times-circle"
-      />
-      <StPopupLayout onClick={onClickLayout} className="popup__overlay">
-        <StPopupLayoutInner>
+    <StPopupWrapper onClick={onClickClosePopup}>
+      <StPopupLayout className="popup__overlay">
+        <StPopupLayoutInner onClick={stopPropagation}>
+          <StPopupBtnClose
+            onClick={onClickClosePopup}
+            className="fa fa-times-circle"
+          />
           <StPopupContents>{children}</StPopupContents>
         </StPopupLayoutInner>
       </StPopupLayout>
@@ -41,4 +38,4 @@ const Popup = ({ children }) => {
 Popup.propTypes = {
   children: PropTypes.node.isRequired,
 };
-export default Popup;
+export default React.memo(Popup);

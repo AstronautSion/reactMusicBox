@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const StHeader = styled.div`
     z-index:9999;
@@ -37,40 +37,17 @@ export const StHeader = styled.div`
 `;
 
 export const StAccountMenu = styled.div`
-    position:relative;
-    display:inline-block;
-    padding-right:1em;
-    > button{
-        color:#fff;
-        font-size:.875rem;
-        cursor:pointer;
+  position: relative;
+  display: inline-block;
+  padding-right: 1em;
+  a {
+    color: #fff;
+    font-size: 0.875rem;
+    cursor: pointer;
+    &:hover {
+      text-decoration: none;
     }
-
-`;
-
-export const StMenuUl = styled.ul`
-    transition:all .2s;
-    position:absolute;
-    left:0;
-    margin-top:1em;
-    background-color:#fff;
-    border:1px solid #ddd;
-    opacity:0;
-    top:70%;
-    visibility: hidden;
-
-    li a{
-        font-size: .8rem;
-        color:#666;
-        display:block;
-        padding:.75em .5em;
-        width:110px;
-        text-decoration:none;
-        font-weight:normal;
-        &:hover{
-            background-color:#f9f9f9;
-        }
-    }
+  }
 `;
 
 export const StBtnSignin = styled.a`
@@ -91,29 +68,32 @@ export const StBtnSignin = styled.a`
         text-decoration:none;
     }
 
-    ${(props) => props.stMainColor && css`
-        border:1px solid #5f56e0;
-        background-color:#5f56e0;
-    `}
+    ${(props) =>
+      props.stMainColor &&
+      css`
+        border: 1px solid #5f56e0;
+        background-color: #5f56e0;
+      `}
 `;
 
 export const StButtonSm = styled.button`
-    padding:.3rem .5rem;
-    display:block;
-    text-align:center;
-    text-decoration:none;
-    color:#fff;
-    font-size:.7rem;
-    border:1px solid #383838;
-    background-color:transparent;
-    border-radius:.25rem;
-    cursor:pointer;
-    margin-left:1em;
-    line-height:1;
+  padding: 0.3rem 0.5rem;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.7rem;
+  border: 1px solid #383838;
+  background-color: transparent;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  margin-left: 1em;
+  line-height: 1;
 
-    ${(props) => props.stOrange && css`
-        border:1px solid #5f56e0;
-        background-color:#5f56e0;
+  ${(props) =>
+    props.stOrange &&
+    css`
+      border: 1px solid #5f56e0;
+      background-color: #5f56e0;
     `}
-
 `;

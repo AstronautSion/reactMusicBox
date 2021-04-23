@@ -22,8 +22,9 @@ const VideoAddForm = () => {
   const [author, setAuthor] = useState("");
   const [duration, setDuration] = useState("");
   const [loadingVideo, setLoadingVideo] = useState("Loading"); // loading, complete, error
-  const { id: UserId } = useSelector((state) => state.user.me);
-  const { addVideoDone, addVideoError } = useSelector((state) => state.video);
+  const UserId = useSelector((state) => state.user.me.id);
+  const addVideoDone = useSelector((state) => state.video.addVideoDone);
+  const addVideoError = useSelector((state) => state.video.addVideoError);
 
   const onChangeLink = useCallback(
     (e) => {

@@ -36,7 +36,7 @@ import ContentsVideoImgList from "../../Layout/ContentsVideoImgList";
 
 const Video = () => {
   const dispatch = useDispatch();
-  const { me } = useSelector((state) => state.user);
+  const me = useSelector((state) => state.user.me);
   const { addVideo, updateVideo } = useSelector((state) => state.user.popup);
   const opts = { playerVars: { autoplay: 1 } };
   const id = useSelector((state) => state.video.nowPlayList?.id);

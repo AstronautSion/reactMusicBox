@@ -12,8 +12,8 @@ import ContentsMain from "../Layout/ContentsMain";
 import wrapper from "../store/configureStore";
 
 const Home = () => {
-  const { me } = useSelector((state) => state.user);
-  const { loadMyInfoError } = useSelector((state) => state.user);
+  const me = useSelector((state) => state.user);
+  const loadMyInfoError = useSelector((state) => state.user.loadMyInfoError);
   useEffect(() => {
     if (loadMyInfoError) {
       alert(loadMyInfoError);

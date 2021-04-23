@@ -14,9 +14,11 @@ import VideoModiForm from "../../components/From/VideoModiForm";
 const ContentsVideoImgList = () => {
   const dispatch = useDispatch();
   const playList = useSelector((state) => state.video.playList);
-  const { addVideo, updateVideo } = useSelector((state) => state.user.popup);
-  const { hasMoreVideo, loadVideosLoading } = useSelector(
-    (state) => state.video
+  const addVideo = useSelector((state) => state.user.popup.addVideo);
+  const updateVideo = useSelector((state) => state.user.popup.updateVideo);
+  const hasMoreVideo = useSelector((state) => state.video.hasMoreVideo);
+  const loadVideosLoading = useSelector(
+    (state) => state.video.loadVideosLoading
   );
   const router = useRouter();
 
@@ -72,8 +74,7 @@ const ContentsVideoImgList = () => {
 
       {updateVideo && (
         <Popup>
-          {" "}
-          <VideoModiForm />{" "}
+          <VideoModiForm />
         </Popup>
       )}
 
@@ -82,4 +83,4 @@ const ContentsVideoImgList = () => {
   );
 };
 
-export default ContentsVideoImgList;
+export default React.memo(ContentsVideoImgList);

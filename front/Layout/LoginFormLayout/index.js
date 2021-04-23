@@ -13,7 +13,7 @@ import LoginForm from "../../components/From/LoginForm";
 import CreateAccountInfoForm from "../../components/From/CreateAccountInfoForm";
 
 const LoginFormLayout = () => {
-  const { loginPopupOrder } = useSelector((state) => state.user);
+  const loginPopupOrder = useSelector((state) => state.user.loginPopupOrder);
   const [nickname, setNickname] = useState("");
   return (
     <div>

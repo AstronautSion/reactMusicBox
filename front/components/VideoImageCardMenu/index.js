@@ -50,4 +50,4 @@ VideoImageCardMenu.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-export default VideoImageCardMenu;
+export default React.memo(VideoImageCardMenu);

@@ -6,7 +6,7 @@ import { StContainer, StSmLayout } from "../Layout/AppLayout/styles";
 import AppLayout from "../Layout/AppLayout";
 
 const Profile = () => {
-  const { me } = useSelector((state) => state.user);
+  const me = useSelector((state) => state.user.me);
   useEffect(() => {
     if (!(me && me.id)) {
       Router.push("/");

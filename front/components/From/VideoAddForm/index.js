@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import YouTube from "react-youtube";
 import { useDispatch, useSelector } from "react-redux";
 import { StInput, StLable } from "../../../style/Form";
@@ -34,7 +34,7 @@ const VideoAddForm = () => {
   );
 
   const checkLink = useCallback(() => {
-    const piece = "watch?v=";
+    const piece = "?v=";
     const piece2 = "&";
 
     const splitFront = link.includes(piece) ? link.split(piece)[1] : link;
@@ -61,20 +61,23 @@ const VideoAddForm = () => {
           videoId,
           title: title.trim(),
           author: author.trim(),
-          UserId: UserId.trim(),
+          UserId,
           duration,
         })
       );
-      if (addVideoDone && !addVideoError) {
-        dispatch(popupCloseRequestAction);
-        setTitle("");
-        setAuthor("");
-        setLoadingVideo("Loading");
-        setReadySubmit(false);
-      }
     },
-    [duration, videoId, title, author, addVideoDone, addVideoError]
+    [duration, videoId, title, author, UserId]
   );
+
+  useEffect(() => {
+    if (addVideoDone && !addVideoError) {
+      dispatch(popupCloseRequestAction);
+      setTitle("");
+      setAuthor("");
+      setLoadingVideo("Loading");
+      setReadySubmit(false);
+    }
+  }, [addVideoDone, addVideoError]);
 
   const onclickBack = () => {
     setTitle("");

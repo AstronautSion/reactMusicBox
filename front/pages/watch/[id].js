@@ -19,9 +19,6 @@ import {
   getOneVideoRequestAction,
   getVideosRequestAction,
 } from "../../reducers/video";
-import Popup from "../../components/Popup";
-import VideoAddForm from "../../components/From/VideoAddForm";
-import VideoModiForm from "../../components/From/VideoModiForm";
 import {
   StDetailWatchAuthor,
   StDetailWatchButton,
@@ -33,11 +30,12 @@ import {
   StVideoId,
 } from "./style";
 import ContentsVideoImgList from "../../Layout/ContentsVideoImgList";
+import AddVideoPopup from "../../components/AddVideoPopup";
+import UpdateVideoPopup from "../../components/UpdateVideoPopup";
 
 const Video = () => {
   const dispatch = useDispatch();
   const me = useSelector((state) => state.user.me);
-  const { addVideo, updateVideo } = useSelector((state) => state.user.popup);
   const opts = { playerVars: { autoplay: 1 } };
   const id = useSelector((state) => state.video.nowPlayList?.id);
   const title = useSelector((state) => state.video.nowPlayList?.title);
@@ -124,17 +122,8 @@ const Video = () => {
                 </StDetailWatchSta>
               </StDetailWatchInfoArea>
             </StDetailWatchView>
-            {addVideo && (
-              <Popup>
-                <VideoAddForm />
-              </Popup>
-            )}
-            {updateVideo && (
-              <Popup>
-                <VideoModiForm />
-              </Popup>
-            )}
-
+            <AddVideoPopup />
+            <UpdateVideoPopup />
             <ContentsVideoImgList mini={true} />
           </StContainer>
         </StWrapper>

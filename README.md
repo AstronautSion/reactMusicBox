@@ -1,4 +1,5 @@
 # React Youtube_List
+
 React와 친해지기 프로젝트 <br>
 원하는 유투브 링크를 추가하면 고유의 vidoeId를 추출하여 디비에 저장하고,<br>
 저장한 videoId로 Iframe방식으로 영상을 볼 수 있다.<br>
@@ -26,9 +27,3 @@ React와 친해지기 프로젝트 <br>
 - [x] video detail 페이지 <br>
 - [x] 검색기능 <br>
 - [x] SEO <br>
-- [ ] 단위테스트 <br>
-
-
-
-
-
